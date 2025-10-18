@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { GoogleGenAI, Chat, Type, FunctionDeclaration, GenerateContentResponse, Part } from "@google/genai";
 import { AiAssistantContent, PricingContent, Plan, AppointmentSlot, CustomerData, Language } from '../types';
 import { fetchAirtableSlots } from '../lib/api';
 import AppointmentPicker from './AppointmentPicker';
@@ -22,29 +21,39 @@ type ConversationState = 'chatting' | 'booking' | 'collecting_info';
 
 const CHAT_HISTORY_KEY = 'tourcare_chat_history';
 
-const tools: FunctionDeclaration[] = [
+const deepSeekTools = [
     {
-        name: 'schedule_consultation',
-        description: 'Fetches available 30-minute free consultation slots from the calendar (via Airtable) to show the user.',
-        parameters: { type: Type.OBJECT, properties: {} }
+        type: 'function' as const,
+        function: {
+            name: 'schedule_consultation',
+            description: 'Fetches available 30-minute free consultation slots from the calendar (via Airtable) to show the user.',
+            parameters: { type: 'object', properties: {} }
+        }
     },
     {
-        name: 'show_pricing_plans',
-        description: 'Displays the available service packages and their pricing.',
-        parameters: { type: Type.OBJECT, properties: {} }
+        type: 'function' as const,
+        function: {
+            name: 'show_pricing_plans',
+            description: 'Displays the available service packages and their pricing.',
+            parameters: { type: 'object', properties: {} }
+        }
     },
     {
-        name: 'start_onboarding',
-        description: 'Starts the customer onboarding process when they choose a specific plan. This will involve collecting their information.',
-        parameters: {
-            type: Type.OBJECT,
-            properties: {
-                planName: { type: Type.STRING, description: 'The name of the plan the user selected, e.g., "Basic Setup", "Pro Setup".' }
-            },
-            required: ['planName']
+        type: 'function' as const,
+        function: {
+            name: 'start_onboarding',
+            description: 'Starts the customer onboarding process when they choose a specific plan. This will involve collecting their information.',
+            parameters: {
+                type: 'object',
+                properties: {
+                    planName: { type: 'string', description: 'The name of the plan the user selected, e.g., "Basic Setup", "Pro Setup".' }
+                },
+                required: ['planName']
+            }
         }
     },
 ];
+
 
 const AiIcon = () => (
     <div className="w-8 h-8 rounded-full bg-brand-accent flex items-center justify-center flex-shrink-0">
@@ -63,7 +72,6 @@ const UserIcon = () => (
 );
 
 const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, aiAssistantContent, pricingContent, lang }) => {
-    const [chat, setChat] = useState<Chat | null>(null);
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -72,73 +80,40 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, ai
     const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const mapMessagesToGeminiHistory = (msgs: Message[]) => {
-      return msgs
-        .filter(msg => (msg.sender === 'user' || msg.sender === 'ai') && typeof msg.text === 'string')
-        .map(msg => ({
-          role: msg.sender === 'user' ? 'user' as const : 'model' as const,
-          parts: [{ text: msg.text as string }],
-        }));
-    };
-    
     const getSystemInstruction = useCallback((currentLang: Language) => {
         return currentLang === 'ar' 
             ? `أنت TourCare.ai، مساعد ذكاء اصطناعي ودود ومحترف. هدفك هو مساعدة مديري شركات السياحة، خاصة موردي GetYourGuide، على فهم خدماتنا. الخدمات هي: الإعداد الأساسي، الإعداد الاحترافي، والإعداد المتقدم. يمكنك عرض الأسعار، وحجز استشارة مجانية مدتها 30 دقيقة، وبدء عملية الإعداد للعملاء. كن مهذبًا وذكيًا في طرح الأسئلة لتحديد الباقة الأنسب. استخدم الأدوات المتاحة لك عند الطلب.`
             : `You are TourCare.ai, a friendly and professional AI assistant. Your goal is to help tour operator managers, especially GetYourGuide suppliers, understand our services. The services are: Basic Setup, Pro Setup, and Advanced Setup. You can show pricing, schedule a free 30-minute consultation, and start the onboarding process for clients. Be polite and ask smart questions to determine the most suitable package. Use the tools available to you when requested.`;
     }, []);
 
-    const initializeChat = useCallback(async () => {
-        try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const savedHistoryJSON = localStorage.getItem(CHAT_HISTORY_KEY);
-            let initialMessages: Message[] = [];
-            let historyForGemini: { role: "user" | "model"; parts: Part[]; }[] = [];
+    const initializeChat = useCallback(() => {
+        const savedHistoryJSON = localStorage.getItem(CHAT_HISTORY_KEY);
+        let initialMessages: Message[] = [];
 
-            if (savedHistoryJSON) {
-                try {
-                    const parsedMessages: Message[] = JSON.parse(savedHistoryJSON);
-                    if (Array.isArray(parsedMessages) && parsedMessages.length > 0) {
-                        initialMessages = parsedMessages;
-                        historyForGemini = mapMessagesToGeminiHistory(initialMessages);
-                    }
-                } catch (e) {
-                    console.error("Could not parse chat history:", e);
-                    localStorage.removeItem(CHAT_HISTORY_KEY);
+        if (savedHistoryJSON) {
+            try {
+                const parsedMessages: Message[] = JSON.parse(savedHistoryJSON);
+                if (Array.isArray(parsedMessages) && parsedMessages.length > 0) {
+                    initialMessages = parsedMessages.filter(m => typeof m.text === 'string');
                 }
+            } catch (e) {
+                console.error("Could not parse chat history:", e);
+                localStorage.removeItem(CHAT_HISTORY_KEY);
             }
-
-            if (initialMessages.length === 0) {
-                initialMessages = [{ text: aiAssistantContent.initialMessage, sender: 'ai' }];
-            }
-            
-            setMessages(initialMessages);
-
-            const newChat = ai.chats.create({
-                model: 'gemini-2.5-flash',
-                history: historyForGemini,
-                config: {
-                    systemInstruction: getSystemInstruction(lang),
-                    tools: [{ functionDeclarations: tools }],
-                }
-            });
-            setChat(newChat);
-        } catch (error) {
-            console.error("Failed to initialize Gemini AI:", error);
-            const errorText = lang === 'ar' 
-                ? "عفواً، لا يمكن تهيئة مساعد الذكاء الاصطناعي. يرجى التأكد من تكوين مفتاح API بشكل صحيح."
-                : "Sorry, the AI Assistant could not be initialized. Please ensure the API key is configured correctly.";
-            setMessages([{ text: errorText, sender: 'system-error' }]);
-            setChat(null);
         }
-    }, [aiAssistantContent.initialMessage, lang, getSystemInstruction]);
+
+        if (initialMessages.length === 0) {
+            initialMessages = [{ text: aiAssistantContent.initialMessage, sender: 'ai' }];
+        }
+        
+        setMessages(initialMessages);
+    }, [aiAssistantContent.initialMessage]);
 
 
     useEffect(() => {
         if (isOpen) {
             initializeChat();
         } else {
-            // Reset state on close
-            setChat(null); // Clear chat instance to save memory
             setMessages([]);
             setInput('');
             setIsLoading(false);
@@ -152,7 +127,6 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, ai
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, isLoading]);
     
-    // Save history to localStorage whenever messages change
     useEffect(() => {
         if (!isOpen || messages.length === 0) return;
 
@@ -171,76 +145,111 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, ai
         setIsLoading(false);
         localStorage.removeItem(CHAT_HISTORY_KEY);
         setMessages([{ text: aiAssistantContent.initialMessage, sender: 'ai' }]);
-        // Re-initialize the Gemini chat instance
-        try {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-            const newChat = ai.chats.create({
-                model: 'gemini-2.5-flash',
-                config: {
-                    systemInstruction: getSystemInstruction(lang),
-                    tools: [{ functionDeclarations: tools }],
-                }
-            });
-            setChat(newChat);
-        } catch (error) {
-            console.error("Failed to re-initialize Gemini AI after reset:", error);
-            setChat(null);
-        }
     }, [aiAssistantContent.initialMessage, lang, getSystemInstruction]);
 
-
-    const processApiResponse = async (response: GenerateContentResponse) => {
-        if (response.functionCalls && response.functionCalls.length > 0) {
-            const fc = response.functionCalls[0];
-            const functionResponses: Part[] = [];
-
-            switch (fc.name) {
-                case 'schedule_consultation':
-                    try {
-                        const slots = await fetchAirtableSlots();
-                        setAvailableSlots(slots);
-                        setConversationState('booking');
-                        functionResponses.push({ functionResponse: { name: fc.name, response: { success: true, slotCount: slots.length } } });
-                    } catch (error) {
-                        functionResponses.push({ functionResponse: { name: fc.name, response: { success: false, error: (error as Error).message } } });
-                    }
-                    break;
-                case 'show_pricing_plans':
-                    setMessages(prev => [...prev, { sender: 'system', text: <PricingCards /> }]);
-                    functionResponses.push({ functionResponse: { name: fc.name, response: { success: true } } });
-                    break;
-                case 'start_onboarding':
-                    const planName = fc.args.planName as string;
-                    const plan = pricingContent.plans.find(p => p.name.toLowerCase() === planName.toLowerCase());
-                    if (plan) {
-                        setSelectedPlan(plan);
-                        setConversationState('collecting_info');
-                    }
-                    functionResponses.push({ functionResponse: { name: fc.name, response: { success: !!plan } } });
-                    break;
-            }
-            
-            if (chat && functionResponses.length > 0) {
-                 const finalResponse = await chat.sendMessage({ message: functionResponses });
-                 await processApiResponse(finalResponse);
-            }
-
-        } else if (response.text) {
-             setMessages(prev => [...prev, { text: response.text, sender: 'ai' }]);
-        }
-    }
-
-
     const handleSendMessage = async (messageText: string) => {
-        if (!messageText.trim() || isLoading || !chat) return;
+        const apiKey = import.meta.env.VITE_DEEP_SEEK_API_KEY;
+        if (!apiKey) {
+            const errorText = lang === 'ar' 
+                ? "عفواً، لا يمكن تهيئة مساعد الذكاء الاصطناعي. يرجى التأكد من تكوين مفتاح VITE_DEEP_SEEK_API_KEY بشكل صحيح."
+                : "Sorry, the AI Assistant could not be initialized. Please ensure the VITE_DEEP_SEEK_API_KEY is configured correctly.";
+            setMessages(prev => [...prev, { text: errorText, sender: 'system-error' }]);
+            return;
+        }
 
-        setMessages(prev => [...prev, { text: messageText, sender: 'user' }]);
+        if (!messageText.trim() || isLoading) return;
+
+        const newUserMessage: Message = { text: messageText, sender: 'user' };
+        setMessages(prev => [...prev, newUserMessage]);
         setInput('');
         setIsLoading(true);
         
+        let historyForApi = [...messages, newUserMessage]
+            .filter(msg => (msg.sender === 'user' || msg.sender === 'ai') && typeof msg.text === 'string')
+            .map(msg => ({
+                role: msg.sender === 'ai' ? 'assistant' as const : 'user' as const,
+                content: msg.text as string
+            }));
+
+        const systemInstruction = { role: 'system' as const, content: getSystemInstruction(lang) };
+        let fullApiHistory: any[] = [systemInstruction, ...historyForApi];
+
         try {
-            const response = await chat.sendMessage({ message: messageText });
-            await processApiResponse(response);
+            let done = false;
+            while (!done) {
+                const payload = {
+                    model: 'deepseek-chat',
+                    messages: fullApiHistory,
+                    tools: deepSeekTools,
+                    tool_choice: 'auto' as const
+                };
+
+                const response = await fetch('https://api.deepseek.com/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(await response.text());
+                }
+                
+                const data = await response.json();
+                const assistantResponse = data.choices[0].message;
+                
+                fullApiHistory.push(assistantResponse);
+
+                if (assistantResponse.tool_calls && assistantResponse.tool_calls.length > 0) {
+                    const toolCall = assistantResponse.tool_calls[0];
+                    let functionResult;
+
+                    switch (toolCall.function.name) {
+                        case 'schedule_consultation':
+                            try {
+                                const slots = await fetchAirtableSlots();
+                                setAvailableSlots(slots);
+                                setConversationState('booking');
+                                functionResult = { success: true, slotCount: slots.length };
+                            } catch (error) {
+                                functionResult = { success: false, error: (error as Error).message };
+                            }
+                            break;
+                        case 'show_pricing_plans':
+                            setMessages(prev => [...prev, { sender: 'system', text: <PricingCards /> }]);
+                            functionResult = { success: true };
+                            break;
+                        case 'start_onboarding':
+                            const args = JSON.parse(toolCall.function.arguments);
+                            const planName = args.planName as string;
+                            const plan = pricingContent.plans.find(p => p.name.toLowerCase() === planName.toLowerCase());
+                            if (plan) {
+                                setSelectedPlan(plan);
+                                setConversationState('collecting_info');
+                            }
+                            functionResult = { success: !!plan };
+                            break;
+                        default:
+                            functionResult = { success: false, error: `Unknown function: ${toolCall.function.name}` };
+                    }
+                    
+                    fullApiHistory.push({
+                        role: 'tool' as const,
+                        tool_call_id: toolCall.id,
+                        content: JSON.stringify(functionResult)
+                    });
+                    
+                    done = false; // Continue loop for final response
+                } else {
+                    if (assistantResponse.content) {
+                        const newAiMessage: Message = { text: assistantResponse.content, sender: 'ai' };
+                        setMessages(prev => [...prev, newAiMessage]);
+                    }
+                    done = true; // Exit loop
+                }
+            }
         } catch (error) {
             console.error("Failed to fetch AI response:", error);
             const errorText = lang === 'ar' ? "عفواً، أواجه مشكلة في الاتصال الآن. يرجى المحاولة مرة أخرى لاحقاً." : "Sorry, I'm having trouble connecting right now. Please try again later.";
@@ -249,6 +258,7 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, ai
             setIsLoading(false);
         }
     };
+
 
     const handleSlotSelection = (slotId: string) => {
         const slot = availableSlots.find(s => s.id === slotId);
@@ -421,10 +431,10 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ isOpen, onClose, ai
                             onChange={e => setInput(e.target.value)}
                             placeholder={aiAssistantContent.inputPlaceholder}
                             className="flex-1 bg-gray-100 border border-gray-300 rounded-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent transition shadow-inner"
-                            disabled={isLoading || !chat || conversationState !== 'chatting'}
+                            disabled={isLoading || !import.meta.env.VITE_DEEP_SEEK_API_KEY || conversationState !== 'chatting'}
                             aria-label={aiAssistantContent.inputPlaceholder}
                         />
-                        <button type="submit" className="bg-brand-accent text-white p-3 rounded-md hover:bg-brand-accent-hover disabled:bg-gray-300 transition hover:shadow-lg" disabled={isLoading || !chat || conversationState !== 'chatting'} aria-label={lang === 'ar' ? 'إرسال' : 'Send'}>
+                        <button type="submit" className="bg-brand-accent text-white p-3 rounded-md hover:bg-brand-accent-hover disabled:bg-gray-300 transition hover:shadow-lg" disabled={isLoading || !import.meta.env.VITE_DEEP_SEEK_API_KEY || conversationState !== 'chatting'} aria-label={lang === 'ar' ? 'إرسال' : 'Send'}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ transform: lang === 'ar' ? 'scaleX(-1)' : 'none'}}>
                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                             </svg>

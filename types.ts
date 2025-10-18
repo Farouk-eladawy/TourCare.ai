@@ -11,20 +11,13 @@ declare global {
     readonly VITE_MAKE_WEBHOOK_URL: string;
     readonly VITE_MAKE_BOOKING_WEBHOOK_URL: string;
     readonly VITE_MAKE_TEST_WEBHOOK_URL: string;
+    readonly VITE_DEEP_SEEK_API_KEY: string;
   }
 
   interface ImportMeta {
     readonly env: ImportMetaEnv;
   }
 }
-
-declare var process: {
-  env: {
-    API_KEY: string;
-    [key: string]: string | undefined;
-  }
-};
-
 
 export type Language = 'en' | 'ar' | 'de' | 'es';
 export type Direction = 'ltr' | 'rtl';
@@ -157,6 +150,7 @@ export interface TestimonialsContent {
 
 export interface PlaygroundContent {
     title: string;
+    // FIX: Add missing description property to resolve type errors.
     description: string;
     form: {
       bookingId: string;
