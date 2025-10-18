@@ -1,103 +1,100 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
+import { countries, Country } from '../data/countries';
+import CountryCodePicker from './CountryCodePicker';
 
 interface BookingPopupProps {
     onClose: () => void;
-    onSubmit: (info: { name: string; whatsapp: string; email: string }) => Promise<void>;
+    onSubmit: (info: { name: string, whatsapp: string, email: string }) => Promise<void>;
     lang: Language;
+}
+
+const content = {
+    en: {
+        title: "Start Live Test",
+        namePlaceholder: "Your Name",
+        emailPlaceholder: "Your Email",
+        whatsappPlaceholder: "Your WhatsApp Number",
+        submitButton: "Start Automation",
+        submitting: "Starting...",
+        description: "Enter your details to receive live notifications as we simulate the booking process.",
+    },
+    ar: {
+        title: "بدء الاختبار المباشر",
+        namePlaceholder: "اسمك",
+        emailPlaceholder: "بريدك الإلكتروني",
+        whatsappPlaceholder: "رقم الواتساب الخاص بك",
+        submitButton: "بدء الأتمتة",
+        submitting: "جاري البدء...",
+        description: "أدخل بياناتك لتلقي إشعارات مباشرة أثناء محاكاة عملية الحجز.",
+    }
 }
 
 const BookingPopup: React.FC<BookingPopupProps> = ({ onClose, onSubmit, lang }) => {
     const [name, setName] = useState('');
-    const [whatsapp, setWhatsapp] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState('');
-
-    const content = {
-        en: {
-            title: "Start Your Automated Journey",
-            namePlaceholder: "Full Name",
-            whatsappPlaceholder: "WhatsApp Number (e.g., +1...)",
-            emailPlaceholder: "Email Address",
-            submitButton: "Start Automation",
-            submittingButton: "Starting...",
-            validationError: "Please fill in all fields correctly."
-        },
-        ar: {
-            title: "ابدأ رحلتك المؤتمتة",
-            namePlaceholder: "الاسم الكامل",
-            whatsappPlaceholder: "رقم الواتساب (مثال: +971...)",
-            emailPlaceholder: "البريد الإلكتروني",
-            submitButton: "ابدأ الأتمتة",
-            submittingButton: "جاري البدء...",
-            validationError: "يرجى ملء جميع الحقول بشكل صحيح."
-        }
-    };
-    const modalContent = content[lang];
-
+    const popupContent = content[lang] || content.en;
+    
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
-        if (!name.trim() || !whatsapp.trim() || !email.trim()) {
-            setError(modalContent.validationError);
+        if (!name || !email || !phone) {
+            alert("Please fill all fields.");
             return;
         }
         setIsSubmitting(true);
-        await onSubmit({ name, whatsapp, email });
-        setIsSubmitting(false); // The parent will close the modal on success
-    };
-
+        const fullWhatsapp = `${selectedCountry.dial_code}${phone}`;
+        await onSubmit({ name, whatsapp: fullWhatsapp, email });
+        // The parent component will close the modal on success
+        setIsSubmitting(false);
+    }
+    
     return (
-        <div 
-            className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" 
-            onClick={onClose}
-        >
-            <div 
-                className="bg-white w-full max-w-md rounded-lg shadow-2xl p-8 relative"
-                onClick={e => e.stopPropagation()}
-            >
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700" aria-label="Close">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{modalContent.title}</h3>
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={onClose}>
+            <div className="bg-white w-full max-w-md rounded-lg shadow-2xl p-8" onClick={e => e.stopPropagation()}>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">{popupContent.title}</h2>
+                <p className="text-gray-600 mb-6">{popupContent.description}</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                     <input 
+                    <input 
                         type="text"
-                        placeholder={modalContent.namePlaceholder}
+                        placeholder={popupContent.namePlaceholder}
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
+                        onChange={e => setName(e.target.value)}
                         className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent"
-                    />
-                    <input 
-                        type="tel"
-                        placeholder={modalContent.whatsappPlaceholder}
-                        value={whatsapp}
-                        onChange={(e) => setWhatsapp(e.target.value)}
                         required
-                        className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent"
                     />
-                    <input 
+                     <input 
                         type="email"
-                        placeholder={modalContent.emailPlaceholder}
+                        placeholder={popupContent.emailPlaceholder}
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
+                        onChange={e => setEmail(e.target.value)}
                         className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent"
+                        required
                     />
-                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-                    <button 
+                    <div className="flex">
+                        <CountryCodePicker selectedCountry={selectedCountry} onCountryChange={setSelectedCountry} />
+                        <input 
+                            type="tel"
+                            placeholder={popupContent.whatsappPlaceholder}
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                            className="w-full bg-gray-100 border border-l-0 border-gray-300 rounded-r-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent"
+                            required
+                        />
+                    </div>
+                     <button 
                         type="submit"
                         className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-md hover:bg-brand-accent-hover transition disabled:bg-gray-400"
                         disabled={isSubmitting}
                     >
-                        {isSubmitting ? modalContent.submittingButton : modalContent.submitButton}
+                        {isSubmitting ? popupContent.submitting : popupContent.submitButton}
                     </button>
                 </form>
             </div>
         </div>
     );
-};
+}
 
 export default BookingPopup;

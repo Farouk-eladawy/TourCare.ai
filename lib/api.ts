@@ -55,9 +55,12 @@ const generateMockSlots = (): AppointmentSlot[] => {
 export const fetchAirtableSlots = async (): Promise<AppointmentSlot[]> => {
     // Credentials are now read from environment variables using a standard convention.
     // Please set these in your deployment environment.
-    const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
-    const tableName = import.meta.env.VITE_AIRTABLE_TABLE_NAME;
-    const apiKey = import.meta.env.VITE_AIRTABLE_API_KEY;
+    // Fix: Cast import.meta to any to bypass TypeScript error when Vite client types are not available.
+    const baseId = (import.meta as any).env.VITE_AIRTABLE_BASE_ID;
+    // Fix: Cast import.meta to any to bypass TypeScript error when Vite client types are not available.
+    const tableName = (import.meta as any).env.VITE_AIRTABLE_TABLE_NAME;
+    // Fix: Cast import.meta to any to bypass TypeScript error when Vite client types are not available.
+    const apiKey = (import.meta as any).env.VITE_AIRTABLE_API_KEY;
 
     // Check if environment variables are configured. If not, use mock data.
     if (!baseId || !tableName || !apiKey) {
@@ -122,7 +125,8 @@ interface BookingPayload {
 export const bookConsultation = async (payload: BookingPayload): Promise<void> => {
     // The webhook URL is read from an environment variable.
     // Please set VITE_MAKE_BOOKING_WEBHOOK_URL in your deployment environment.
-    const webhookUrl = import.meta.env.VITE_MAKE_BOOKING_WEBHOOK_URL;
+    // Fix: Cast import.meta to any to bypass TypeScript error when Vite client types are not available.
+    const webhookUrl = (import.meta as any).env.VITE_MAKE_BOOKING_WEBHOOK_URL;
 
     // If the environment variable is not set, the app will run in "demo mode".
     if (!webhookUrl) {
