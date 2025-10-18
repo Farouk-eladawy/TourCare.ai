@@ -141,7 +141,7 @@ const MobileMenu: FC<{
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
             <a href="#/" onClick={onClose}>
-              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-12" />
+              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-10" />
             </a>
             <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -219,9 +219,9 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
   return (
     <>
       <header id="main-header" className={headerClasses}>
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <a href="#/" className="z-10">
-            <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-12" />
+            <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-10" />
           </a>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
