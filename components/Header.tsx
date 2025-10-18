@@ -219,7 +219,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
   return (
     <>
       <header id="main-header" className={headerClasses}>
-        <div className="container mx-auto px-6 py-2 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-1 flex justify-between items-center">
           <a href="#/" className="z-10">
             <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760800757/assets_2Ftask_01k7vyba23f0wsdx1cyw7d3nzg_2F1760800691_img_0_fcuvt8.webp" alt="TourCare.ai Logo" className="h-[var(--logo-height)]" />
           </a>
