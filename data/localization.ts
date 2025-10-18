@@ -12,7 +12,7 @@ const en: Content = {
           { href: '#/products/live-support', text: 'Live Quality Support', description: 'Proactive review & feedback management.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Test Automation' },
+      { type: 'link', href: '#/test-automation', text: 'Try Experience' },
       { type: 'link', href: '#/about', text: 'About Us' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
       { type: 'link', href: '#/contact', text: 'Contact' }
@@ -152,7 +152,7 @@ const en: Content = {
         title: 'Company',
         links: [
           { text: 'About Us', href: '#/about' },
-          { text: 'Test Automation', href: '#/test-automation' },
+          { text: 'Try Experience', href: '#/test-automation' },
           { text: 'Contact Us', href: '#/contact' },
         ],
       },
@@ -404,7 +404,7 @@ const ar: Content = {
                     { href: '#/products/live-support', text: 'دعم الجودة المباشر', description: 'إدارة استباقية للتقييمات والملاحظات.' },
                 ],
             },
-            { type: 'link', href: '#/test-automation', text: 'اختبار الأتمتة' },
+            { type: 'link', href: '#/test-automation', text: 'جرب التجربة' },
             { type: 'link', href: '#/about', text: 'من نحن' },
             { type: 'link', href: '#/faq', text: 'الأسئلة الشائعة' },
             { type: 'link', href: '#/contact', text: 'اتصل بنا' }
@@ -544,7 +544,7 @@ const ar: Content = {
           title: 'الشركة',
           links: [
             { text: 'من نحن', href: '#/about' },
-            { text: 'اختبار الأتمتة', href: '#/test-automation' },
+            { text: 'جرب التجربة', href: '#/test-automation' },
             { text: 'اتصل بنا', href: '#/contact' },
           ],
         },
@@ -796,7 +796,7 @@ const de: Content = {
           { href: '#/products/live-support', text: 'Live-Qualitätssupport', description: 'Proaktives Bewertungs- & Feedback-Management.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Testautomatisierung' },
+      { type: 'link', href: '#/test-automation', text: 'Erlebnis testen' },
       { type: 'link', href: '#/about', text: 'Über uns' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
       { type: 'link', href: '#/contact', text: 'Kontakt' }
@@ -936,7 +936,7 @@ const de: Content = {
         title: 'Unternehmen',
         links: [
           { text: 'Über uns', href: '#/about' },
-          { text: 'Testautomatisierung', href: '#/test-automation' },
+          { text: 'Erlebnis testen', href: '#/test-automation' },
           { text: 'Kontakt', href: '#/contact' },
         ],
       },
@@ -1188,7 +1188,7 @@ const es: Content = {
           { href: '#/products/live-support', text: 'Soporte de Calidad en Vivo', description: 'Gestión proactiva de reseñas y comentarios.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Probar Automatización' },
+      { type: 'link', href: '#/test-automation', text: 'Probar Experiencia' },
       { type: 'link', href: '#/about', text: 'Sobre nosotros' },
       { type: 'link', href: '#/faq', text: 'Preguntas Frecuentes' },
       { type: 'link', href: '#/contact', text: 'Contacto' }
@@ -1328,7 +1328,7 @@ const es: Content = {
         title: 'Compañía',
         links: [
           { text: 'Sobre nosotros', href: '#/about' },
-          { text: 'Probar Automatización', href: '#/test-automation' },
+          { text: 'Probar Experiencia', href: '#/test-automation' },
           { text: 'Contáctenos', href: '#/contact' },
         ],
       },
