@@ -9,7 +9,7 @@ interface HeaderProps {
   onCtaClick: () => void;
 }
 
-// Self-contained Dropdown component for Products
+// Self-contained Dropdown component for Products (Desktop)
 const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
         </svg>
       </button>
       {isOpen && (
-        <div className="absolute top-full ltr:left-0 rtl:right-0 mt-3 w-64 bg-white rounded-md shadow-lg border border-gray-200/80 p-2">
+        <div className="absolute top-full ltr:left-0 rtl:right-0 mt-3 w-64 bg-white rounded-md shadow-lg border border-gray-200/80 p-2 z-20">
           {item.items.map((subItem) => (
             <a
               key={subItem.href}
@@ -86,7 +86,7 @@ const LanguageSwitcher: FC<{ currentLang: Language; availableLangs: Language[]; 
                 <span className="uppercase">{currentLang}</span>
             </button>
             {isOpen && (
-                <div className="absolute top-full ltr:right-0 rtl:left-0 mt-3 w-32 bg-white rounded-md shadow-lg border border-gray-200/80 p-1">
+                <div className="absolute top-full ltr:right-0 rtl:left-0 mt-3 w-32 bg-white rounded-md shadow-lg border border-gray-200/80 p-1 z-20">
                     {availableLangs.map(langCode => (
                         <button
                             key={langCode}
@@ -102,23 +102,114 @@ const LanguageSwitcher: FC<{ currentLang: Language; availableLangs: Language[]; 
     );
 }
 
+// Mobile Menu Component
+const MobileMenu: FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  content: HeaderContent;
+  lang: Language;
+  onCtaClick: () => void;
+}> = ({ isOpen, onClose, content, lang, onCtaClick }) => {
+  const handleCtaClick = () => {
+    onClose();
+    onCtaClick();
+  };
+
+  return (
+    <div
+      className={`fixed inset-0 z-50 transition-opacity duration-300 ease-in-out ${
+        isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/60"
+        onClick={onClose}
+        aria-hidden="true"
+      ></div>
+
+      {/* Menu Panel */}
+      <div
+        className={`absolute top-0 h-full w-full max-w-sm bg-brand-white shadow-xl transition-transform duration-300 ease-in-out ${
+          lang === 'ar'
+            ? `left-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+            : `right-0 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
+        }`}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex justify-between items-center p-6 border-b border-gray-200">
+            <a href="#/" onClick={onClose} className="text-2xl font-bold text-gray-900">
+              TourCare<span className="text-brand-accent">.ai</span>
+            </a>
+            <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span className="sr-only">Close menu</span>
+            </button>
+          </div>
+          <nav className="flex-grow p-6 space-y-4 overflow-y-auto">
+            {content.navItems.map((item, index) => {
+              if (item.type === 'link') {
+                return (
+                  <a key={index} href={item.href} onClick={onClose} className="block text-lg font-semibold text-gray-700 hover:text-brand-accent transition py-2">
+                    {item.text}
+                  </a>
+                );
+              }
+              if (item.type === 'dropdown') {
+                return (
+                  <div key={index} className="py-2">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <div className="space-y-2 ltr:pl-4 rtl:pr-4 border-l-2 border-brand-accent/20 ltr:border-l-2 rtl:border-r-2">
+                      {item.items.map(subItem => (
+                        <a key={subItem.href} href={subItem.href} onClick={onClose} className="block text-gray-600 hover:text-brand-accent transition py-1">
+                          {subItem.text}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </nav>
+          <div className="p-6 border-t border-gray-200 mt-auto">
+            <button onClick={handleCtaClick} className="w-full bg-brand-accent text-white font-bold px-5 py-3 rounded-md hover:bg-brand-accent-hover transition">
+              {content.cta}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLanguage, onCtaClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Dynamically set header classes based on scroll position
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   const headerClasses = `
-    sticky top-0 z-50 transition-all duration-300
+    sticky top-0 z-40 transition-all duration-300
     ${isScrolled
       ? 'bg-brand-white/80 backdrop-blur-lg border-b border-gray-200/80 shadow-sm'
       : 'bg-transparent border-b-transparent'
@@ -126,34 +217,46 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
   `;
 
   return (
-    <header id="main-header" className={headerClasses}>
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#/" className="text-2xl font-bold text-gray-900">
-          TourCare<span className="text-brand-accent">.ai</span>
-        </a>
-        <nav className="hidden md:flex items-center space-x-8">
-          {content.navItems.map((item, index) => {
-            if (item.type === 'link') {
-              return (
-                <a key={index} href={item.href} className="text-gray-700 hover:text-brand-accent transition font-semibold">
-                  {item.text}
-                </a>
-              );
-            }
-            if (item.type === 'dropdown') {
-              return <NavDropdown key={index} item={item} />;
-            }
-            return null;
-          })}
-        </nav>
-        <div className="flex items-center space-x-4">
-          <LanguageSwitcher currentLang={lang} availableLangs={availableLangs} onChange={changeLanguage} />
-          <button onClick={onCtaClick} className="hidden sm:block bg-brand-accent text-white font-bold px-5 py-2 rounded-md hover:bg-brand-accent-hover transition">
-            {content.cta}
-          </button>
+    <>
+      <header id="main-header" className={headerClasses}>
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <a href="#/" className="text-2xl font-bold text-gray-900 z-10">
+            TourCare<span className="text-brand-accent">.ai</span>
+          </a>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {content.navItems.map((item, index) => {
+              if (item.type === 'link') {
+                return <a key={index} href={item.href} className="text-gray-700 hover:text-brand-accent transition font-semibold">{item.text}</a>;
+              }
+              if (item.type === 'dropdown') {
+                return <NavDropdown key={index} item={item} />;
+              }
+              return null;
+            })}
+          </nav>
+          <div className="flex items-center space-x-4">
+            <LanguageSwitcher currentLang={lang} availableLangs={availableLangs} onChange={changeLanguage} />
+            <button onClick={onCtaClick} className="hidden sm:block bg-brand-accent text-white font-bold px-5 py-2 rounded-md hover:bg-brand-accent-hover transition">
+              {content.cta}
+            </button>
+            {/* Mobile Menu Button */}
+            <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden p-2 text-gray-700 hover:text-brand-accent z-10" aria-label="Open menu">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        content={content}
+        lang={lang}
+        onCtaClick={onCtaClick}
+      />
+    </>
   );
 };
 

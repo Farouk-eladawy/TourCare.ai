@@ -147,9 +147,9 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
 
     return (
         <div className="w-full max-w-5xl mx-auto py-12">
-            <div className="relative flex justify-between items-start">
-                {/* Connecting Line - Updated for 5 steps */}
-                 <div className="absolute top-12 left-0 right-0 h-1 z-0 px-12 md:px-16">
+            <div className="relative flex flex-col items-center gap-12 md:flex-row md:justify-between md:items-start md:gap-0">
+                {/* Connecting Line - For Desktop Only */}
+                 <div className="absolute top-12 left-0 right-0 h-1 z-0 px-12 md:px-16 hidden md:block">
                     <svg width="100%" height="100%" viewBox="0 0 100 2" preserveAspectRatio="none">
                         <path d="M0 1 C 15 1, 10 -1, 25 1 S 40 3, 50 1 S 65 -1, 75 1 S 90 3, 100 1" stroke="#D1D5DB" strokeWidth="0.25" fill="none" strokeDasharray="2 2" />
                     </svg>
