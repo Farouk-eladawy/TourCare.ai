@@ -7,7 +7,7 @@ interface Message {
   isPricing?: boolean;
 }
 
-const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
+const apiKey = (process as any).env.VITE_DEEP_SEEK_API_KEY;
 
 const AiAssistantModal: React.FC<{
   isOpen: boolean;

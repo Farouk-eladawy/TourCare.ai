@@ -52,8 +52,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
     };
     
     const sendToWebhook = async (data: object) => {
-        // Fix: Cast import.meta to any to bypass TypeScript error when Vite client types are not available.
-        const webhookUrl = (import.meta as any).env.VITE_MAKE_TEST_WEBHOOK_URL;
+        const webhookUrl = (process as any).env.VITE_MAKE_TEST_WEBHOOK_URL;
         if (!webhookUrl) {
             console.warn("VITE_MAKE_TEST_WEBHOOK_URL is not set. Simulating API call.");
             await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay

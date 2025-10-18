@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Language } from '../types';
 
 interface GuidingAssistantProps {
@@ -36,41 +36,115 @@ const sectionMessages: Record<string, { [key in Language]: string }> = {
 
 const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, lang, currentRoute }) => {
   const isHomePage = currentRoute === '#/' || currentRoute === '';
+  const botRef = useRef<HTMLDivElement>(null);
 
-  // --- ALL HOOKS MOVED TO TOP-LEVEL TO FIX REACT ERROR #310 ---
-  // Hooks for HomePage version
-  const [position, setPosition] = useState({ top: '85%', left: '3rem' });
+  // --- State for positioning and interaction ---
+  const [position, setPosition] = useState({ top: window.innerHeight - 100, left: 24 });
+  const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState(sectionMessages['hero'][lang]);
   const [showMessage, setShowMessage] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(true);
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const [botSize, setBotSize] = useState(96);
   const bubbleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  
-  // Hooks for other pages version
-  const [isVisible, setIsVisible] = useState(false);
-  
-  // Effect to get dynamic CSS variables and DOM element sizes (HomePage only)
-  useEffect(() => {
-    if (isHomePage) {
-      const headerEl = document.getElementById('main-header');
-      if (headerEl) {
-        setHeaderHeight(headerEl.offsetHeight);
-      }
-      const sizeStr = getComputedStyle(document.documentElement).getPropertyValue('--bot-size').trim().replace('px', '');
-      const size = parseInt(sizeStr, 10);
-      if (!isNaN(size)) {
-        setBotSize(size);
-      }
+
+  // --- State and Refs for Drag Functionality ---
+  const [isDragging, setIsDragging] = useState(false);
+  const [isManuallyPositioned, setIsManuallyPositioned] = useState(false);
+  const dragStartData = useRef({ startX: 0, startY: 0, elementX: 0, elementY: 0 });
+  const wasDragged = useRef(false);
+
+  // --- Drag Handlers (with useCallback for performance) ---
+  const handleDragMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!botRef.current) return;
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+    const dx = clientX - dragStartData.current.startX;
+    const dy = clientY - dragStartData.current.startY;
+    
+    // Set wasDragged flag if moved beyond a small threshold
+    if (!wasDragged.current && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+        wasDragged.current = true;
     }
-  }, [isHomePage]);
-  
+
+    let newX = dragStartData.current.elementX + dx;
+    let newY = dragStartData.current.elementY + dy;
+    
+    // Clamp to viewport
+    const { offsetWidth, offsetHeight } = botRef.current;
+    newX = Math.max(0, Math.min(newX, window.innerWidth - offsetWidth));
+    newY = Math.max(0, Math.min(newY, window.innerHeight - offsetHeight));
+
+    setPosition({ top: newY, left: newX });
+  }, []);
+
+  const handleDragEnd = useCallback(() => {
+    setIsDragging(false);
+    document.body.style.cursor = 'default';
+    window.removeEventListener('mousemove', handleDragMove);
+    window.removeEventListener('mouseup', handleDragEnd);
+    window.removeEventListener('touchmove', handleDragMove);
+    window.removeEventListener('touchend', handleDragEnd);
+  }, [handleDragMove]);
+
+  const handleDragStart = useCallback((e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => {
+    if (!botRef.current) return;
+
+    wasDragged.current = false;
+    e.stopPropagation();
+
+    setIsManuallyPositioned(true);
+    setIsDragging(true);
+    
+    const clientX = 'touches' in e ? e.nativeEvent.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.nativeEvent.touches[0].clientY : e.clientY;
+    
+    const rect = botRef.current.getBoundingClientRect();
+
+    dragStartData.current = {
+        startX: clientX,
+        startY: clientY,
+        elementX: rect.left,
+        elementY: rect.top, 
+    };
+    
+    document.body.style.cursor = 'grabbing';
+    window.addEventListener('mousemove', handleDragMove);
+    window.addEventListener('mouseup', handleDragEnd);
+    window.addEventListener('touchmove', handleDragMove);
+    window.addEventListener('touchend', handleDragEnd);
+  }, [handleDragMove, handleDragEnd]);
+
+
+  const handleClick = () => {
+    if (wasDragged.current) return;
+    onOpenAssistant();
+  };
+
+  // Effect for visibility and initial positioning
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 500);
+    
+    if (!isManuallyPositioned && !isHomePage) {
+      const botSize = 72;
+      setPosition({
+        top: window.innerHeight - botSize - 24,
+        left: window.innerWidth - botSize - 24
+      });
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentRoute, isManuallyPositioned, isHomePage]);
+
   // Effect for dynamic guiding behavior on the homepage
   useEffect(() => {
-    if (!isHomePage || headerHeight === 0) {
-        setIsMinimized(true); // Ensure it's hidden when not on homepage
-        return;
-    };
+    if (!isHomePage || isManuallyPositioned) {
+      return;
+    }
+
+    const headerEl = document.getElementById('main-header');
+    const headerHeight = headerEl ? headerEl.offsetHeight : 0;
+    const botSizeStr = getComputedStyle(document.documentElement).getPropertyValue('--bot-size').trim().replace('px', '');
+    const botSize = parseInt(botSizeStr, 10) || 72;
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -81,13 +155,13 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
                 
                 if (sectionId && sectionMessages[sectionId]) {
                     const windowWidth = window.innerWidth;
-                    const leftPosition = windowWidth > 768 ? '3rem' : '1rem';
+                    const leftPosition = windowWidth > 768 ? 48 : 16;
                     const newTop = rect.top + rect.height / 2;
                     const minTop = headerHeight + (botSize / 2) + 16;
                     const finalTop = Math.max(newTop, minTop);
 
                     setPosition({
-                        top: `${finalTop}px`,
+                        top: finalTop,
                         left: leftPosition,
                     });
                     
@@ -106,7 +180,6 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
     sections.forEach(sec => observer.observe(sec));
     
     const entryTimeout = setTimeout(() => {
-        setIsMinimized(false);
         setShowMessage(true);
         bubbleTimeoutRef.current = setTimeout(() => setShowMessage(false), 5000);
     }, 1500);
@@ -116,82 +189,63 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
         if (bubbleTimeoutRef.current) clearTimeout(bubbleTimeoutRef.current);
         clearTimeout(entryTimeout);
     };
-  }, [isHomePage, lang, headerHeight, botSize]);
+  }, [isHomePage, isManuallyPositioned, lang]);
 
   // Effect for handling language change in messages
   useEffect(() => {
-    if(isHomePage) {
-      const currentMessageKey = Object.keys(sectionMessages).find(key => 
-        Object.values(sectionMessages[key]).includes(message)
-      );
-      if (currentMessageKey) {
-        setMessage(sectionMessages[currentMessageKey][lang]);
-      }
+    const currentMessageKey = Object.keys(sectionMessages).find(key => 
+      Object.values(sectionMessages[key]).includes(message)
+    );
+    if (currentMessageKey) {
+      setMessage(sectionMessages[currentMessageKey][lang]);
     }
-  }, [lang, isHomePage, message]);
+  }, [lang, message]);
 
-  // Effect for the static button on other pages
-  useEffect(() => {
-    if (!isHomePage) {
-      const timer = setTimeout(() => setIsVisible(true), 500);
-      return () => clearTimeout(timer);
-    } else {
-      setIsVisible(false); // Hide immediately when navigating to home
-    }
-  }, [isHomePage]);
+  return (
+    <div 
+      ref={botRef}
+      className={`fixed z-40 group transition-all duration-300 ease-in-out ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
+      style={{
+          top: `${position.top}px`,
+          left: `${position.left}px`,
+          cursor: isDragging ? 'grabbing' : 'grab',
+          transition: isDragging ? 'none' : 'all 0.3s ease-in-out, opacity 0.3s ease-in-out',
+      }}
+    >
+      <div className="relative">
+        <button
+          onClick={handleClick}
+          onMouseDown={handleDragStart}
+          onTouchStart={handleDragStart}
+          className="bg-brand-blue p-3 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent"
+          style={{ width: 'var(--bot-size)', height: 'var(--bot-size)' }}
+          role="button"
+          aria-label="Open AI Assistant"
+        >
+          <BotIcon />
+        </button>
 
-
-  // --- CONDITIONAL JSX RENDERING BASED ON isHomePage ---
-  if (isHomePage) {
-    // DYNAMIC GUIDING BOT for HomePage
-    return (
-      <div 
-        className={`fixed z-40 transition-all duration-700 ease-in-out transform ${isMinimized ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
-        style={{ top: position.top, left: position.left, transform: 'translateY(-50%)' }}
-      >
-        <div className="relative">
-          <button
-            onClick={onOpenAssistant}
-            className="bg-brand-blue p-3 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent"
-            style={{ width: 'var(--bot-size)', height: 'var(--bot-size)' }}
-            role="button"
-            aria-label="Open AI Assistant"
-          >
-            <BotIcon />
-          </button>
-          
+        {isHomePage && !isManuallyPositioned && (
           <div className={`
             absolute bottom-1/2 left-full ml-4 transform translate-y-1/2 
             w-64 p-4 bg-brand-blue text-white text-base font-semibold rounded-lg shadow-xl 
             transition-all duration-500 ease-out origin-left
-            ${showMessage ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}
+            ${showMessage ? 'scale-100 opacity-100' : 'scale-75 opacity-0 pointer-events-none'}
           `}>
             {message}
             <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-brand-blue transform rotate-45"></div>
           </div>
-        </div>
-      </div>
-    );
-  } else {
-    // STATIC FLOATING ACTION BUTTON for other pages
-    return (
-       <div className="fixed bottom-6 right-6 z-40 group">
-          <button
-              onClick={onOpenAssistant}
-              className={`bg-brand-blue p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-accent ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}
-              style={{ width: '64px', height: '64px' }}
-              role="button"
-              aria-label="Open AI Assistant"
-          >
-              <BotIcon />
-          </button>
-          <div className="absolute bottom-1/2 right-full mr-4 transform translate-y-1/2 px-3 py-1.5 bg-brand-blue text-white text-sm font-semibold rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        )}
+
+        {!isHomePage && (
+           <div className="absolute bottom-1/2 right-full mr-4 transform translate-y-1/2 px-3 py-1.5 bg-brand-blue text-white text-sm font-semibold rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
             {lang === 'ar' ? 'المساعد الذكي' : 'AI Assistant'}
             <div className="absolute top-1/2 left-full -translate-y-1/2 w-2 h-2 bg-brand-blue transform rotate-45"></div>
           </div>
-        </div>
-    );
-  }
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default GuidingAssistant;
