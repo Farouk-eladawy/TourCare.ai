@@ -259,6 +259,17 @@ export interface ProductPageContent {
   cta: CtaSectionContent;
 }
 
+export interface PrivacyPolicySection {
+    title: string;
+    content: string | string[];
+}
+
+export interface PrivacyPolicyContent {
+    pageTitle: string;
+    lastUpdated: string;
+    sections: PrivacyPolicySection[];
+}
+
 
 export interface Content {
     header: HeaderContent;
@@ -280,6 +291,7 @@ export interface Content {
     commercialOffer: CommercialOfferContent;
     faqSection: FaqSectionContent;
     contactPage: ContactPageContent;
+    privacyPolicy: PrivacyPolicyContent;
     productPages: {
       operationSys: ProductPageContent;
       pickupTime: ProductPageContent;

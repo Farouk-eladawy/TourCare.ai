@@ -1,4 +1,98 @@
-import { Content, Language } from '../types';
+import { Content, Language, PrivacyPolicyContent } from '../types';
+
+const privacyPolicyEn: PrivacyPolicyContent = {
+  pageTitle: 'Privacy Policy – TourCare.ai',
+  lastUpdated: 'Last updated: October 18, 2025',
+  sections: [
+    { title: '1. Who We Are', content: 'TourCare, Inc. (“TourCare”, “we”, “us”, or “our”) is a U.S.-based company providing AI-powered automation and operations systems for tour & activity suppliers working with online travel agencies (OTAs) such as GetYourGuide, Viator, Headout, and others.\n\nEmail: privacy@tourcare.ai\nData Protection Contact: dpo@tourcare.ai\nEU Representative (Art.27 GDPR): [To be designated]\nUK Representative (UK GDPR): [To be designated]\n\nThis Privacy Policy explains how we collect, use, disclose, and protect your personal information when you interact with our website (www.tourcare.ai), products, and related services.' },
+    { title: '2. Scope', content: [
+        'Suppliers & Partners: Companies and individuals using TourCare’s platform.',
+        'Website Visitors: Users visiting our website or demo pages.',
+        'Prospective Clients: Potential partners contacting us for demos or information.',
+        'End Customers: Limited data shared via supplier integrations with OTAs.'
+    ] },
+    { title: '3. Categories of Data We Collect', content: [
+        'Identification & Contact Data: Name, email, phone/WhatsApp number, company name, role, country.',
+        'Operational Booking Data: Booking ID, product details, date/time, guest count, pickup/hotel details, customer preferences, language.',
+        'Communications Data: Messages via email, chat, or WhatsApp, support tickets, and review correspondence.',
+        'Payment & Billing Data: Invoice references, payment status, transaction IDs (processed securely through payment gateways — TourCare does not store card details).',
+        'Technical Data: IP address, browser type, device ID, cookie identifiers, log files, and usage analytics.',
+        'Review & Quality Data: Post-tour ratings, complaints, feedback, refund status, and internal investigation results.'
+    ] },
+    { title: '4. How We Collect Data', content: [
+        'Directly from you (form submissions, demo requests, emails, chats).',
+        'Automatically through cookies, analytics, and integrations.',
+        'From suppliers and OTAs where integrations are active.',
+        'From third-party tools (payment, CRM, analytics, communication platforms).'
+    ] },
+    { title: '5. Purpose of Processing', content: [
+        'Service Delivery: Manage bookings, send confirmations and pickup times, issue invoices, and automate operations.',
+        'Customer Experience: Provide real-time pickup tracking, quality assurance, and review management.',
+        'Payments: Process add-on charges and generate invoices via secure payment gateways.',
+        'Marketing & Communication: Send service updates, newsletters, and demo offers (opt-out anytime).',
+        'Analytics & Security: Improve our platform, ensure fraud prevention, and maintain infrastructure safety.'
+    ] },
+    { title: '6. Legal Basis for Processing (GDPR/UK-GDPR)', content: [
+        'Consent (Art.6(1)(a)) – for newsletters, cookies, or optional analytics.',
+        'Contract (Art.6(1)(b)) – to provide our services and integrations.',
+        'Legal Obligation (Art.6(1)(c)) – for accounting, tax, or compliance.',
+        'Legitimate Interest (Art.6(1)(f)) – to improve performance, security, and conduct B2B marketing (subject to easy opt-out).'
+    ] },
+    { title: '7. Do Not Sell or Share (CCPA/CPRA)', content: 'We do not “sell” personal information as defined by the CPRA.\nCertain analytics or advertising technologies may constitute “sharing” for cross-context behavioral advertising.\nYou can opt out at any time via our “Do Not Sell or Share My Personal Information” link, and we honor Global Privacy Control (GPC) signals.' },
+    { title: '8. International Data Transfers', content: 'Data may be transferred to the United States or other countries.\nWhere applicable, we rely on Standard Contractual Clauses (SCCs) and conduct Transfer Impact Assessments (TIAs) to ensure adequate protection.' },
+    { title: '9. Data Retention', content: 'We retain data only as long as necessary for the purposes described:\n\n**Data Type**\t**Retention Period**\nSupport & communication logs\t12–24 months\nOperational booking data\tDuration of supplier contract + legal requirements\nBilling & payments\t5–10 years (as required by law)\nMarketing contacts\tUntil you opt out\nAnalytics & cookies\tAs per consent or browser settings' },
+    { title: '10. Cookies & Tracking Technologies', content: [
+        'Essential Cookies – required for core functionality (always active).',
+        'Performance Cookies – analytics to improve usability (requires consent in EU/UK).',
+        'Personalization/Advertising Cookies – optional, activated only with your consent.',
+        'You can manage or withdraw your cookie preferences anytime through our Cookie Settings panel.'
+    ]},
+    { title: '11. Automated Processing & AI', content: 'We use AI-based tools to assist with data analysis, pickup coordination, and review sentiment detection.\nWe do not make legally binding decisions solely through automated processing.\nUsers may request human review of any decision that significantly affects them.' },
+    { title: '12. Security', content: [
+        'Encryption in transit (SSL/TLS)',
+        'Role-based access controls',
+        'Regular security audits and penetration testing',
+        'Activity logging and intrusion detection'
+    ]},
+    { title: '13. Children’s Data', content: 'TourCare.ai is not directed to children under 13, and we do not knowingly collect personal data from them.' },
+    { title: '14. Your Privacy Rights', content: 'Under GDPR/UK-GDPR:\n\n- Right to access, rectify, delete, restrict, or object to processing.\n- Right to data portability and to withdraw consent.\nWe respond within 30 days (extendable by 60 days for complex requests).\n\nUnder CCPA/CPRA (California Residents):\n\n- Right to know, delete, correct, opt out of “sale/share,” and non-discrimination.\nWe respond within 45 days (extendable by 45 days if necessary).\n\nTo exercise your rights, email privacy@tourcare.ai with “Data Request” in the subject line. Identity verification may be required.' },
+    { title: '15. Security of International Partners (Processors)', content: [
+        'Payment & invoicing (Stripe, PayPal, etc.)',
+        'Hosting & storage (AWS, Google Cloud)',
+        'CRM & communication tools (HubSpot, Intercom, WhatsApp Business)',
+        'Analytics (Google Analytics, Hotjar, LinkedIn Ads)',
+        'All partners are bound by Data Processing Agreements (DPAs) and comply with GDPR or equivalent safeguards.'
+    ]},
+    { title: '16. Accessibility & Language', content: 'This policy is available in English and Arabic. Alternative accessible formats may be requested via privacy@tourcare.ai.' },
+    { title: '17. Updates', content: 'We may update this Privacy Policy from time to time.\nThe latest version will always be available at www.tourcare.ai/privacy and include the date of the most recent revision.' },
+    { title: 'Summary', content: 'TourCare.ai is committed to protecting your personal information.\nWe only collect what’s necessary, use it transparently, and give you full control over your data.\n\nFor any questions, please contact:\n📧 privacy@tourcare.ai' },
+  ]
+};
+
+const privacyPolicyAr: PrivacyPolicyContent = {
+  pageTitle: 'سياسة الخصوصية – TourCare.ai',
+  lastUpdated: 'آخر تحديث: 18 أكتوبر 2025',
+  sections: [
+    { title: '1. من نحن', content: 'محتوى مترجم...' },
+  ]
+};
+
+const privacyPolicyDe: PrivacyPolicyContent = {
+  pageTitle: 'Datenschutzrichtlinie – TourCare.ai',
+  lastUpdated: 'Zuletzt aktualisiert: 18. Oktober 2025',
+  sections: [
+    { title: '1. Wer wir sind', content: 'Übersetzter Inhalt...' },
+  ]
+};
+
+const privacyPolicyEs: PrivacyPolicyContent = {
+  pageTitle: 'Política de Privacidad – TourCare.ai',
+  lastUpdated: 'Última actualización: 18 de octubre de 2025',
+  sections: [
+    { title: '1. Quiénes somos', content: 'Contenido traducido...' },
+  ]
+};
+
 
 const en: Content = {
   header: {
@@ -167,7 +261,7 @@ const en: Content = {
       {
         title: 'Legal',
         links: [
-          { text: 'Privacy Policy', href: '#' },
+          { text: 'Privacy Policy', href: '#/privacy' },
           { text: 'Terms of Service', href: '#' },
         ],
       },
@@ -390,6 +484,7 @@ const en: Content = {
       cta: { title: 'Upgrade Your Customer Support', subtitle: 'With Live Quality Support, you no longer have to worry about negative reviews or complaints—we manage them for you professionally, turning every negative experience into an opportunity to improve service and increase your customer satisfaction.', cta: 'Book a Free Consultation' },
     },
   },
+  privacyPolicy: privacyPolicyEn,
 };
 
 const ar: Content = {
@@ -559,7 +654,7 @@ const ar: Content = {
         {
           title: 'قانوني',
           links: [
-            { text: 'سياسة الخصوصية', href: '#' },
+            { text: 'سياسة الخصوصية', href: '#/privacy' },
             { text: 'شروط الخدمة', href: '#' },
           ],
         },
@@ -771,7 +866,7 @@ const ar: Content = {
                 features: [
                     { icon: '📈', text: 'رفع تقييمات منتجاتك على منصات مثل GetYourGuide وViator وتحسين ترتيبها في نتائج البحث.' },
                     { icon: '🚀', text: 'زيادة معدل التحويل والمبيعات بفضل السمعة القوية والتقييمات الإيجابية.' },
-                    { icon: '🧠', text: 'فهم أعمق لتجربة العملاء وتحسين جودة الخدمة بناءً على بيانات وتحليلات حقيقية.' },
+                    { icon: '🧠', text: 'فهم أعمق لتجربة العملاء وتحسين جودة الخدمة بناءً на بيانات وتحليلات حقيقية.' },
                     { icon: '🕐', text: 'توفير الوقت والجهد من خلال الاعتماد على فريق مختص وأدوات ذكاء اصطناعي تدير العملية بالكامل نيابةً عنك.' }
                 ]
             },
@@ -782,6 +877,7 @@ const ar: Content = {
             cta: { title: 'قم بترقية دعم العملاء الخاص بك', subtitle: 'مع Live Quality Support، لن تضطر للقلق بشأن التقييمات السلبية أو الشكاوى بعد الآن – نحن نديرها عنك باحتراف، ونحوّل كل تجربة سلبية إلى فرصة لتحسين الخدمة وزيادة رضا عملائك.', cta: 'احجز استشارة مجانية' },
         },
     },
+    privacyPolicy: privacyPolicyAr,
 };
 
 const de: Content = {
@@ -951,7 +1047,7 @@ const de: Content = {
       {
         title: 'Rechtliches',
         links: [
-          { text: 'Datenschutzrichtlinie', href: '#' },
+          { text: 'Datenschutzrichtlinie', href: '#/privacy' },
           { text: 'Nutzungsbedingungen', href: '#' },
         ],
       },
@@ -1174,6 +1270,7 @@ const de: Content = {
       cta: { title: 'Verbessern Sie Ihren Kundensupport', subtitle: 'Mit Live Quality Support müssen Sie sich keine Sorgen mehr über negative Bewertungen oder Beschwerden machen – wir verwalten sie professionell für Sie und verwandeln jede negative Erfahrung in eine Chance, den Service zu verbessern und Ihre Kundenzufriedenheit zu steigern.', cta: 'Kostenlose Beratung buchen' },
     },
   },
+  privacyPolicy: privacyPolicyDe,
 };
 
 const es: Content = {
@@ -1343,7 +1440,7 @@ const es: Content = {
       {
         title: 'Legal',
         links: [
-          { text: 'Política de privacidad', href: '#' },
+          { text: 'Política de privacidad', href: '#/privacy' },
           { text: 'Términos de servicio', href: '#' },
         ],
       },
@@ -1566,6 +1663,7 @@ const es: Content = {
       cta: { title: 'Mejore su atención al cliente', subtitle: 'Con el Soporte de Calidad en Vivo, ya no tiene que preocuparse por las reseñas negativas o las quejas; las gestionamos por usted profesionalmente, convirtiendo cada experiencia negativa en una oportunidad para mejorar el servicio y aumentar la satisfacción de sus clientes.', cta: 'Reservar consulta gratuita' },
     },
   },
+  privacyPolicy: privacyPolicyEs,
 };
 
 export const content = {
