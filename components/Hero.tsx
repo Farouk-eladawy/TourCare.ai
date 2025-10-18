@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ content, onWatchIntroClick, onBookConsultat
       <BackgroundVideo src={videoUrl} />
       <div className="absolute inset-0 bg-white/50 z-10"></div>
       <div className="relative container mx-auto px-6 z-20">
-        <h2 ref={headlineRef} className="scroll-animate text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4" style={{textShadow: '0px 1px 3px rgba(0,0,0,0.1)'}}>
+        <h2 ref={headlineRef} className="scroll-animate text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4" style={{textShadow: '0px 1px 3px rgba(0,0,0,0.1)'}}>
           {content.headline}
         </h2>
         <p ref={textRef} className="scroll-animate text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
