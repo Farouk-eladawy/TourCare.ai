@@ -7,7 +7,8 @@ interface Message {
   isPricing?: boolean;
 }
 
-const apiKey = (process as any).env.VITE_DEEP_SEEK_API_KEY;
+// FIX: Property 'env' does not exist on type 'ImportMeta'.
+const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
 
 const AiAssistantModal: React.FC<{
   isOpen: boolean;
