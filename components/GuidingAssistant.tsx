@@ -23,7 +23,6 @@ const BotIcon = () => (
     </svg>
 );
 
-// FIX: Added missing de/es language properties to align with the `Language` type.
 const sectionMessages: Record<string, { [key in Language]: string }> = {
     'hero': { en: "Welcome! Let's explore how we can automate your business.", ar: "أهلاً بك! دعنا نستكشف كيف يمكننا أتمتة أعمالك.", de: "Welcome! Let's explore how we can automate your business.", es: "Welcome! Let's explore how we can automate your business." },
     'stats': { en: "See the impact! We deliver measurable results for your business.", ar: "شاهد التأثير! نقدم نتائج قابلة للقياس لعملك.", de: "See the impact! We deliver measurable results for your business.", es: "See the impact! We deliver measurable results for your business." },
@@ -37,23 +36,27 @@ const sectionMessages: Record<string, { [key in Language]: string }> = {
 
 const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, lang, currentRoute }) => {
   const isHomePage = currentRoute === '#/' || currentRoute === '';
+
+  // --- ALL HOOKS MOVED TO TOP-LEVEL TO FIX REACT ERROR #310 ---
+  // Hooks for HomePage version
   const [position, setPosition] = useState({ top: '85%', left: '3rem' });
   const [message, setMessage] = useState(sectionMessages['hero'][lang]);
   const [showMessage, setShowMessage] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [botSize, setBotSize] = useState(96);
-  
   const bubbleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
-  // Effect to get dynamic CSS variables and DOM element sizes
+  // Hooks for other pages version
+  const [isVisible, setIsVisible] = useState(false);
+  
+  // Effect to get dynamic CSS variables and DOM element sizes (HomePage only)
   useEffect(() => {
     if (isHomePage) {
       const headerEl = document.getElementById('main-header');
       if (headerEl) {
         setHeaderHeight(headerEl.offsetHeight);
       }
-
       const sizeStr = getComputedStyle(document.documentElement).getPropertyValue('--bot-size').trim().replace('px', '');
       const size = parseInt(sizeStr, 10);
       if (!isNaN(size)) {
@@ -64,7 +67,10 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
   
   // Effect for dynamic guiding behavior on the homepage
   useEffect(() => {
-    if (!isHomePage || headerHeight === 0) return;
+    if (!isHomePage || headerHeight === 0) {
+        setIsMinimized(true); // Ensure it's hidden when not on homepage
+        return;
+    };
 
     const observer = new IntersectionObserver(
         (entries) => {
@@ -76,14 +82,7 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
                 if (sectionId && sectionMessages[sectionId]) {
                     const windowWidth = window.innerWidth;
                     const leftPosition = windowWidth > 768 ? '3rem' : '1rem';
-                    
                     const newTop = rect.top + rect.height / 2;
-                    
-                    // The minimum top position should ensure the bot's top edge is below the header.
-                    // The `top` style is for the center of the bot due to translateY(-50%).
-                    // We want the bot's top edge (top - botSize/2) to be >= headerHeight.
-                    // Therefore, the minimum center position `top` must be `headerHeight + botSize/2`.
-                    // A 16px buffer is added for spacing.
                     const minTop = headerHeight + (botSize / 2) + 16;
                     const finalTop = Math.max(newTop, minTop);
 
@@ -106,7 +105,6 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
     const sections = document.querySelectorAll('[data-section-id]');
     sections.forEach(sec => observer.observe(sec));
     
-    // Initial reveal
     const entryTimeout = setTimeout(() => {
         setIsMinimized(false);
         setShowMessage(true);
@@ -123,14 +121,27 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
   // Effect for handling language change in messages
   useEffect(() => {
     if(isHomePage) {
-      setMessage(msg => {
-        const key = Object.keys(sectionMessages).find(k => sectionMessages[k]['en'] === msg || sectionMessages[k]['ar'] === msg);
-        return key ? sectionMessages[key][lang] : sectionMessages['hero'][lang];
-      });
+      const currentMessageKey = Object.keys(sectionMessages).find(key => 
+        Object.values(sectionMessages[key]).includes(message)
+      );
+      if (currentMessageKey) {
+        setMessage(sectionMessages[currentMessageKey][lang]);
+      }
     }
-  }, [lang, isHomePage]);
+  }, [lang, isHomePage, message]);
+
+  // Effect for the static button on other pages
+  useEffect(() => {
+    if (!isHomePage) {
+      const timer = setTimeout(() => setIsVisible(true), 500);
+      return () => clearTimeout(timer);
+    } else {
+      setIsVisible(false); // Hide immediately when navigating to home
+    }
+  }, [isHomePage]);
 
 
+  // --- CONDITIONAL JSX RENDERING BASED ON isHomePage ---
   if (isHomePage) {
     // DYNAMIC GUIDING BOT for HomePage
     return (
@@ -163,12 +174,6 @@ const GuidingAssistant: React.FC<GuidingAssistantProps> = ({ onOpenAssistant, la
     );
   } else {
     // STATIC FLOATING ACTION BUTTON for other pages
-    const [isVisible, setIsVisible] = useState(false);
-    useEffect(() => {
-      const timer = setTimeout(() => setIsVisible(true), 500);
-      return () => clearTimeout(timer);
-    }, []);
-
     return (
        <div className="fixed bottom-6 right-6 z-40 group">
           <button
