@@ -179,6 +179,7 @@ const en: Content = {
     description: 'Ask me about pricing, features, or book a consultation!',
     initialMessage: 'Hello! I am the TourCare.ai assistant. How can I help you today? You can ask me to "show pricing" or "schedule a consultation".',
     inputPlaceholder: 'Type your message...',
+    clearChat: 'Clear Chat',
   },
   authModal: {
     title: 'Book a Free Consultation',
@@ -570,6 +571,7 @@ const ar: Content = {
         description: 'اسألني عن الأسعار والميزات أو احجز استشارة!',
         initialMessage: 'مرحبًا! أنا مساعد TourCare.ai. كيف يمكنني مساعدتك اليوم؟ يمكنك أن تطلب مني "عرض الأسعار" أو "تحديد موعد استشارة".',
         inputPlaceholder: 'اكتب رسالتك...',
+        clearChat: 'مسح المحادثة',
     },
     authModal: {
         title: 'احجز استشارة مجانية',
@@ -961,6 +963,7 @@ const de: Content = {
     description: 'Fragen Sie mich nach Preisen, Funktionen oder buchen Sie eine Beratung!',
     initialMessage: 'Hallo! Ich bin der TourCare.ai-Assistent. Wie kann ich Ihnen heute helfen? Sie können mich bitten, "Preise anzuzeigen" oder "eine Beratung zu vereinbaren".',
     inputPlaceholder: 'Geben Sie Ihre Nachricht ein...',
+    clearChat: 'Chat löschen',
   },
   authModal: {
     title: 'Kostenlose Beratung buchen',
@@ -1352,6 +1355,7 @@ const es: Content = {
     description: '¡Pregúnteme sobre precios, características o reserve una consulta!',
     initialMessage: '¡Hola! Soy el asistente de TourCare.ai. ¿Cómo puedo ayudarle hoy? Puede pedirme que "muestre los precios" o "programe una consulta".',
     inputPlaceholder: 'Escriba su mensaje...',
+    clearChat: 'Limpiar chat',
   },
   authModal: {
     title: 'Reservar una consulta gratuita',

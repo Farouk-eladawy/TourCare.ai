@@ -140,6 +140,7 @@ export interface AiAssistantContent {
     description: string;
     initialMessage: string;
     inputPlaceholder: string;
+    clearChat: string;
 }
 
 export interface AuthModalContent {

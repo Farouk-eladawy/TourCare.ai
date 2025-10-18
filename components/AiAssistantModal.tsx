@@ -9,6 +9,7 @@ interface Message {
 
 // FIX: Property 'env' does not exist on type 'ImportMeta'.
 const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
+const CHAT_HISTORY_KEY = 'tourcare_ai_chat_history';
 
 const AiAssistantModal: React.FC<{
   isOpen: boolean;
@@ -34,17 +35,41 @@ const AiAssistantModal: React.FC<{
         }]);
         return;
       }
-
-      setMessages([{
-        role: 'system',
-        text: aiAssistantContent.initialMessage
-      }]);
+      
+      const savedHistory = localStorage.getItem(CHAT_HISTORY_KEY);
+      if (savedHistory) {
+          try {
+            const parsedHistory = JSON.parse(savedHistory);
+            if (Array.isArray(parsedHistory) && parsedHistory.length > 0) {
+              setMessages(parsedHistory);
+            } else {
+              setMessages([{ role: 'system', text: aiAssistantContent.initialMessage }]);
+            }
+          } catch (e) {
+            setMessages([{ role: 'system', text: aiAssistantContent.initialMessage }]);
+          }
+      } else {
+        setMessages([{ role: 'system', text: aiAssistantContent.initialMessage }]);
+      }
     }
   }, [isOpen, aiAssistantContent.initialMessage]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+  
+  // Save history to localStorage
+  useEffect(() => {
+    if (isOpen && messages.length > 0) {
+      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+    }
+  }, [messages, isOpen]);
+
+  const handleClearChat = () => {
+    localStorage.removeItem(CHAT_HISTORY_KEY);
+    setMessages([{ role: 'system', text: aiAssistantContent.initialMessage }]);
+  };
+
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -161,9 +186,21 @@ const AiAssistantModal: React.FC<{
                 <h2 id="ai-modal-title" className="font-bold text-lg">{aiAssistantContent.title}</h2>
                 <p className="text-sm text-gray-500">{aiAssistantContent.description}</p>
             </div>
-            <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800" aria-label="Close">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
+            <div className="flex items-center gap-2">
+                <button 
+                  onClick={handleClearChat} 
+                  className="p-2 text-gray-500 hover:text-red-600 transition-colors"
+                  aria-label={aiAssistantContent.clearChat} 
+                  title={aiAssistantContent.clearChat}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clipRule="evenodd" />
+                    </svg>
+                </button>
+                <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 space-y-4">
