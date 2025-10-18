@@ -140,8 +140,13 @@ const MobileMenu: FC<{
       >
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <a href="#/" onClick={onClose}>
-              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760800757/assets_2Ftask_01k7vyba23f0wsdx1cyw7d3nzg_2F1760800691_img_0_fcuvt8.webp" alt="TourCare.ai Logo" className="h-[var(--logo-height)]" />
+            <a href="#/" onClick={onClose} className="block" aria-label="TourCare.ai Home">
+              <img
+                src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png"
+                alt="TourCare.ai logo"
+                style={{ height: 'var(--logo-height)' }}
+                className="object-contain max-w-[200px]"
+              />
             </a>
             <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -219,9 +224,14 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
   return (
     <>
       <header id="main-header" className={headerClasses}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <a href="#/" className="z-10">
-            <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760800757/assets_2Ftask_01k7vyba23f0wsdx1cyw7d3nzg_2F1760800691_img_0_fcuvt8.webp" alt="TourCare.ai Logo" className="h-[var(--logo-height)]" />
+        <div className="container mx-auto px-6 py-0 flex justify-between items-center">
+          <a href="#/" className="block z-10" aria-label="TourCare.ai Home">
+            <img 
+              src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png" 
+              alt="TourCare.ai logo" 
+              style={{ height: 'var(--logo-height)' }}
+              className="object-contain"
+            />
           </a>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

@@ -20,8 +20,15 @@ const Footer: React.FC<{ content: FooterContent }> = ({ content }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-10">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <a href="#/" className="mb-4 inline-block bg-white p-2 rounded-lg shadow-md">
-              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760800757/assets_2Ftask_01k7vyba23f0wsdx1cyw7d3nzg_2F1760800691_img_0_fcuvt8.webp" alt="TourCare.ai Logo" className="h-[var(--logo-height)]" />
+            <a href="#/" className="inline-block mb-4" aria-label="TourCare.ai Home">
+              <div className="bg-white p-2 rounded-xl shadow-md">
+                <img
+                  src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png"
+                  alt="TourCare.ai logo"
+                  style={{ height: 'var(--logo-height)' }}
+                  className="object-contain"
+                />
+              </div>
             </a>
             <p className="max-w-xs text-gray-400">{content.slogan}</p>
             <div className="flex items-center space-x-4 mt-6">
