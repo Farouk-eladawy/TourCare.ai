@@ -1,4 +1,4 @@
-import { Content, Language, PrivacyPolicyContent } from '../types';
+import { Content, Language, PrivacyPolicyContent, TermsOfServiceContent } from '../types';
 
 const privacyPolicyEn: PrivacyPolicyContent = {
   pageTitle: 'Privacy Policy – TourCare.ai',
@@ -91,6 +91,87 @@ const privacyPolicyEs: PrivacyPolicyContent = {
   sections: [
     { title: '1. Quiénes somos', content: 'Contenido traducido...' },
   ]
+};
+
+const termsOfServiceEn: TermsOfServiceContent = {
+  pageTitle: 'Terms of Service – TourCare.ai',
+  lastUpdated: 'Last Updated: October 18, 2025',
+  sections: [
+    { title: '1. Acceptance of Terms', content: 'By accessing or using the TourCare.ai website (“Site”), platform, or services (collectively, the “Service”), you agree to be bound by these Terms of Service (“Terms”).\nIf you do not agree to these Terms, please do not use the Service.\n\nTourCare, Inc. (“TourCare,” “we,” “us,” or “our”) reserves the right to update or modify these Terms at any time. Any changes will take effect upon posting on our website.' },
+    { title: '2. Description of the Service', content: 'TourCare.ai provides an AI-powered operations and automation platform for tour & activity suppliers working with Online Travel Agencies (OTAs) such as GetYourGuide, Viator, Headout, and others.' },
+    { title: '', content: [
+        'Automated booking management & scheduling',
+        'Smart pickup tracking with GPS',
+        'AI-driven customer communication & review management',
+        'Quality control & refund handling',
+        'Analytics dashboards and automated reporting'
+    ]},
+    { title: '', content: 'We may add or modify features from time to time to improve the Service.'},
+    { title: '3. Eligibility', content: 'You must be at least 18 years old and authorized to act on behalf of a registered company or supplier to use the Service.\nBy using the Service, you represent that you have the legal capacity to enter into this agreement.' },
+    { title: '4. Account Registration & Security', content: 'To access the platform, you may need to create a TourCare account.\nYou agree to:' },
+    { title: '', content: [
+        'Provide accurate and complete information.',
+        'Keep your login credentials confidential.',
+        'Be responsible for all activity under your account.'
+    ]},
+    { title: '', content: 'If we suspect unauthorized use, we may suspend or terminate your account for security reasons.' },
+    { title: '5. Subscription, Fees & Payments', content: 'TourCare.ai may offer free trials, paid subscriptions, or custom enterprise plans.' },
+    { title: '', content: [
+        'Fees are charged according to the selected plan and billing cycle.',
+        'Payments are processed securely through third-party payment gateways (e.g., Stripe, PayPal).',
+        'You authorize us to charge your payment method automatically according to your plan’s terms.',
+        'All fees are non-refundable, except where required by law or specified otherwise.'
+    ]},
+    { title: '6. Data Processing & Privacy', content: 'Your use of the Service is also governed by our Privacy Policy.\nBy using TourCare, you acknowledge and agree that we may process and store data as described therein, including in the U.S. and other jurisdictions.' },
+    { title: '7. Supplier & End-Customer Data', content: 'When you use TourCare’s platform to process bookings or communications with customers:' },
+    { title: '', content: [
+        'You remain the controller of your customer data under GDPR.',
+        'TourCare acts as a data processor, processing data solely under your instructions.',
+        'You must ensure all data you upload or share complies with applicable privacy laws.'
+    ]},
+    { title: '8. Acceptable Use', content: 'You agree not to:' },
+    { title: '', content: [
+        'Use the Service for unlawful or fraudulent purposes.',
+        'Interfere with the platform’s functionality or security.',
+        'Share content that is defamatory, abusive, or violates third-party rights.',
+        'Reverse engineer, copy, or resell our software without written consent.'
+    ]},
+    { title: '', content: 'Violation of these rules may result in account suspension or termination.' },
+    { title: '9. Intellectual Property', content: 'All content, designs, software, AI models, and trademarks related to TourCare.ai are the exclusive property of TourCare, Inc.\nYou are granted a limited, non-exclusive, non-transferable license to use the platform during your subscription.\nYou may not copy, modify, or distribute any part of the Service without prior written consent.' },
+    { title: '10. Third-Party Integrations', content: 'TourCare may integrate with third-party platforms (e.g., OTAs, payment processors, CRMs).\nWe are not responsible for the availability, security, or accuracy of third-party systems.\nYour use of third-party services is governed by their respective terms and policies.' },
+    { title: '11. Disclaimer of Warranties', content: 'The Service is provided on an “as-is” and “as-available” basis.\nTourCare makes no warranties, express or implied, regarding reliability, accuracy, uptime, or suitability for your specific needs.' },
+    { title: '12. Limitation of Liability', content: 'To the maximum extent permitted by law:' },
+    { title: '', content: [
+        'TourCare shall not be liable for any indirect, incidental, or consequential damages, including loss of profits or data.',
+        'Our total liability for any claim related to the Service shall not exceed the total fees paid by you in the previous 12 months.'
+    ]},
+    { title: '13. Termination', content: 'We may suspend or terminate your account at any time for:' },
+    { title: '', content: [
+        'Violation of these Terms,',
+        'Non-payment of fees,',
+        'Legal or security reasons.'
+    ]},
+    { title: '', content: 'Upon termination, your right to use the Service will immediately cease.' },
+    { title: '14. Governing Law & Dispute Resolution', content: 'These Terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-law principles.\nAny disputes shall be resolved through binding arbitration in Delaware, unless otherwise required by applicable law.' },
+    { title: '15. Contact', content: 'For any questions or legal notices regarding these Terms:\n\nTourCare, Inc.\nEmail: legal@tourcare.ai\nWebsite: www.tourcare.ai' },
+    { title: '16. Entire Agreement', content: 'These Terms, along with the Privacy Policy, constitute the entire agreement between you and TourCare regarding the use of our services, superseding any prior agreements or communications.' },
+  ]
+};
+
+const termsOfServiceAr: TermsOfServiceContent = {
+  pageTitle: 'شروط الخدمة – TourCare.ai',
+  lastUpdated: 'آخر تحديث: 18 أكتوبر 2025',
+  sections: [{ title: '1. قبول الشروط', content: 'محتوى مترجم...' }]
+};
+const termsOfServiceDe: TermsOfServiceContent = {
+  pageTitle: 'Nutzungsbedingungen – TourCare.ai',
+  lastUpdated: 'Zuletzt aktualisiert: 18. Oktober 2025',
+  sections: [{ title: '1. Annahme der Bedingungen', content: 'Übersetzter Inhalt...' }]
+};
+const termsOfServiceEs: TermsOfServiceContent = {
+  pageTitle: 'Términos de Servicio – TourCare.ai',
+  lastUpdated: 'Última actualización: 18 de octubre de 2025',
+  sections: [{ title: '1. Aceptación de los Términos', content: 'Contenido traducido...' }]
 };
 
 
@@ -262,7 +343,7 @@ const en: Content = {
         title: 'Legal',
         links: [
           { text: 'Privacy Policy', href: '#/privacy' },
-          { text: 'Terms of Service', href: '#' },
+          { text: 'Terms of Service', href: '#/terms' },
         ],
       },
     ]
@@ -485,6 +566,7 @@ const en: Content = {
     },
   },
   privacyPolicy: privacyPolicyEn,
+  termsOfService: termsOfServiceEn,
 };
 
 const ar: Content = {
@@ -655,7 +737,7 @@ const ar: Content = {
           title: 'قانوني',
           links: [
             { text: 'سياسة الخصوصية', href: '#/privacy' },
-            { text: 'شروط الخدمة', href: '#' },
+            { text: 'شروط الخدمة', href: '#/terms' },
           ],
         },
       ]
@@ -878,6 +960,7 @@ const ar: Content = {
         },
     },
     privacyPolicy: privacyPolicyAr,
+    termsOfService: termsOfServiceAr,
 };
 
 const de: Content = {
@@ -1048,7 +1131,7 @@ const de: Content = {
         title: 'Rechtliches',
         links: [
           { text: 'Datenschutzrichtlinie', href: '#/privacy' },
-          { text: 'Nutzungsbedingungen', href: '#' },
+          { text: 'Nutzungsbedingungen', href: '#/terms' },
         ],
       },
     ]
@@ -1271,6 +1354,7 @@ const de: Content = {
     },
   },
   privacyPolicy: privacyPolicyDe,
+  termsOfService: termsOfServiceDe,
 };
 
 const es: Content = {
@@ -1441,7 +1525,7 @@ const es: Content = {
         title: 'Legal',
         links: [
           { text: 'Política de privacidad', href: '#/privacy' },
-          { text: 'Términos de servicio', href: '#' },
+          { text: 'Términos de servicio', href: '#/terms' },
         ],
       },
     ]
@@ -1664,6 +1748,7 @@ const es: Content = {
     },
   },
   privacyPolicy: privacyPolicyEs,
+  termsOfService: termsOfServiceEs,
 };
 
 export const content = {

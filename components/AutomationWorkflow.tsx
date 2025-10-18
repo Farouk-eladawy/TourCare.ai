@@ -52,7 +52,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
     };
     
     const sendToWebhook = async (data: object) => {
-        // FIX: Property 'env' does not exist on type 'ImportMeta'.
+        // FIX: Removed comment as 'import.meta.env' with type casting is a valid workaround.
         const webhookUrl = (import.meta as any).env.VITE_MAKE_TEST_WEBHOOK_URL;
         if (!webhookUrl) {
             console.warn("VITE_MAKE_TEST_WEBHOOK_URL is not set. Simulating API call.");

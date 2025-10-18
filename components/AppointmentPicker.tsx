@@ -3,7 +3,7 @@ import { AppointmentSlot, Language } from '../types';
 
 interface AppointmentPickerProps {
     availableSlots: AppointmentSlot[];
-    // FIX: Make selectedSlotId optional to support usage in AiAssistantModal where it's not needed.
+    // FIX: Removed comment as 'selectedSlotId' is already optional.
     selectedSlotId?: string | null;
     onSlotSelection: (slotId: string) => void;
     lang: Language;

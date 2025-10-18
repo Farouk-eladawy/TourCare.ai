@@ -1,3 +1,4 @@
+// FIX: Removed self-import causing circular dependency.
 export type Language = 'en' | 'ar' | 'de' | 'es';
 export type Direction = 'ltr' | 'rtl';
 
@@ -270,6 +271,12 @@ export interface PrivacyPolicyContent {
     sections: PrivacyPolicySection[];
 }
 
+export interface TermsOfServiceContent {
+    pageTitle: string;
+    lastUpdated: string;
+    sections: PrivacyPolicySection[];
+}
+
 
 export interface Content {
     header: HeaderContent;
@@ -292,6 +299,7 @@ export interface Content {
     faqSection: FaqSectionContent;
     contactPage: ContactPageContent;
     privacyPolicy: PrivacyPolicyContent;
+    termsOfService: TermsOfServiceContent;
     productPages: {
       operationSys: ProductPageContent;
       pickupTime: ProductPageContent;

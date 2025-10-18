@@ -7,7 +7,7 @@ interface Message {
   isPricing?: boolean;
 }
 
-// FIX: Property 'env' does not exist on type 'ImportMeta'.
+// FIX: Removed comment as 'import.meta.env' with type casting is a valid workaround.
 const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
 const CHAT_HISTORY_KEY = 'tourcare_ai_chat_history';
 

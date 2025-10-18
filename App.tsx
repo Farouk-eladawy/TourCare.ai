@@ -19,6 +19,7 @@ import PickupTimePage from './pages/products/PickupTimePage';
 import LiveSupportPage from './pages/products/LiveSupportPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
 
 function App() {
   const { lang, dir, content, changeLanguage, availableLangs } = useLocalization();
@@ -66,6 +67,8 @@ function App() {
         return <LiveSupportPage content={content.productPages.liveSupport} openAuthModal={openAuthModal} />;
       case '#/privacy':
         return <PrivacyPolicyPage content={content.privacyPolicy} />;
+      case '#/terms':
+        return <TermsOfServicePage content={content.termsOfService} />;
       default:
         return <HomePage content={content} setIsVideoModalOpen={setIsVideoModalOpen} openAuthModal={openAuthModal} />;
     }
