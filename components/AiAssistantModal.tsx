@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI, Chat } from '@google/genai';
 import { AiAssistantContent, PricingContent, Language } from '../types';
 
 interface Message {
@@ -8,7 +7,7 @@ interface Message {
   isPricing?: boolean;
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
+const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
 
 const AiAssistantModal: React.FC<{
   isOpen: boolean;
@@ -20,20 +19,20 @@ const AiAssistantModal: React.FC<{
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [chat, setChat] = useState<Chat | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const systemInstruction = `You are a helpful and friendly assistant for TourCare.ai, an AI Operating System for tour operators. Your goal is to answer questions about features, pricing, and help users understand the service. If asked to book a consultation, guide them to use the "Book a Consultation" button on the website. Be concise and helpful.`;
 
   useEffect(() => {
     if (isOpen) {
-      const systemInstruction = `You are a helpful and friendly assistant for TourCare.ai, an AI Operating System for tour operators. Your goal is to answer questions about features, pricing, and help users understand the service. If asked to book a consultation, guide them to use the "Book a Consultation" button on the website. Be concise and helpful.`;
-      
-      const newChat = ai.chats.create({
-        model: 'gemini-2.5-flash',
-        config: {
-            systemInstruction: systemInstruction,
-        }
-      });
-      setChat(newChat);
+      if (!apiKey) {
+        console.error("VITE_DEEP_SEEK_API_KEY is not set. The AI Assistant cannot function.");
+        setMessages([{
+          role: 'system',
+          text: "Sorry, the AI Assistant is not configured correctly. An API key is missing."
+        }]);
+        return;
+      }
 
       setMessages([{
         role: 'system',
@@ -48,10 +47,11 @@ const AiAssistantModal: React.FC<{
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim() || isLoading || !chat) return;
+    if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: 'user', text: input };
-    setMessages(prev => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
     setInput('');
     setIsLoading(true);
 
@@ -68,21 +68,79 @@ const AiAssistantModal: React.FC<{
         return;
     }
 
-    // AI response
+    // DeepSeek API response
     try {
-        const result = await chat.sendMessageStream({ message: input });
-        let modelResponse = '';
-        setMessages(prev => [...prev, { role: 'model', text: '' }]); // Add placeholder
-        for await (const chunk of result) {
-            modelResponse += chunk.text;
-            setMessages(prev => {
-                const newMessages = [...prev];
-                newMessages[newMessages.length - 1].text = modelResponse;
-                return newMessages;
-            });
+        const apiMessages = [
+            { role: 'system', content: systemInstruction },
+            ...newMessages
+                .filter(m => m.role !== 'system' && !m.isPricing)
+                .map(m => ({
+                    role: m.role === 'model' ? 'assistant' : m.role,
+                    content: m.text,
+                }))
+        ];
+
+        const response = await fetch('https://api.deepseek.com/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: 'deepseek-chat',
+                messages: apiMessages,
+                stream: true,
+            }),
+        });
+        
+        if (!response.ok) {
+            const errorBody = await response.text();
+            throw new Error(`API error: ${response.status} ${response.statusText} - ${errorBody}`);
         }
+
+        setMessages(prev => [...prev, { role: 'model', text: '' }]);
+
+        const reader = response.body!.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    const data = line.substring(6);
+                    if (data.trim() === '[DONE]') {
+                        setIsLoading(false);
+                        return;
+                    }
+                    try {
+                        const chunk = JSON.parse(data);
+                        const content = chunk.choices[0]?.delta?.content;
+                        if (content) {
+                           setMessages(prev => {
+                                const newMessages = [...prev];
+                                const lastMessage = newMessages[newMessages.length - 1];
+                                if (lastMessage && lastMessage.role === 'model') {
+                                    lastMessage.text += content;
+                                }
+                                return newMessages;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing stream chunk:', data, e);
+                    }
+                }
+            }
+        }
+
     } catch (error) {
-        console.error("Gemini API error:", error);
+        console.error("DeepSeek API error:", error);
         setMessages(prev => [...prev, { role: 'model', text: "Sorry, I'm having trouble connecting right now." }]);
     } finally {
         setIsLoading(false);
@@ -133,7 +191,13 @@ const AiAssistantModal: React.FC<{
                 )}
               </div>
             ))}
-            {isLoading && <div className="flex justify-start"><div className="bg-gray-100 rounded-lg p-3"><span className="animate-pulse">...</span></div></div>}
+            {isLoading && messages[messages.length - 1]?.role !== 'model' && (
+                <div className="flex justify-start">
+                    <div className="bg-gray-100 rounded-lg p-3">
+                        <span className="animate-pulse">...</span>
+                    </div>
+                </div>
+            )}
             <div ref={messagesEndRef} />
         </main>
 
@@ -145,9 +209,9 @@ const AiAssistantModal: React.FC<{
               onChange={(e) => setInput(e.target.value)}
               placeholder={aiAssistantContent.inputPlaceholder}
               className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 text-gray-800 focus:ring-2 focus:ring-brand-accent focus:border-brand-accent"
-              disabled={isLoading}
+              disabled={isLoading || !apiKey}
             />
-            <button type="submit" className="bg-brand-accent text-white font-bold px-5 py-2 rounded-md hover:bg-brand-accent-hover transition disabled:bg-gray-400" disabled={isLoading || !input.trim()}>
+            <button type="submit" className="bg-brand-accent text-white font-bold px-5 py-2 rounded-md hover:bg-brand-accent-hover transition disabled:bg-gray-400" disabled={isLoading || !input.trim() || !apiKey}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
             </button>
           </form>
