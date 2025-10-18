@@ -56,6 +56,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
         const webhookUrl = (import.meta as any).env.VITE_MAKE_TEST_WEBHOOK_URL;
         if (!webhookUrl) {
             console.warn("VITE_MAKE_TEST_WEBHOOK_URL is not set. Simulating API call.");
+            console.log("Simulated Webhook Payload:", data);
             await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
             return true;
         }
@@ -73,7 +74,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
     };
 
     const handleBookingSubmit = async (info: CustomerInfo) => {
-        const success = await sendToWebhook(info);
+        const success = await sendToWebhook({ ...info, action: stepContent.steps[0] });
         if (success) {
             setCustomerInfo(info);
             setIsPopupOpen(false);
@@ -86,7 +87,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
     const handleTimeSubmit = async (time: string) => {
         if (!customerInfo) return;
         const payload = { ...customerInfo, pickupTime: time };
-        const success = await sendToWebhook(payload);
+        const success = await sendToWebhook({ ...payload, action: stepContent.steps[2] });
         if (success) {
             setIsTimePickerOpen(false);
             triggerAnimation(2); // Corresponds to "Set Pickup Time" step index
@@ -103,7 +104,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
             case 1: // Collect Info
                 if (!customerInfo) return;
                 setIsSubmittingStep(1);
-                const successCollect = await sendToWebhook({ ...customerInfo, action: 'CollectInfo' });
+                const successCollect = await sendToWebhook({ ...customerInfo, action: stepContent.steps[1] });
                 setIsSubmittingStep(null);
                 if (successCollect) {
                     triggerAnimation(1);
@@ -117,7 +118,7 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
             case 3: // Request Review
                 if (!customerInfo) return;
                 setIsSubmittingStep(3);
-                const successReview = await sendToWebhook({ ...customerInfo, action: 'RequestReview' });
+                const successReview = await sendToWebhook({ ...customerInfo, action: stepContent.steps[3] });
                 setIsSubmittingStep(null);
                 if (successReview) {
                     triggerAnimation(3);
