@@ -782,27 +782,787 @@ const ar: Content = {
     },
 };
 
-// Create placeholder content for new languages by cloning English
-const de: Content = JSON.parse(JSON.stringify(en));
-de.header.navItems = [
-    { type: 'link', href: '#/products/operation-sys', text: 'Produkte' },
-    { type: 'link', href: '#/test-automation', text: 'Test-Automatisierung' },
-    { type: 'link', href: '#/about', text: 'Über uns' },
-    { type: 'link', href: '#/faq', text: 'FAQ' },
-    { type: 'link', href: '#/contact', text: 'Kontakt' }
-];
-de.header.cta = 'Beratung buchen';
+const de: Content = {
+  header: {
+    navItems: [
+      {
+        type: 'dropdown',
+        title: 'Produkte',
+        items: [
+          { href: '#/products/operation-sys', text: 'KI-Betriebssystem', description: 'Automatisieren Sie Ihren gesamten Arbeitsablauf.' },
+          { href: '#/products/pickup-time', text: 'Intelligente Abholung & Nachverfolgung', description: 'Echtzeit-GPS-Verfolgung für Abholungen.' },
+          { href: '#/products/live-support', text: 'Live-Qualitätssupport', description: 'Proaktives Bewertungs- & Feedback-Management.' },
+        ],
+      },
+      { type: 'link', href: '#/test-automation', text: 'Testautomatisierung' },
+      { type: 'link', href: '#/about', text: 'Über uns' },
+      { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/contact', text: 'Kontakt' }
+    ],
+    cta: 'Beratung buchen',
+  },
+  hero: {
+    headline: 'Das KI-Betriebssystem für moderne Reiseveranstalter',
+    secondaryText: 'Automatisieren Sie Buchungen, optimieren Sie die Kommunikation und verbessern Sie das Erlebnis Ihrer Gäste. Entwickelt für GetYourGuide-Anbieter.',
+    ctaTrial: 'Kostenlose Beratung buchen',
+    ctaDemo: 'Intro ansehen',
+    ctaIntro: 'Intro ansehen',
+  },
+  trustedPartners: {
+    title: 'Nahtlos kompatibel mit all Ihren Buchungsplattformen',
+    partners: [
+        { name: 'GetYourGuide', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648049/GetYourGuide_Logo_fb8ral.jpg' },
+        { name: 'Viator', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648301/maxresdefault_dvftgx.jpg' },
+        { name: 'Headout', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648345/1730430084666.headout-logo-400x300_rclqkh.jpg' },
+        { name: 'Tiqets', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648540/AIdro_maZ2fUG38f8CLeNPzubXCQ8vhcrPe6qBhJFDkJbQQkzg_s900-c-k-c0x00ffffff-no-rj_azxd30.jpg' },
+    ],
+  },
+  stats: {
+    stats: [
+      { value: '80%', label: 'Reduzierung manueller Arbeit' },
+      { value: '95%', label: 'Kundenzufriedenheit' },
+      { value: '24/7', label: 'Automatisierter Support' },
+      { value: '3x', label: 'Schnellere Reaktionszeit' },
+    ],
+  },
+  whoItIsFor: {
+    title: 'Entwickelt für wachstumsorientierte Reiseveranstalter',
+    focus: 'Wenn Sie GetYourGuide, Viator, Headout oder Tiqets nutzen, benötigen Sie TourCare.ai.',
+    points: [
+      'GetYourGuide- & Viator-Anbieter',
+      'Wüstensafari- & Stadtrundfahrtveranstalter',
+      'Anbieter von Attraktionen & Erlebnissen',
+      'DMC & Inbound-Reiseveranstalter',
+      'Unternehmen, die ihre Betriebsabläufe skalieren möchten',
+      'Teams, die manuelle, repetitive Aufgaben leid sind',
+    ],
+  },
+  workflow: {
+    title: 'So funktioniert es: Einfach & leistungsstark',
+    steps: [
+      { icon: '1️⃣', title: 'Verbinden', description: 'Integrieren Sie Ihre Buchungsplattformen in wenigen Minuten.' },
+      { icon: '2️⃣', title: 'Konfigurieren', description: 'Richten Sie Ihre Automatisierungsregeln und Nachrichtenvorlagen ein.' },
+      { icon: '3️⃣', title: 'Automatisieren', description: 'Überlassen Sie der KI die Abholzeiten, FAQs und den Support.' },
+      { icon: '4️⃣', title: 'Wachsen', description: 'Konzentrieren Sie sich auf Ihr Geschäft, während wir die Abläufe übernehmen.' },
+    ],
+  },
+  visualFeatures: {
+    title: 'Alles, was Sie brauchen. Nichts, was Sie nicht brauchen.',
+    features: [
+      {
+        image: 'https://res.cloudinary.com/dqlurfwet/video/upload/v1760600739/Generated_File_October_05_2025_-_7_52PM_y9xuad.mp4',
+        title: 'Automatisierte Kommunikation der Abholzeit',
+        description: 'Beseitigen Sie Nichterscheinen und reduzieren Sie Supportanfragen, indem Sie Ihren Gästen automatisch genaue Abholzeiten per WhatsApp, iMessage und SMS senden.',
+        points: [
+          'Automatische Berechnung basierend auf dem Standort',
+          'Benachrichtigungen über mehrere Kanäle',
+          'Reduziert eingehende Anrufe wie "Wo bleibt meine Abholung?"',
+          'Anpassbare Nachrichtenvorlagen',
+        ],
+      },
+      {
+        image: 'https://res.cloudinary.com/dqlurfwet/video/upload/v1760650718/assets_task_01k7nzevahf1ev9yppcr9xm1pd_task_01k7nzevahf1ev9yppcr9xm1pd_genid_af342fa4-71e5-44e3-b1bd-b541577ef97d_25_10_16_07_48_188040_videos_00000_260261227_md_ir8sfv.mp4',
+        title: 'KI-gestützter 24/7-Live-Support',
+        description: 'Bieten Sie Ihren Kunden rund um die Uhr sofortige und genaue Antworten auf ihre Fragen. Unsere KI ist auf Ihre spezifischen Tourdaten und Geschäftsrichtlinien trainiert.',
+        points: [
+          'Bearbeitet bis zu 80 % der häufigsten Anfragen',
+          'Verfügbar 24/7, 365 Tage im Jahr',
+          'Versteht mehrere Sprachen',
+          'Nahtlose Übergabe an menschliche Agenten bei Bedarf',
+        ],
+      },
+    ],
+  },
+  ctaSection: {
+    title: 'Bereit, Ihre Abläufe zu automatisieren?',
+    subtitle: 'Vereinbaren Sie eine kostenlose, unverbindliche Beratung, um zu sehen, wie TourCare.ai Ihr Unternehmen verändern kann.',
+    cta: 'Ihre kostenlose Beratung buchen',
+  },
+  playground: {
+    title: 'Testen Sie die Automatisierungs-Engine',
+    description: 'Sehen Sie, wie unser System Kunden sofort benachrichtigt. Geben Sie die Details unten ein, um das Senden einer Abholzeit-Benachrichtigung per WhatsApp zu simulieren.',
+    form: {
+      bookingId: 'Buchungs-ID',
+      route: 'Tour / Routenname',
+      pickupTime: 'Abholzeit',
+      button: 'Benachrichtigung senden',
+    },
+    result: {
+      title: 'API-Antwort',
+      status: 'Status',
+      success: 'Erfolg',
+      sent: 'Eine WhatsApp-Nachricht mit den Details wurde an den Kunden gesendet.',
+    },
+  },
+  integrations: {
+    title: 'Nahtlose Integration mit Ihren bestehenden Tools',
+    partners: ['Gmail Interface', 'ChatGPT API', 'DeepSeek API', 'WhatsApp Cloud API', 'Zapier', 'Make.com'],
+  },
+  testimonials: {
+    title: 'Was unsere Partner sagen',
+    quote: 'TourCare.ai hat unsere Arbeitsabläufe revolutioniert. Wir haben unseren manuellen Arbeitsaufwand um mehr als 80 % reduziert und unsere Kundenzufriedenheit war noch nie höher. Es ist ein Muss für jeden ernsthaften Reiseveranstalter auf GetYourGuide.',
+    author: 'Ahmed M.',
+    company: 'Operations Manager, OceanAir Travels',
+  },
+  pricing: {
+    title: 'Einfache, transparente Preise',
+    plans: [
+      { name: 'Basis-Setup', price: '499 $', features: ['1 Buchungsplattform-Integration', 'Automatisierung der Abholzeit', 'Basis-KI-Support-Bot', 'WhatsApp-Kanal'], cta: 'Basis wählen' },
+      { name: 'Pro-Setup', price: '999 $', features: ['Bis zu 3 Integrationen', 'Erweiterte Automatisierungsregeln', 'Maßgeschneiderter KI-Bot', '24/7-Übergabe an Live-Agenten'], cta: 'Pro wählen' },
+      { name: 'Erweitertes Setup', price: '1.999 $', features: ['Unbegrenzte Integrationen', 'Vollständiges Betriebs-OS', 'Dedizierter Erfolgsmanager', 'API-Zugang & benutzerdefinierte Logik'], cta: 'Erweitert wählen' },
+    ],
+    retainer: 'Alle Pläne beinhalten eine monatliche Pauschale für Support und Wartung.',
+  },
+  slogan: 'Konzentrieren Sie sich auf die Tour, nicht auf die Aufgaben.',
+  footer: {
+    slogan: 'Das KI-Betriebssystem für moderne Reiseveranstalter.',
+    copyright: '© 2024 TourCare.ai. Alle Rechte vorbehalten.',
+    socials: [
+      { name: 'Facebook', href: 'https://facebook.com' },
+      { name: 'LinkedIn', href: 'https://linkedin.com' },
+    ],
+    columns: [
+      {
+        title: 'Produkte',
+        links: [
+          { text: 'KI-Betriebssystem', href: '#/products/operation-sys' },
+          { text: 'Intelligente Abholung & Nachverfolgung', href: '#/products/pickup-time' },
+          { text: 'Live-Qualitätssupport', href: '#/products/live-support' },
+        ],
+      },
+      {
+        title: 'Unternehmen',
+        links: [
+          { text: 'Über uns', href: '#/about' },
+          { text: 'Testautomatisierung', href: '#/test-automation' },
+          { text: 'Kontakt', href: '#/contact' },
+        ],
+      },
+      {
+        title: 'Ressourcen',
+        links: [
+          { text: 'FAQ', href: '#/faq' },
+          { text: 'Blog', href: '#' },
+          { text: 'Fallstudien', href: '#' },
+        ],
+      },
+      {
+        title: 'Rechtliches',
+        links: [
+          { text: 'Datenschutzrichtlinie', href: '#' },
+          { text: 'Nutzungsbedingungen', href: '#' },
+        ],
+      },
+    ]
+  },
+  aiAssistant: {
+    openButtonLabel: 'KI-Assistent öffnen',
+    title: 'TourCare.ai Assistent',
+    description: 'Fragen Sie mich nach Preisen, Funktionen oder buchen Sie eine Beratung!',
+    initialMessage: 'Hallo! Ich bin der TourCare.ai-Assistent. Wie kann ich Ihnen heute helfen? Sie können mich bitten, "Preise anzuzeigen" oder "eine Beratung zu vereinbaren".',
+    inputPlaceholder: 'Geben Sie Ihre Nachricht ein...',
+  },
+  authModal: {
+    title: 'Kostenlose Beratung buchen',
+    closeButton: 'Schließen',
+    formPlaceholderFirstName: 'Vorname',
+    formPlaceholderLastName: 'Nachname',
+    formPlaceholderEmail: 'E-Mail-Adresse',
+    formPlaceholderNote: 'Sollten wir sonst noch etwas wissen? (optional)',
+    slotPickerTitle: 'Wählen Sie eine Zeit, die Ihnen passt:',
+    noSlots: 'Keine verfügbaren Termine. Bitte kontaktieren Sie uns direkt.',
+    submitButton: 'Buchung bestätigen',
+    confirming: 'Ihre Buchung wird bestätigt...',
+    confirmationTitle: 'Buchung bestätigt!',
+    confirmationMessage: 'Vielen Dank! Eine Kalendereinladung wurde an Ihre E-Mail gesendet.',
+    errorTitle: 'Hoppla!',
+    errorMessage: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns.',
+  },
+  commercialOffer: {
+    mainTitle: 'Unsere Mission: Reiseveranstalter mit KI zu stärken',
+    whoWeAre: {
+        description: `TourCare.ai wurde von einem Team aus Reiseveranstaltern und KI-Ingenieuren gegründet, die die betrieblichen Herausforderungen beim Skalieren eines Geschäfts auf Plattformen wie GetYourGuide aus erster Hand erlebt haben.\n\nWir waren die sich wiederholenden E-Mails, die nächtlichen Supportanrufe und die ständige Angst, dass eine verpasste Abholzeit zu einer schlechten Bewertung führt, leid. Wir wussten, es muss einen besseren Weg geben. Deshalb haben wir TourCare.ai entwickelt: ein intelligentes, automatisiertes System, das die mühsamen Aufgaben erledigt, damit Sie sich auf das konzentrieren können, was Sie am besten können – unvergessliche Erlebnisse schaffen.`
+    },
+    vision: {
+        title: 'Unsere Vision',
+        description: 'Das unverzichtbare Betriebssystem für jeden Tour- und Aktivitätenanbieter weltweit zu werden und anspruchsvolle Automatisierung und KI für Unternehmen jeder Größe zugänglich und erschwinglich zu machen.'
+    },
+    whatWeOffer: {
+        title: 'Was wir bieten',
+        description: 'Eine umfassende Suite von Tools zur Automatisierung Ihrer gesamten Kundenreise.',
+        features: [
+            { icon: '🤖', text: 'KI-gestützte Automatisierung: Von Buchungsbestätigungen bis hin zu Feedback nach der Tour, automatisieren Sie jeden Schritt.' },
+            { icon: '💬', text: 'Mehrsprachiger 24/7-Support: Ein KI-Assistent, der die Sprache Ihrer Kunden spricht, zu jeder Tageszeit.' },
+            { icon: '📊', text: 'Handlungsrelevante Einblicke: Verstehen Sie Ihre Abläufe wie nie zuvor mit intelligenten Analysen und Berichten.' },
+            { icon: '🔌', text: 'Nahtlose Integration: Verbinden Sie sich mühelos mit den Plattformen, die Sie bereits nutzen, wie GetYourGuide, Viator und WhatsApp.' }
+        ]
+    }
+  },
+  faqSection: {
+    pageTitle: 'Häufig gestellte Fragen',
+    allCategories: 'Alle',
+    searchPlaceholder: 'Nach einer Frage suchen...',
+    categories: [
+        {
+            title: 'Allgemein',
+            icon: '🌍',
+            items: [
+                { q: 'Was ist TourCare.ai?', a: 'TourCare.ai ist ein KI-gestütztes Betriebssystem für Reiseveranstalter. Es automatisiert wichtige Aufgaben wie das Senden von Abholzeiten, die Beantwortung von Kundenfragen rund um die Uhr und die Verwaltung von Buchungen, um Ihnen Zeit zu sparen und die Zufriedenheit der Gäste zu verbessern.' },
+                { q: 'Für wen ist das?', a: 'Unser System ist speziell für Tour- und Aktivitätenanbieter konzipiert, insbesondere für diejenigen, die Anbieter auf Plattformen wie GetYourGuide und Viator sind. Wenn Sie Buchungen verwalten, Abholungen koordinieren und mit Gästen kommunizieren, ist TourCare.ai für Sie.' }
+            ]
+        },
+        {
+            title: 'Technisch',
+            icon: '⚙️',
+            items: [
+                { q: 'Wie integriert es sich mit GetYourGuide?', a: 'Wir verwenden offizielle APIs und sichere Integrationsmethoden, um uns mit Ihrem GetYourGuide-Anbieterkonto zu verbinden. Dies ermöglicht uns, Buchungsinformationen in Echtzeit zu lesen, um Automatisierungen auszulösen.' },
+                { q: 'Sind meine Daten sicher?', a: 'Absolut. Wir verwenden branchenübliche Verschlüsselungs- und Sicherheitspraktiken, um alle Ihre Daten und die Informationen Ihrer Kunden zu schützen. Wir sind vollständig DSGVO-konform.' }
+            ]
+        },
+        {
+            title: 'Preise',
+            icon: '💰',
+            items: [
+                { q: 'Wie funktioniert die Preisgestaltung?', a: 'Wir bieten einmalige Setup-Pakete je nach Ihren Bedürfnissen an, gefolgt von einer monatlichen Pauschale für laufenden Support, Wartung und Systemnutzung. Dies stellt sicher, dass das System immer reibungslos läuft und Sie bei Bedarf Zugang zu unserem Team haben.' },
+                { q: 'Gibt es eine kostenlose Testversion?', a: 'Wir bieten keine kostenlose Testversion an, aber eine kostenlose, ausführliche Beratung und Live-Demo, um Ihnen genau zu zeigen, wie das System für Ihr Unternehmen funktionieren würde. Dies ermöglicht es uns, die Demonstration auf Ihre spezifischen betrieblichen Anforderungen zuzuschneiden.' }
+            ]
+        }
+    ]
+  },
+  contactPage: {
+    pageTitle: 'Kontaktieren Sie uns',
+    intro: 'Haben Sie eine Frage, einen speziellen Wunsch oder möchten Sie einfach eine Demo sehen? \nWir würden uns freuen, von Ihnen zu hören. Melden Sie sich, und lassen Sie uns besprechen, wie wir Ihnen beim Wachsen helfen können.',
+    whyContact: {
+        title: 'Warum uns kontaktieren?',
+        reasons: [
+            'Eine personalisierte Demo vereinbaren',
+            'Ein benutzerdefiniertes Automatisierungsprojekt besprechen',
+            'Informationen zu Unternehmenslösungen anfordern',
+            'Partnerschaftsmöglichkeiten erkunden',
+            'Antworten auf spezifische Fragen erhalten',
+            'Feedback oder Vorschläge geben'
+        ]
+    },
+    directContact: {
+        title: 'Direkter Kontakt',
+        items: [
+            { icon: '📧', label: 'E-Mail an uns', value: 'contact@tourcare.ai', href: 'mailto:contact@tourcare.ai' },
+            { icon: '📞', label: 'Rufen Sie uns an (VAE)', value: '+971 50 123 4567', href: 'tel:+971501234567' },
+            { icon: '📍', label: 'Unser Büro', value: 'Dubai, Vereinigte Arabische Emirate' }
+        ]
+    },
+    instantChannels: {
+        title: 'Sofortkanäle',
+        items: [
+            { icon: '💬', label: 'WhatsApp', action: 'Chatten Sie jetzt mit uns', href: 'https://wa.me/971501234567' },
+            { icon: '🤖', label: 'KI-Assistent', action: 'Stellen Sie unserer KI eine Frage', href: '#/ai-assistant-shortcut' }
+        ]
+    },
+    formSection: {
+        title: 'Senden Sie uns eine Nachricht',
+        subtitle: 'Füllen Sie das untenstehende Formular aus, und unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden.',
+        form: {
+            companyName: 'Firmenname',
+            contactPerson: 'Ihr Name',
+            email: 'Ihre E-Mail',
+            phone: 'Ihre Telefonnummer',
+            platforms: 'Welche Buchungsplattformen nutzen Sie?',
+            platformOptions: ['GetYourGuide', 'Viator', 'Booking.com', 'Eigene Website', 'Andere'],
+            message: 'Ihre Nachricht',
+            submitButton: 'Nachricht senden',
+            sendingButton: 'Wird gesendet...'
+        },
+        confirmation: 'Wir respektieren Ihre Privatsphäre und werden Ihre Informationen niemals weitergeben.'
+    }
+  },
+  productPages: {
+    operationSys: {
+      navTitle: 'KI-Betriebssystem',
+      hero: { title: 'Das komplette KI-Betriebssystem', subtitle: 'Integrieren Sie all Ihre Tools in einen einzigen, intelligenten Hub, der Ihr Geschäft auf Autopilot verwaltet.' },
+      descriptionSection: {
+        title: 'Produktbeschreibung',
+        content: 'Eine umfassende Lösung zur Verwaltung und zum Betrieb aller Phasen der Tour, vom Buchungszeitpunkt bis zum Ende des Erlebnisses, die darauf ausgelegt ist, alle manuellen Aufgaben in vollautomatische Prozesse umzuwandeln.\n\nBei TourCare bieten wir ein integriertes Betriebssystem, das jeden Punkt im Lebenszyklus der Buchung abdeckt und das Tourmanagement in einen intelligenten, vollautomatischen Prozess verwandelt:',
+        features: [
+          { icon: '🤖', text: 'Sammeln Sie Buchungen von allen Plattformen automatisch an einem Ort ohne manuellen Eingriff.' },
+          { icon: '💬', text: 'Sofortige automatische Antwort an den Kunden nach der Buchung zur Bestätigung der Details und zum Aufbau von Vertrauen.' },
+          { icon: '📩', text: 'Senden Sie Abholzeiten automatisch per E-Mail oder WhatsApp.' },
+          { icon: '⏰', text: 'Automatische Erinnerungen an den Kunden über die Abholzeit vor der Reise, um Verspätungen oder Nichterscheinen zu reduzieren.' },
+          { icon: '💳', text: 'Erheben Sie automatisch zusätzliche Beträge oder optionale Dienstleistungen vom Kunden durch Anbindung an Zahlungsgateways, mit einer automatischen elektronischen Rechnung, die mit der Willkommens- oder Abholzeitnachricht gesendet wird.' },
+          { icon: '📧', text: 'Professionelle E-Mail-Vorlagen, die für jede Phase angepasst sind (Buchungsbestätigung - Erinnerung - Senden der Abholzeit - Bewertungsanfrage - Beschwerdeverfolgung - Rechnungen), mit mehrsprachiger Formulierung, die Ihre Markenidentität widerspiegelt.' },
+          { icon: '🤖', text: 'KI-Agent zum automatischen Sammeln wichtiger Kundendaten wie Hotelname, Zimmernummer oder geografischer Standort per E-Mail oder WhatsApp, was Fehler reduziert und betriebliche Prozesse beschleunigt.' },
+          { icon: '⭐', text: 'Fordern Sie nach der Reise automatisch Bewertungen an und leiten Sie Beschwerden direkt an die Qualitätsabteilung zur Analyse und Nachverfolgung weiter.' },
+          { icon: '📍', text: 'Verfolgen Sie Fahrer und Fahrten in Echtzeit über ein intelligentes Dashboard, um die Raten von Nichterscheinen und Stornierungen zu reduzieren.' },
+          { icon: '📱', text: 'Senden Sie Last-Minute-Buchungen automatisch per WhatsApp an den Betriebsleiter zur schnellen Ausführung.' },
+          { icon: '👤', text: 'Erstellen Sie Unterkonten für Reiseführer, Fahrer und Lieferanten, um betriebliche Aufgaben zu verfolgen und den Status jeder Reise in Echtzeit zu aktualisieren.' },
+          { icon: '📊', text: 'Automatisches tägliches Berichtssystem, das per E-Mail gesendet wird und die tatsächliche Anzahl der Buchungen auf jeder Plattform (GetYourGuide - Viator - Headout - usw.) anzeigt, mit einer detaillierten Aufschlüsselung nach Zielen und Produkten.' },
+          { icon: '📈', text: 'Ein umfassendes Analyse-Dashboard, das alle Leistungsindikatoren (Buchungen, Einnahmen, Stornierungsraten, Kundenbewertungen und Rezensionen) an einem Ort anzeigt, damit das Management schnellere und genauere Entscheidungen treffen kann.' }
+        ]
+      },
+      pricing: {
+        title: 'Preise für das vollständige Betriebssystem',
+        plans: [
+          { name: 'Pro', price: '999 $', features: ['Alle Kernfunktionen', 'Bis zu 3 Integrationen', '24/7 Live-Support'], cta: 'Pro wählen' },
+          { name: 'Erweitert', price: '1.999 $', features: ['Alles in Pro', 'Unbegrenzte Integrationen', 'API-Zugang'], cta: 'Erweitert wählen' },
+          { name: 'Unternehmen', price: 'Individuell', features: ['Vollständig maßgeschneiderte Lösung', 'Dedizierte Infrastruktur', 'Schulung vor Ort'], cta: 'Kontaktieren Sie uns' },
+        ]
+      },
+      cta: { title: 'Bereit für echten Autopiloten?', subtitle: 'Lassen Sie uns Ihr individuelles Betriebssystem erstellen.', cta: 'Planungsgespräch buchen' },
+    },
+    pickupTime: {
+      navTitle: 'Intelligente Abholung & Nachverfolgung',
+      hero: { title: 'Intelligentes Abhol- & Nachverfolgungssystem', subtitle: 'GPS-basiertes Kundenabholungssystem' },
+      descriptionSection: {
+        title: 'Produktbeschreibung',
+        content: 'Eine intelligente Plattform, die auf die Verwaltung und Organisation von Abhol- und Transportvorgängen für touristische Reisen spezialisiert ist und es Ihnen ermöglicht, jeden Fahrer und Kunden in Echtzeit zu verfolgen, um sicherzustellen, dass jede Reise pünktlich und ohne Verzögerung ankommt. Das System verbessert die betriebliche Genauigkeit und bietet ein professionelleres und reibungsloseres Erlebnis für die Kunden vom Verlassen ihres Hotels bis zum Beginn ihrer Tour.',
+        features: [
+            { icon: '📍', text: 'Echtzeit-Nachverfolgung: Überwachen Sie die Standorte von Fahrern und Kunden von Moment zu Moment mithilfe der GPS-Technologie.' },
+            { icon: '🔔', text: 'Sofortige Benachrichtigungen: Unverzügliche Warnungen, wenn sich ein Fahrer verspätet oder sich der Standort eines Kunden ändert.' },
+            { icon: '🧭', text: 'Live-Betriebs-Dashboard: Sehen Sie den Live-Status jedes Abholvorgangs in einem einzigen, einfach zu bedienenden Kontrollpanel.' },
+            { icon: '📞', text: 'Sichere & direkte Kommunikation: Ermöglichen Sie es den Fahrern, Kunden direkt zu kontaktieren, ohne Telefonnummern preiszugeben, um den Datenschutz zu gewährleisten.' },
+            { icon: '📸', text: 'Medienunterstützung: Möglichkeit, Fotos vom Standort des Fahrers aufzunehmen und an den Kunden zu senden, um die Zuverlässigkeit zu erhöhen und die Anwesenheit zu bestätigen.' },
+            { icon: '📍', text: 'Live-Standortfreigabe: Im Falle eines Nichterscheinens kann zur Backup-Zeit ein Live-Standort gesendet werden, um dem Kunden die Anreise zu erleichtern und die Wahrscheinlichkeit einer Rückerstattungsanforderung zu verringern.' },
+            { icon: '📊', text: 'Genaue Betriebsberichte: Sehen Sie detaillierte Analysen zur Fahrerleistung, zu Fällen von Nichterscheinen und Stornierungsraten, mit Tools zur Leistungsverbesserung und Verlustreduzierung.' }
+        ]
+      },
+      benefits: {
+          title: 'Vorteile',
+          features: [
+              { icon: '🚗', text: 'Reduzieren Sie die Raten von Nichterscheinen und Stornierungen erheblich.' },
+              { icon: '🤝', text: 'Verbessern Sie das Kundenerlebnis vom Verlassen des Hotels bis zum Beginn der Tour.' },
+              { icon: '📉', text: 'Eine deutliche Reduzierung der Rückerstattungen aufgrund von Ankunftsproblemen.' },
+              { icon: '📈', text: 'Steigern Sie die betriebliche Effizienz und verbessern Sie den Ruf Ihres Unternehmens auf globalen Plattformen.' }
+          ]
+      },
+      pricing: {
+        title: 'Einfache Preise',
+        plans: []
+      },
+      cta: { title: 'Automatisieren Sie Ihre Abholungen noch heute', subtitle: 'Mit dem intelligenten Abhol- & Nachverfolgungssystem können Sie alle Transport- und Abholvorgänge mit vollständiger Professionalität verwalten und ein genaueres und zuverlässigeres Kundenerlebnis schaffen, das Ihnen hilft, Verluste zu reduzieren und Gewinne zu steigern.', cta: 'Kostenlose Beratung buchen' },
+    },
+    liveSupport: {
+      navTitle: 'Live-Qualitätssupport',
+      hero: { title: 'Live-Qualitätssupport', subtitle: 'Kundenservice-System für Qualität und Bewertungen' },
+      descriptionSection: {
+        title: 'Produktbeschreibung',
+        content: 'Eine integrierte Lösung, die ein professionelles menschliches Support-Team mit intelligenter KI kombiniert, um die Servicequalität nach Ende der Tour zu verwalten, das Kundenverhalten zu analysieren, Bewertungen zu sammeln und Beschwerden professionell zu bearbeiten, um Ihnen zu helfen, Ihre Produkt-Rankings auf OTAs wie GetYourGuide und Viator zu verbessern. Das System verfolgt das Erlebnis des Kunden vom Moment seiner Rückkehr von der Reise bis zur Bewertungsphase, um höchste Zufriedenheitsraten zu gewährleisten und die Wahrscheinlichkeit negativer Bewertungen oder Rückerstattungsanträge zu reduzieren.',
+        features: [
+            { icon: '📬', text: 'Senden Sie nach der Reise automatisierte Bewertungsanfragen mit professionellen, mehrsprachigen Texten, um die Chancen auf positive Bewertungen zu erhöhen.' },
+            { icon: '🤖', text: 'Stimmungsanalyse: Verwenden Sie künstliche Intelligenz, um unzufriedene Kunden frühzeitig zu erkennen, bevor sie eine negative Bewertung schreiben.' },
+            { icon: '🔎', text: 'Beschwerdeuntersuchung: Sammeln Sie Details und analysieren Sie die Gründe für negative Bewertungen, um korrigierende Entscheidungen zu treffen und den Service zu verbessern.' },
+            { icon: '🧑‍⚖', text: 'Entfernung negativer Bewertungen: Sorgfältige Nachverfolgung bei OTAs, um Bewertungen zu entfernen, die gegen deren Geschäftsbedingungen verstoßen.' },
+            { icon: '🤝', text: 'Verhandeln Sie mit Kunden: Kommunizieren Sie professionell, um alternative Lösungen anzubieten, die sie davon abhalten, eine Rückerstattung zu beantragen oder eine negative Bewertung zu schreiben.' },
+            { icon: '💼', text: 'Verwaltung von Rückerstattungsanträgen: Verwalten Sie Anträge Schritt für Schritt bis zum Abschluss und dokumentieren Sie alle Kommunikationsphasen.' },
+            { icon: '📊', text: 'KI-gestützte Bewertungsanalyse: Extrahieren Sie handlungsrelevante Einblicke über die Gründe für die Zufriedenheit oder Unzufriedenheit der Kunden und stellen Sie der Geschäftsleitung monatliche Berichte zur Verfügung.' }
+        ]
+      },
+      benefits: {
+          title: 'Vorteile',
+          features: [
+              { icon: '📈', text: 'Steigern Sie Ihre Produktbewertungen auf Plattformen wie GetYourGuide und Viator und verbessern Sie deren Suchrankings.' },
+              { icon: '🚀', text: 'Erhöhen Sie die Konversionsraten und den Umsatz dank eines starken Rufs und positiver Bewertungen.' },
+              { icon: '🧠', text: 'Gewinnen Sie ein tieferes Verständnis für das Kundenerlebnis und verbessern Sie die Servicequalität auf der Grundlage von echten Daten und Analysen.' },
+              { icon: '🕐', text: 'Sparen Sie Zeit und Mühe, indem Sie sich auf ein spezialisiertes Team und KI-Tools verlassen, die den gesamten Prozess für Sie verwalten.' }
+          ]
+      },
+      pricing: {
+        title: 'Einfache Preise',
+        plans: []
+      },
+      cta: { title: 'Verbessern Sie Ihren Kundensupport', subtitle: 'Mit Live Quality Support müssen Sie sich keine Sorgen mehr über negative Bewertungen oder Beschwerden machen – wir verwalten sie professionell für Sie und verwandeln jede negative Erfahrung in eine Chance, den Service zu verbessern und Ihre Kundenzufriedenheit zu steigern.', cta: 'Kostenlose Beratung buchen' },
+    },
+  },
+};
 
-const es: Content = JSON.parse(JSON.stringify(en));
-es.header.navItems = [
-    { type: 'link', href: '#/products/operation-sys', text: 'Productos' },
-    { type: 'link', href: '#/test-automation', text: 'Prueba de Automatización' },
-    { type: 'link', href: '#/about', text: 'Sobre nosotros' },
-    { type: 'link', href: '#/faq', text: 'FAQ' },
-    { type: 'link', href: '#/contact', text: 'Contacto' }
-];
-es.header.cta = 'Reservar consulta';
-
+const es: Content = {
+  header: {
+    navItems: [
+      {
+        type: 'dropdown',
+        title: 'Productos',
+        items: [
+          { href: '#/products/operation-sys', text: 'Sistema de Operaciones con IA', description: 'Automatice todo su flujo de trabajo.' },
+          { href: '#/products/pickup-time', text: 'Recogida y Seguimiento Inteligente', description: 'Seguimiento GPS en tiempo real para recogidas.' },
+          { href: '#/products/live-support', text: 'Soporte de Calidad en Vivo', description: 'Gestión proactiva de reseñas y comentarios.' },
+        ],
+      },
+      { type: 'link', href: '#/test-automation', text: 'Probar Automatización' },
+      { type: 'link', href: '#/about', text: 'Sobre nosotros' },
+      { type: 'link', href: '#/faq', text: 'Preguntas Frecuentes' },
+      { type: 'link', href: '#/contact', text: 'Contacto' }
+    ],
+    cta: 'Reservar una consulta',
+  },
+  hero: {
+    headline: 'El Sistema Operativo con IA para Operadores Turísticos Modernos',
+    secondaryText: 'Automatice las reservas, agilice la comunicación y mejore la experiencia de sus huéspedes. Diseñado para proveedores de GetYourGuide.',
+    ctaTrial: 'Reservar consulta gratuita',
+    ctaDemo: 'Ver introducción',
+    ctaIntro: 'Ver introducción',
+  },
+  trustedPartners: {
+    title: 'Compatible sin problemas con todas sus plataformas de reserva',
+    partners: [
+        { name: 'GetYourGuide', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648049/GetYourGuide_Logo_fb8ral.jpg' },
+        { name: 'Viator', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648301/maxresdefault_dvftgx.jpg' },
+        { name: 'Headout', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648345/1730430084666.headout-logo-400x300_rclqkh.jpg' },
+        { name: 'Tiqets', logoUrl: 'https://res.cloudinary.com/dqlurfwet/image/upload/v1760648540/AIdro_maZ2fUG38f8CLeNPzubXCQ8vhcrPe6qBhJFDkJbQQkzg_s900-c-k-c0x00ffffff-no-rj_azxd30.jpg' },
+    ],
+  },
+  stats: {
+    stats: [
+      { value: '80%', label: 'Reducción del trabajo manual' },
+      { value: '95%', label: 'Satisfacción del cliente' },
+      { value: '24/7', label: 'Soporte automatizado' },
+      { value: '3x', label: 'Tiempo de respuesta más rápido' },
+    ],
+  },
+  whoItIsFor: {
+    title: 'Diseñado para operadores turísticos centrados en el crecimiento',
+    focus: 'Si utiliza GetYourGuide, Viator, Headout o Tiqets, necesita TourCare.ai.',
+    points: [
+      'Proveedores de GetYourGuide y Viator',
+      'Operadores de safaris por el desierto y tours por la ciudad',
+      'Proveedores de atracciones y experiencias',
+      'DMC y operadores de turismo receptivo',
+      'Empresas que buscan escalar operaciones',
+      'Equipos cansados de tareas manuales y repetitivas',
+    ],
+  },
+  workflow: {
+    title: 'Cómo funciona: Simple y potente',
+    steps: [
+      { icon: '1️⃣', title: 'Conectar', description: 'Integre sus plataformas de reserva en minutos.' },
+      { icon: '2️⃣', title: 'Configurar', description: 'Configure sus reglas de automatización y plantillas de mensajes.' },
+      { icon: '3️⃣', title: 'Automatizar', description: 'Deje que la IA se encargue de los horarios de recogida, las preguntas frecuentes y el soporte.' },
+      { icon: '4️⃣', title: 'Crecer', description: 'Concéntrese en su negocio mientras nosotros nos encargamos de las operaciones.' },
+    ],
+  },
+  visualFeatures: {
+    title: 'Todo lo que necesita. Nada que no necesite.',
+    features: [
+      {
+        image: 'https://res.cloudinary.com/dqlurfwet/video/upload/v1760600739/Generated_File_October_05_2025_-_7_52PM_y9xuad.mp4',
+        title: 'Comunicación automatizada de la hora de recogida',
+        description: 'Elimine las ausencias y reduzca las consultas de soporte enviando automáticamente a sus huéspedes las horas de recogida precisas a través de WhatsApp, iMessage y SMS.',
+        points: [
+          'Cálculo automático basado en la ubicación',
+          'Notificaciones multicanal',
+          'Reduce las llamadas entrantes de "¿dónde está mi recogida?"',
+          'Plantillas de mensajes personalizables',
+        ],
+      },
+      {
+        image: 'https://res.cloudinary.com/dqlurfwet/video/upload/v1760650718/assets_task_01k7nzevahf1ev9yppcr9xm1pd_task_01k7nzevahf1ev9yppcr9xm1pd_genid_af342fa4-71e5-44e3-b1bd-b541577ef97d_25_10_16_07_48_188040_videos_00000_260261227_md_ir8sfv.mp4',
+        title: 'Soporte en vivo 24/7 impulsado por IA',
+        description: 'Proporcione respuestas instantáneas y precisas a las preguntas de sus clientes durante todo el día. Nuestra IA está entrenada con los datos específicos de su tour y las políticas de su empresa.',
+        points: [
+          'Maneja hasta el 80% de las consultas comunes',
+          'Disponible 24/7, los 365 días del año',
+          'Entiende múltiples idiomas',
+          'Traspaso sin problemas a agentes humanos si es necesario',
+        ],
+      },
+    ],
+  },
+  ctaSection: {
+    title: '¿Listo para automatizar sus operaciones?',
+    subtitle: 'Programe una consulta gratuita y sin compromiso para ver cómo TourCare.ai puede transformar su negocio.',
+    cta: 'Reserve su consulta gratuita',
+  },
+  playground: {
+    title: 'Pruebe el motor de automatización',
+    description: 'Vea cómo nuestro sistema envía mensajes a los clientes al instante. Ingrese los detalles a continuación para simular el envío de una notificación de hora de recogida a través de WhatsApp.',
+    form: {
+      bookingId: 'ID de reserva',
+      route: 'Nombre del tour / ruta',
+      pickupTime: 'Hora de recogida',
+      button: 'Enviar notificación',
+    },
+    result: {
+      title: 'Respuesta de la API',
+      status: 'Estado',
+      success: 'Éxito',
+      sent: 'Se ha enviado un mensaje de WhatsApp al cliente con los detalles.',
+    },
+  },
+  integrations: {
+    title: 'Se integra perfectamente con sus herramientas existentes',
+    partners: ['Interfaz de Gmail', 'API de ChatGPT', 'API de DeepSeek', 'API de WhatsApp Cloud', 'Zapier', 'Make.com'],
+  },
+  testimonials: {
+    title: 'Lo que dicen nuestros socios',
+    quote: 'TourCare.ai ha cambiado las reglas del juego para nuestras operaciones. Hemos reducido nuestra carga de trabajo manual en más del 80% y la satisfacción de nuestros clientes nunca ha sido tan alta. Es imprescindible para cualquier operador turístico serio en GetYourGuide.',
+    author: 'Ahmed M.',
+    company: 'Gerente de Operaciones, OceanAir Travels',
+  },
+  pricing: {
+    title: 'Precios simples y transparentes',
+    plans: [
+      { name: 'Configuración Básica', price: '$499', features: ['Integración de 1 plataforma de reservas', 'Automatización de la hora de recogida', 'Bot de soporte de IA básico', 'Canal de WhatsApp'], cta: 'Elegir Básica' },
+      { name: 'Configuración Pro', price: '$999', features: ['Hasta 3 integraciones', 'Reglas de automatización avanzadas', 'Bot de IA entrenado a medida', 'Traspaso a agente en vivo 24/7'], cta: 'Elegir Pro' },
+      { name: 'Configuración Avanzada', price: '$1,999', features: ['Integraciones ilimitadas', 'SO de operaciones completo', 'Gerente de éxito dedicado', 'Acceso a la API y lógica personalizada'], cta: 'Elegir Avanzada' },
+    ],
+    retainer: 'Todos los planes incluyen una tarifa mensual de soporte y mantenimiento.',
+  },
+  slogan: 'Concéntrese en el tour, no en las tareas.',
+  footer: {
+    slogan: 'El Sistema Operativo con IA para Operadores Turísticos Modernos.',
+    copyright: '© 2024 TourCare.ai. Todos los derechos reservados.',
+    socials: [
+      { name: 'Facebook', href: 'https://facebook.com' },
+      { name: 'LinkedIn', href: 'https://linkedin.com' },
+    ],
+    columns: [
+      {
+        title: 'Productos',
+        links: [
+          { text: 'Sistema de Operaciones con IA', href: '#/products/operation-sys' },
+          { text: 'Recogida y Seguimiento Inteligente', href: '#/products/pickup-time' },
+          { text: 'Soporte de Calidad en Vivo', href: '#/products/live-support' },
+        ],
+      },
+      {
+        title: 'Compañía',
+        links: [
+          { text: 'Sobre nosotros', href: '#/about' },
+          { text: 'Probar Automatización', href: '#/test-automation' },
+          { text: 'Contáctenos', href: '#/contact' },
+        ],
+      },
+      {
+        title: 'Recursos',
+        links: [
+          { text: 'Preguntas Frecuentes', href: '#/faq' },
+          { text: 'Blog', href: '#' },
+          { text: 'Casos de estudio', href: '#' },
+        ],
+      },
+      {
+        title: 'Legal',
+        links: [
+          { text: 'Política de privacidad', href: '#' },
+          { text: 'Términos de servicio', href: '#' },
+        ],
+      },
+    ]
+  },
+  aiAssistant: {
+    openButtonLabel: 'Abrir Asistente de IA',
+    title: 'Asistente de TourCare.ai',
+    description: '¡Pregúnteme sobre precios, características o reserve una consulta!',
+    initialMessage: '¡Hola! Soy el asistente de TourCare.ai. ¿Cómo puedo ayudarle hoy? Puede pedirme que "muestre los precios" o "programe una consulta".',
+    inputPlaceholder: 'Escriba su mensaje...',
+  },
+  authModal: {
+    title: 'Reservar una consulta gratuita',
+    closeButton: 'Cerrar',
+    formPlaceholderFirstName: 'Nombre',
+    formPlaceholderLastName: 'Apellido',
+    formPlaceholderEmail: 'Dirección de correo electrónico',
+    formPlaceholderNote: '¿Algo más que debamos saber? (opcional)',
+    slotPickerTitle: 'Elija un horario que le convenga:',
+    noSlots: 'No hay horarios disponibles. Por favor, contáctenos directamente.',
+    submitButton: 'Confirmar reserva',
+    confirming: 'Confirmando su reserva...',
+    confirmationTitle: '¡Reserva confirmada!',
+    confirmationMessage: '¡Gracias! Se ha enviado una invitación de calendario a su correo electrónico.',
+    errorTitle: '¡Vaya!',
+    errorMessage: 'Algo salió mal. Por favor, inténtelo de nuevo o contáctenos.',
+  },
+  commercialOffer: {
+    mainTitle: 'Nuestra misión: Empoderar a los operadores turísticos con IA',
+    whoWeAre: {
+        description: `TourCare.ai fue fundado por un equipo de operadores turísticos e ingenieros de IA que experimentaron de primera mano los desafíos operativos de escalar un negocio en plataformas como GetYourGuide.\n\nNos cansamos de los correos electrónicos repetitivos, las llamadas de soporte nocturnas y el miedo constante de que una hora de recogida perdida condujera a una mala crítica. Sabíamos que tenía que haber una mejor manera. Es por eso que construimos TourCare.ai: un sistema inteligente y automatizado diseñado para manejar las tareas tediosas, para que pueda concentrarse en lo que mejor sabe hacer: crear experiencias inolvidables.`
+    },
+    vision: {
+        title: 'Nuestra visión',
+        description: 'Convertirnos en el sistema operativo esencial para cada proveedor de tours y actividades en todo el mundo, haciendo que la automatización sofisticada y la IA sean accesibles y asequibles para empresas de todos los tamaños.'
+    },
+    whatWeOffer: {
+        title: 'Lo que ofrecemos',
+        description: 'Un conjunto completo de herramientas para automatizar todo el recorrido de su cliente.',
+        features: [
+            { icon: '🤖', text: 'Automatización impulsada por IA: Desde confirmaciones de reserva hasta comentarios posteriores al tour, automatice cada paso.' },
+            { icon: '💬', text: 'Soporte multilingüe 24/7: Un asistente de IA que habla el idioma de sus clientes, a cualquier hora del día.' },
+            { icon: '📊', text: 'Información procesable: Entienda sus operaciones como nunca antes con análisis e informes inteligentes.' },
+            { icon: '🔌', text: 'Integración perfecta: Conéctese sin esfuerzo con las plataformas que ya utiliza, como GetYourGuide, Viator y WhatsApp.' }
+        ]
+    }
+  },
+  faqSection: {
+    pageTitle: 'Preguntas Frecuentes',
+    allCategories: 'Todas',
+    searchPlaceholder: 'Buscar una pregunta...',
+    categories: [
+        {
+            title: 'General',
+            icon: '🌍',
+            items: [
+                { q: '¿Qué es TourCare.ai?', a: 'TourCare.ai es un sistema operativo impulsado por IA para operadores turísticos. Automatiza tareas clave como el envío de horarios de recogida, la respuesta a preguntas de los clientes 24/7 y la gestión de reservas para ahorrarle tiempo y mejorar la satisfacción de los huéspedes.' },
+                { q: '¿Para quién es esto?', a: 'Nuestro sistema está diseñado específicamente para operadores de tours y actividades, especialmente aquellos que son proveedores en plataformas como GetYourGuide y Viator. Si gestiona reservas, coordina recogidas y se comunica con los huéspedes, TourCare.ai es para usted.' }
+            ]
+        },
+        {
+            title: 'Técnico',
+            icon: '⚙️',
+            items: [
+                { q: '¿Cómo se integra con GetYourGuide?', a: 'Utilizamos API oficiales y métodos de integración seguros para conectarnos con su cuenta de proveedor de GetYourGuide. Esto nos permite leer la información de la reserva en tiempo real para activar las automatizaciones.' },
+                { q: '¿Están mis datos seguros?', a: 'Absolutamente. Utilizamos prácticas de seguridad y cifrado estándar de la industria para proteger todos sus datos y la información de sus clientes. Cumplimos totalmente con el GDPR.' }
+            ]
+        },
+        {
+            title: 'Precios',
+            icon: '💰',
+            items: [
+                { q: '¿Cómo funciona el precio?', a: 'Ofrecemos paquetes de configuración únicos basados en sus necesidades, seguidos de una tarifa mensual para soporte continuo, mantenimiento y uso del sistema. Esto garantiza que el sistema siempre funcione sin problemas y que tenga acceso a nuestro equipo cuando lo necesite.' },
+                { q: '¿Hay una prueba gratuita?', a: 'No ofrecemos una prueba gratuita, pero sí ofrecemos una consulta gratuita y detallada y una demostración en vivo para mostrarle exactamente cómo funcionaría el sistema para su negocio. Esto nos permite adaptar la demostración a sus necesidades operativas específicas.' }
+            ]
+        }
+    ]
+  },
+  contactPage: {
+    pageTitle: 'Póngase en contacto',
+    intro: '¿Tiene una pregunta, una solicitud personalizada o simplemente quiere ver una demostración? \nNos encantaría saber de usted. Comuníquese y hablemos de cómo podemos ayudarlo a crecer.',
+    whyContact: {
+        title: '¿Por qué contactarnos?',
+        reasons: [
+            'Programar una demostración personalizada',
+            'Discutir un proyecto de automatización a medida',
+            'Consultar sobre soluciones empresariales',
+            'Explorar oportunidades de asociación',
+            'Obtener respuestas a preguntas específicas',
+            'Proporcionar comentarios o sugerencias'
+        ]
+    },
+    directContact: {
+        title: 'Contacto directo',
+        items: [
+            { icon: '📧', label: 'Envíenos un correo electrónico', value: 'contact@tourcare.ai', href: 'mailto:contact@tourcare.ai' },
+            { icon: '📞', label: 'Llámenos (EAU)', value: '+971 50 123 4567', href: 'tel:+971501234567' },
+            { icon: '📍', label: 'Nuestra oficina', value: 'Dubai, Emiratos Árabes Unidos' }
+        ]
+    },
+    instantChannels: {
+        title: 'Canales instantáneos',
+        items: [
+            { icon: '💬', label: 'WhatsApp', action: 'Chatee con nosotros ahora', href: 'https://wa.me/971501234567' },
+            { icon: '🤖', label: 'Asistente de IA', action: 'Haga una pregunta a nuestra IA', href: '#/ai-assistant-shortcut' }
+        ]
+    },
+    formSection: {
+        title: 'Envíenos un mensaje',
+        subtitle: 'Complete el formulario a continuación y nuestro equipo se comunicará con usted dentro de las 24 horas.',
+        form: {
+            companyName: 'Nombre de la empresa',
+            contactPerson: 'Su nombre',
+            email: 'Su correo electrónico',
+            phone: 'Su número de teléfono',
+            platforms: '¿Qué plataformas de reserva utiliza?',
+            platformOptions: ['GetYourGuide', 'Viator', 'Booking.com', 'Sitio web propio', 'Otro'],
+            message: 'Su mensaje',
+            submitButton: 'Enviar mensaje',
+            sendingButton: 'Enviando...'
+        },
+        confirmation: 'Respetamos su privacidad y nunca compartiremos su información.'
+    }
+  },
+  productPages: {
+    operationSys: {
+      navTitle: 'Sistema de Operaciones con IA',
+      hero: { title: 'El Sistema de Operaciones con IA Completo', subtitle: 'Integre todas sus herramientas en un único centro inteligente que gestiona su negocio en piloto automático.' },
+      descriptionSection: {
+        title: 'Descripción del producto',
+        content: 'Una solución integral para gestionar y operar todas las etapas del tour, desde el momento de la reserva hasta el final de la experiencia, diseñada para transformar todas las tareas manuales en procesos totalmente automatizados.\n\nEn TourCare, ofrecemos un sistema operativo integrado que cubre cada punto del ciclo de vida de la reserva y transforma la gestión de tours en un proceso inteligente y totalmente automatizado:',
+        features: [
+          { icon: '🤖', text: 'Agregue reservas de todas las plataformas automáticamente en un solo lugar sin intervención manual.' },
+          { icon: '💬', text: 'Respuesta automática instantánea al cliente después de la reserva para confirmar detalles y generar confianza.' },
+          { icon: '📩', text: 'Envíe los horarios de recogida automáticamente por correo electrónico o WhatsApp.' },
+          { icon: '⏰', text: 'Recordatorios automáticos al cliente sobre la hora de recogida antes del viaje para reducir retrasos o ausencias.' },
+          { icon: '💳', text: 'Cobre automáticamente cualquier monto adicional o servicio opcional del cliente mediante la vinculación con pasarelas de pago, con una factura electrónica automática enviada con el mensaje de bienvenida o de hora de recogida.' },
+          { icon: '📧', text: 'Plantillas de correo electrónico profesionales personalizadas para cada etapa (confirmación de reserva - recordatorio - envío de hora de recogida - solicitud de reseña - seguimiento de quejas - facturas), con redacción multilingüe que refleja la identidad de su marca.' },
+          { icon: '🤖', text: 'Agente de IA para recopilar automáticamente datos importantes del cliente como el nombre del hotel, el número de habitación o la ubicación geográfica por correo electrónico o WhatsApp, reduciendo errores y acelerando los procesos operativos.' },
+          { icon: '⭐', text: 'Solicite reseñas automáticamente después del viaje y reenvíe cualquier queja directamente al departamento de calidad para su análisis y seguimiento.' },
+          { icon: '📍', text: 'Realice un seguimiento de los conductores y los viajes en tiempo real a través de un panel de control inteligente para reducir las tasas de ausencia y cancelación.' },
+          { icon: '📱', text: 'Envíe las reservas de última hora automáticamente al gerente de operaciones a través de WhatsApp para una ejecución rápida.' },
+          { icon: '👤', text: 'Cree subcuentas para guías, conductores y proveedores para dar seguimiento a las tareas operativas y actualizar el estado de cada viaje en tiempo real.' },
+          { icon: '📊', text: 'Sistema de informes diarios automático enviado por correo electrónico que muestra el número real de reservas en cada plataforma (GetYourGuide - Viator - Headout - etc.), con un desglose detallado por destinos y productos.' },
+          { icon: '📈', text: 'Un completo panel de análisis que muestra todos los indicadores de rendimiento (reservas, ingresos, tasas de cancelación, calificaciones y reseñas de clientes) en un solo lugar para permitir que la gerencia tome decisiones más rápidas y precisas.' }
+        ]
+      },
+      pricing: {
+        title: 'Precios para el SO completo',
+        plans: [
+          { name: 'Pro', price: '$999', features: ['Todas las características principales', 'Hasta 3 integraciones', 'Soporte en vivo 24/7'], cta: 'Elegir Pro' },
+          { name: 'Avanzado', price: '$1,999', features: ['Todo en Pro', 'Integraciones ilimitadas', 'Acceso a la API'], cta: 'Elegir Avanzado' },
+          { name: 'Empresarial', price: 'Personalizado', features: ['Solución totalmente a medida', 'Infraestructura dedicada', 'Capacitación en el sitio'], cta: 'Contáctenos' },
+        ]
+      },
+      cta: { title: '¿Listo para un verdadero piloto automático?', subtitle: 'Construyamos su sistema operativo personalizado.', cta: 'Reservar una llamada de alcance' },
+    },
+    pickupTime: {
+      navTitle: 'Recogida y Seguimiento Inteligente',
+      hero: { title: 'Sistema Inteligente de Recogida y Seguimiento', subtitle: 'Sistema de recogida de clientes basado en GPS' },
+      descriptionSection: {
+        title: 'Descripción del producto',
+        content: 'Una plataforma inteligente especializada en la gestión y organización de las operaciones de recogida y transporte para viajes turísticos, que le permite rastrear a cada conductor y cliente en tiempo real, asegurando que cada viaje llegue a tiempo sin demora. El sistema trabaja para mejorar la precisión operativa y proporcionar una experiencia más profesional y fluida para los clientes desde el momento en que salen de su hotel hasta que comienza su tour.',
+        features: [
+            { icon: '📍', text: 'Seguimiento en tiempo real: Monitoree las ubicaciones de los conductores y clientes momento a momento utilizando tecnología GPS.' },
+            { icon: '🔔', text: 'Notificaciones instantáneas: Alertas inmediatas si un conductor se retrasa o la ubicación de un cliente cambia.' },
+            { icon: '🧭', text: 'Panel de operaciones en vivo: Vea el estado en vivo de cada operación de recogida en un único panel de control fácil de usar.' },
+            { icon: '📞', text: 'Comunicación segura y directa: Permita que los conductores se comuniquen directamente con los clientes sin revelar números de teléfono para proteger la privacidad de los datos.' },
+            { icon: '📸', text: 'Soporte multimedia: Capacidad para capturar fotos desde la ubicación del conductor y enviarlas al cliente para aumentar la fiabilidad y confirmar la presencia.' },
+            { icon: '📍', text: 'Compartir ubicación en vivo: En caso de no presentarse, se puede enviar una ubicación en vivo a la hora de respaldo para ayudar al cliente a llegar fácilmente y reducir la probabilidad de una solicitud de reembolso.' },
+            { icon: '📊', text: 'Informes operativos precisos: Vea análisis detallados sobre el rendimiento de los conductores, los casos de no presentación y las tasas de cancelación, con herramientas para mejorar el rendimiento y reducir las pérdidas.' }
+        ]
+      },
+      benefits: {
+          title: 'Beneficios',
+          features: [
+              { icon: '🚗', text: 'Reduzca significativamente las tasas de no presentación y cancelación.' },
+              { icon: '🤝', text: 'Mejore la experiencia del cliente desde el momento en que sale del hotel hasta que comienza su tour.' },
+              { icon: '📉', text: 'Una reducción importante en los reembolsos resultantes de problemas de llegada.' },
+              { icon: '📈', text: 'Aumente la eficiencia operativa y mejore la reputación de su empresa en plataformas globales.' }
+          ]
+      },
+      pricing: {
+        title: 'Precios simples',
+        plans: []
+      },
+      cta: { title: 'Automatice sus recogidas hoy', subtitle: 'Con el sistema de Recogida y Seguimiento Inteligente, puede gestionar todas las operaciones de transporte y recogida con total profesionalidad, construyendo una experiencia de cliente más precisa y fiable que le ayuda a reducir pérdidas y aumentar beneficios.', cta: 'Reservar consulta gratuita' },
+    },
+    liveSupport: {
+      navTitle: 'Soporte de Calidad en Vivo',
+      hero: { title: 'Soporte de Calidad en Vivo', subtitle: 'Sistema de atención al cliente para calidad y reseñas' },
+      descriptionSection: {
+        title: 'Descripción del producto',
+        content: 'Una solución integrada que combina un equipo de soporte humano profesional con IA inteligente para gestionar la calidad del servicio después de que finaliza el tour, analizar el comportamiento del cliente, recopilar reseñas y manejar quejas profesionalmente para ayudarlo a mejorar la clasificación de sus productos en OTAs como GetYourGuide y Viator. El sistema sigue la experiencia del cliente desde el momento en que regresa del viaje hasta la etapa de reseña, asegurando las tasas de satisfacción más altas y reduciendo la probabilidad de reseñas negativas o solicitudes de reembolso.',
+        features: [
+            { icon: '📬', text: 'Envíe solicitudes de reseña automatizadas después del viaje con textos profesionales y multilingües para aumentar las posibilidades de obtener reseñas positivas.' },
+            { icon: '🤖', text: 'Análisis de sentimientos: Utilice la inteligencia artificial para detectar clientes insatisfechos temprano antes de que escriban una reseña negativa.' },
+            { icon: '🔎', text: 'Investigación de quejas: Recopile detalles y analice las razones de las reseñas negativas para tomar decisiones correctivas y mejorar el servicio.' },
+            { icon: '🧑‍⚖', text: 'Eliminación de reseñas negativas: Haga un seguimiento meticuloso con las OTAs para eliminar las reseñas que violan sus términos y condiciones.' },
+            { icon: '🤝', text: 'Negocie con los clientes: Comuníquese profesionalmente para ofrecer soluciones alternativas que les impidan solicitar un reembolso o escribir una reseña negativa.' },
+            { icon: '💼', text: 'Gestión de solicitudes de reembolso: Gestione las solicitudes paso a paso hasta su cierre, documentando todas las etapas de comunicación.' },
+            { icon: '📊', text: 'Análisis de reseñas impulsado por IA: Extraiga información procesable sobre las razones de la satisfacción o insatisfacción del cliente y proporcione informes mensuales a la gerencia.' }
+        ]
+      },
+      benefits: {
+          title: 'Beneficios',
+          features: [
+              { icon: '📈', text: 'Aumente las calificaciones de sus productos en plataformas como GetYourGuide y Viator y mejore su clasificación en las búsquedas.' },
+              { icon: '🚀', text: 'Aumente las tasas de conversión y las ventas gracias a una sólida reputación y reseñas positivas.' },
+              { icon: '🧠', text: 'Obtenga una comprensión más profunda de la experiencia del cliente y mejore la calidad del servicio basándose en datos y análisis reales.' },
+              { icon: '🕐', text: 'Ahorre tiempo y esfuerzo confiando en un equipo especializado y herramientas de IA que gestionan todo el proceso por usted.' }
+          ]
+      },
+      pricing: {
+        title: 'Precios simples',
+        plans: []
+      },
+      cta: { title: 'Mejore su atención al cliente', subtitle: 'Con el Soporte de Calidad en Vivo, ya no tiene que preocuparse por las reseñas negativas o las quejas; las gestionamos por usted profesionalmente, convirtiendo cada experiencia negativa en una oportunidad para mejorar el servicio y aumentar la satisfacción de sus clientes.', cta: 'Reservar consulta gratuita' },
+    },
+  },
+};
 
 export const content = {
     en,
