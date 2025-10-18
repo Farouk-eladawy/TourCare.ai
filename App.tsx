@@ -58,7 +58,7 @@ function App() {
       case '#/contact':
         return <ContactPage content={content.contactPage} />;
       case '#/products/operation-sys':
-        return <OperationSysPage pageContent={content.productPages.operationSys} playgroundContent={content.playground} openAuthModal={openAuthModal} />;
+        return <OperationSysPage pageContent={content.productPages.operationSys} openAuthModal={openAuthModal} />;
       case '#/products/pickup-time':
         return <PickupTimePage content={content.productPages.pickupTime} openAuthModal={openAuthModal} />;
       case '#/products/live-support':

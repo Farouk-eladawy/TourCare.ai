@@ -1,6 +1,5 @@
 import React from 'react';
-import { ProductPageContent, Content } from '../../types';
-import AutomationPlayground from '../../components/AutomationPlayground';
+import { ProductPageContent } from '../../types';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import CtaSection from '../../components/CtaSection';
 import { ProductPricingCard } from '../../components/ProductPageLayout';
@@ -8,11 +7,10 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 interface OperationSysPageProps {
   pageContent: ProductPageContent;
-  playgroundContent: Content['playground'];
   openAuthModal: (planName: string | null) => void;
 }
 
-const OperationSysPage: React.FC<OperationSysPageProps> = ({ pageContent, playgroundContent, openAuthModal }) => {
+const OperationSysPage: React.FC<OperationSysPageProps> = ({ pageContent, openAuthModal }) => {
   const content = pageContent; // alias for consistency
   const heroRef = useScrollAnimation<HTMLElement>();
   const descriptionRef = useScrollAnimation<HTMLElement>();
@@ -53,9 +51,6 @@ const OperationSysPage: React.FC<OperationSysPageProps> = ({ pageContent, playgr
             </div>
          </div>
       </section>
-      
-      {/* --- AUTOMATION PLAYGROUND INSERTED HERE --- */}
-      <AutomationPlayground content={playgroundContent} />
       
       {/* Pricing Section */}
       {content.pricing && (
