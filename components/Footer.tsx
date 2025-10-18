@@ -21,7 +21,7 @@ const Footer: React.FC<{ content: FooterContent }> = ({ content }) => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <a href="#/" className="mb-4 inline-block bg-white p-2 rounded-lg shadow-md">
-              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-16" />
+              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-[var(--logo-height)]" />
             </a>
             <p className="max-w-xs text-gray-400">{content.slogan}</p>
             <div className="flex items-center space-x-4 mt-6">
