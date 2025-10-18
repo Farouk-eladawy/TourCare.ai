@@ -20,8 +20,8 @@ const Footer: React.FC<{ content: FooterContent }> = ({ content }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-10">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <a href="#/" className="text-2xl font-bold text-white mb-4 inline-block">
-              TourCare<span className="text-brand-accent">.ai</span>
+            <a href="#/" className="mb-4 inline-block">
+              <img src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760795280/assets_2Ftask_01k7vrzfmmecv9yp1fee19658j_2F1760795073_img_1.webp_hzq5y3.webp" alt="TourCare.ai Logo" className="h-10" />
             </a>
             <p className="max-w-xs text-gray-400">{content.slogan}</p>
             <div className="flex items-center space-x-4 mt-6">
