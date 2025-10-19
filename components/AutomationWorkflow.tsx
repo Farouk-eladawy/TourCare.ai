@@ -39,7 +39,8 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
             submitting: "جاري الإرسال..."
         }
     };
-    const stepContent = content[lang];
+    // FIX: Added a fallback to English to prevent runtime errors if an unsupported language is passed.
+    const stepContent = content[lang as keyof typeof content] || content.en;
 
     const handleAnimationEnd = (stepIndex: number) => {
         setAnimatingStep(null);
@@ -163,7 +164,8 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
                     const isAnimating = animatingStep === index;
 
                     return (
-                        <div key={index} ref={el => stepRefs.current[index] = el} className="z-10 flex flex-col items-center gap-3 text-center w-32">
+                        // FIX: Corrected the ref callback function to have a `void` return type, resolving a TypeScript error where the assignment was implicitly returning a value.
+                        <div key={index} ref={el => { stepRefs.current[index] = el; }} className="z-10 flex flex-col items-center gap-3 text-center w-32">
                             <div className={`
                                 relative w-24 h-24 rounded-full flex items-center justify-center border-4 transition-all duration-500
                                 ${isCompleted ? 'bg-green-100 border-brand-accent text-brand-accent' : isActive ? 'bg-white border-brand-accent text-brand-accent' : 'bg-gray-100 border-gray-300 text-gray-400'}

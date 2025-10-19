@@ -23,14 +23,14 @@ const HomePage: React.FC<HomePageProps> = ({ content, setIsVideoModalOpen, openA
             <Hero 
                 content={content.hero} 
                 onWatchIntroClick={() => setIsVideoModalOpen(true)}
-                onBookConsultationClick={openAuthModal}
+                onBookConsultationClick={() => openAuthModal()}
             />
             <TrustedPartners content={content.trustedPartners} />
             <Stats content={content.stats} />
             <WhoItIsFor content={content.whoItIsFor} />
             <Workflow content={content.workflow} />
             <VisualFeatures content={content.visualFeatures} />
-            <CtaSection content={content.ctaSection} onBookConsultationClick={openAuthModal} />
+            <CtaSection content={content.ctaSection} onBookConsultationClick={() => openAuthModal()} />
             {/* The playground is now its own page */}
             {/* <AutomationPlayground content={content.playground} /> */}
             <Integrations content={content.integrations} />
