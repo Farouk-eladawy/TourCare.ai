@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLocalization } from './hooks/useLocalization';
 
@@ -108,7 +109,7 @@ function App() {
       <VideoModal 
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
-        videoUrl="https://res.cloudinary.com/dqlurfwet/video/upload/v1760941867/Recording_2025-10-20_092945_ghvx9u.mp4"
+        videoUrl="https://res.cloudinary.com/dqlurfwet/video/upload/v1760998006/Recording_2025-10-20_183542_sqmt8o.mp4"
       />
 
       <AuthModal
