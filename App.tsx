@@ -109,7 +109,7 @@ function App() {
       <VideoModal 
         isOpen={isVideoModalOpen}
         onClose={() => setIsVideoModalOpen(false)}
-        videoUrl="https://res.cloudinary.com/dqlurfwet/video/upload/v1761006186/Recording_2025-10-21_032123_zkhpsg.mp4"
+        videoUrl="https://drive.google.com/file/d/1xXNlbbZ9osKNvn9GHZ_1Oaj2KB33Z5JK/preview"
       />
 
       <AuthModal
