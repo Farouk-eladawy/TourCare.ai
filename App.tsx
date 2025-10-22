@@ -56,7 +56,7 @@ function App() {
       case '#/about':
         return <OfferPage content={content.commercialOffer} />;
       case '#/test-automation': // Replaced #/pricing route
-        return <TestAutomationPage openAuthModal={() => openAuthModal()} lang={lang} />;
+        return <TestAutomationPage content={content.testAutomationPage} openAuthModal={() => openAuthModal()} lang={lang} />;
       case '#/faq':
         return <FaqPage content={content.faqSection} />;
       case '#/connect-now':

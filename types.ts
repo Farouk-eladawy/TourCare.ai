@@ -327,6 +327,15 @@ export interface ConnectNowPageContent {
     };
 }
 
+export interface TestAutomationPageContent {
+    title: string;
+    subtitle: string;
+    demoNotice: {
+        title: string;
+        body: string;
+    };
+}
+
 export interface Content {
     header: HeaderContent;
     hero: HeroContent;
@@ -350,6 +359,7 @@ export interface Content {
     privacyPolicy: PrivacyPolicyContent;
     termsOfService: TermsOfServiceContent;
     connectNowPage: ConnectNowPageContent;
+    testAutomationPage: TestAutomationPageContent;
     productPages: {
       operationSys: ProductPageContent;
       pickupTime: ProductPageContent;
