@@ -1,3 +1,4 @@
+
 // FIX: Removed self-import causing circular dependency.
 export type Language = 'en' | 'ar' | 'de' | 'es';
 export type Direction = 'ltr' | 'rtl';
@@ -277,6 +278,54 @@ export interface TermsOfServiceContent {
     sections: PrivacyPolicySection[];
 }
 
+export interface SupplierBooking {
+    id: string;
+    bookingNr: string;
+    tripName: string;
+    tripDate: string;
+    customerName: string;
+    pax: string; // e.g., "2 Adults, 1 Child"
+    status: 'Confirmed' | 'Pending' | 'Cancelled';
+    pickupStatus: 'Set' | 'Missing';
+    hotelName: string;
+    roomNumber: string;
+    pickupTime: string | null;
+    hasNewMessage: boolean;
+}
+
+export interface ConnectNowPageContent {
+    title: string;
+    connectButton: string;
+    loginModal: {
+        title: string;
+        emailPlaceholder: string;
+        passwordPlaceholder: string;
+        loginButton: string;
+        description: string;
+    };
+    loadingScreen: {
+        title: string;
+        steps: string[];
+        complete: string;
+    };
+    dashboard: {
+        title: string;
+        searchPlaceholder: string;
+        localDataWarning: string;
+        upgradeButton: string;
+        tabs: {
+            bookings: string;
+            alerts: string;
+        };
+        bookingCard: {
+            pickup: string;
+            missingInfo: string;
+            status: string;
+            sendMessage: string;
+            setPickup: string;
+        }
+    };
+}
 
 export interface Content {
     header: HeaderContent;
@@ -300,6 +349,7 @@ export interface Content {
     contactPage: ContactPageContent;
     privacyPolicy: PrivacyPolicyContent;
     termsOfService: TermsOfServiceContent;
+    connectNowPage: ConnectNowPageContent;
     productPages: {
       operationSys: ProductPageContent;
       pickupTime: ProductPageContent;

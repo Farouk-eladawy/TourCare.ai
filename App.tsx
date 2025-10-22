@@ -13,7 +13,7 @@ import GuidingAssistant from './components/GuidingAssistant';
 // Page Components
 import HomePage from './pages/HomePage';
 import OfferPage from './pages/OfferPage';
-import TestAutomationPage from './pages/TestAutomationPage'; // Import the new page
+import TestAutomationPage from './pages/TestAutomationPage';
 import FaqPage from './pages/FaqPage';
 import OperationSysPage from './pages/products/OperationSysPage';
 import PickupTimePage from './pages/products/PickupTimePage';
@@ -21,6 +21,7 @@ import LiveSupportPage from './pages/products/LiveSupportPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import ConnectNowPage from './pages/ConnectNowPage'; // Import the new page
 
 function App() {
   const { lang, dir, content, changeLanguage, availableLangs } = useLocalization();
@@ -58,6 +59,8 @@ function App() {
         return <TestAutomationPage openAuthModal={() => openAuthModal()} lang={lang} />;
       case '#/faq':
         return <FaqPage content={content.faqSection} />;
+      case '#/connect-now':
+        return <ConnectNowPage content={content.connectNowPage} lang={lang} openAuthModal={openAuthModal} />;
       case '#/contact':
         return <ContactPage content={content.contactPage} />;
       case '#/products/operation-sys':

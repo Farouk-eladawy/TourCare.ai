@@ -1,3 +1,4 @@
+
 import { Content, Language, PrivacyPolicyContent, TermsOfServiceContent } from '../types';
 
 const privacyPolicyEn: PrivacyPolicyContent = {
@@ -190,6 +191,7 @@ const en: Content = {
       { type: 'link', href: '#/test-automation', text: 'Try Experience' },
       { type: 'link', href: '#/about', text: 'About Us' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Contact' }
     ],
     cta: 'Book a Consultation',
@@ -469,6 +471,46 @@ const en: Content = {
         confirmation: 'We respect your privacy and will never share your information.'
     }
   },
+  connectNowPage: {
+    title: "Connect Your Supplier Account",
+    connectButton: "Connect with GetYourGuide",
+    loginModal: {
+        title: "Log in to GetYourGuide",
+        description: "We'll open a secure window to log you in. Your credentials are never stored by TourCare.ai.",
+        emailPlaceholder: "Email",
+        passwordPlaceholder: "Password",
+        loginButton: "Log In",
+    },
+    loadingScreen: {
+        title: "Building Your Unified Dashboard...",
+        steps: [
+            "Authenticating session...",
+            "Discovering your products and tours...",
+            "Fetching recent bookings...",
+            "Syncing conversations...",
+            "Analyzing pickup schedules...",
+            "Finalizing dashboard...",
+        ],
+        complete: "Dashboard ready!",
+    },
+    dashboard: {
+        title: "Unified Dashboard",
+        searchPlaceholder: "Search by booking # or customer name...",
+        localDataWarning: "Data is currently stored in your browser. It will be cleared if you clear your cache.",
+        upgradeButton: "Book a consultation to save data to the cloud.",
+        tabs: {
+            bookings: "Bookings",
+            alerts: "Alerts",
+        },
+        bookingCard: {
+            pickup: "Pickup",
+            missingInfo: "Missing Info",
+            status: "Status",
+            sendMessage: "Send Message",
+            setPickup: "Set Pickup",
+        }
+    }
+  },
   productPages: {
     operationSys: {
       navTitle: 'AI Operations System',
@@ -531,7 +573,7 @@ const en: Content = {
         title: 'Simple Pricing',
         plans: []
       },
-      cta: { title: 'Automate Your Pickups Today', subtitle: 'With the Smart Pickup & Tracking system, you can manage all transport and pickup operations with complete professionalism, building a more accurate and reliable customer experience that helps you reduce losses and increase profits.', cta: 'Book a Free Consultation' },
+      cta: { title: 'Automate Your Pickups Today', subtitle: 'With the Smart Pickup & Tracking system, you can manage all transport and pickup operations with complete professionalism, building a more accurate and reliable customer experience that helps you reduce losses and increase your profits.', cta: 'Book a Free Consultation' },
     },
     liveSupport: {
       navTitle: 'Live Quality Support',
@@ -584,6 +626,7 @@ const ar: Content = {
             { type: 'link', href: '#/test-automation', text: 'جرب التجربة' },
             { type: 'link', href: '#/about', text: 'من نحن' },
             { type: 'link', href: '#/faq', text: 'الأسئلة الشائعة' },
+            { type: 'link', href: '#/connect-now', text: 'Connect Now' },
             { type: 'link', href: '#/contact', text: 'اتصل بنا' }
         ],
         cta: 'احجز استشارة',
@@ -863,6 +906,46 @@ const ar: Content = {
             confirmation: 'نحن نحترم خصوصيتك ولن نشارك معلوماتك أبدًا.'
         }
     },
+    connectNowPage: {
+        title: "ربط حساب المورد الخاص بك",
+        connectButton: "الاتصال بـ GetYourGuide",
+        loginModal: {
+            title: "تسجيل الدخول إلى GetYourGuide",
+            description: "سنفتح نافذة آمنة لتسجيل دخولك. لا يتم تخزين بيانات الاعتماد الخاصة بك بواسطة TourCare.ai أبدًا.",
+            emailPlaceholder: "البريد الإلكتروني",
+            passwordPlaceholder: "كلمة المرور",
+            loginButton: "تسجيل الدخول",
+        },
+        loadingScreen: {
+            title: "جاري إنشاء لوحة التحكم الموحدة الخاصة بك...",
+            steps: [
+                "جارٍ مصادقة الجلسة...",
+                "اكتشاف منتجاتك وجولاتك...",
+                "جلب الحجوزات الأخيرة...",
+                "مزامنة المحادثات...",
+                "تحليل جداول الاستلام...",
+                "وضع اللمسات الأخيرة على لوحة التحكم...",
+            ],
+            complete: "لوحة التحكم جاهزة!",
+        },
+        dashboard: {
+            title: "لوحة التحكم الموحدة",
+            searchPlaceholder: "ابحث برقم الحجز أو اسم العميل...",
+            localDataWarning: "يتم تخزين البيانات حاليًا في متصفحك. سيتم مسحها إذا قمت بمسح ذاكرة التخزين المؤقت.",
+            upgradeButton: "احجز استشارة لحفظ البيانات على السحابة.",
+            tabs: {
+                bookings: "الحجوزات",
+                alerts: "التنبيهات",
+            },
+            bookingCard: {
+                pickup: "الاستلام",
+                missingInfo: "معلومات ناقصة",
+                status: "الحالة",
+                sendMessage: "إرسال رسالة",
+                setPickup: "تحديد وقت الاستلام",
+            }
+        }
+    },
     productPages: {
         operationSys: {
             navTitle: 'نظام التشغيل بالذكاء الاصطناعي',
@@ -978,6 +1061,7 @@ const de: Content = {
       { type: 'link', href: '#/test-automation', text: 'Erlebnis testen' },
       { type: 'link', href: '#/about', text: 'Über uns' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Kontakt' }
     ],
     cta: 'Beratung buchen',
@@ -1257,6 +1341,7 @@ const de: Content = {
         confirmation: 'Wir respektieren Ihre Privatsphäre und werden Ihre Informationen niemals weitergeben.'
     }
   },
+  connectNowPage: en.connectNowPage,
   productPages: {
     operationSys: {
       navTitle: 'KI-Betriebssystem',
@@ -1373,6 +1458,7 @@ const es: Content = {
       { type: 'link', href: '#/test-automation', text: 'Probar Experiencia' },
       { type: 'link', href: '#/about', text: 'Sobre Nosotros' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
+       { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Contacto' }
     ],
     cta: 'Reservar una Consulta',
@@ -1447,6 +1533,7 @@ const es: Content = {
   commercialOffer: en.commercialOffer,
   faqSection: en.faqSection,
   contactPage: en.contactPage,
+  connectNowPage: en.connectNowPage,
   productPages: en.productPages,
   privacyPolicy: privacyPolicyEs,
   termsOfService: termsOfServiceEs,
