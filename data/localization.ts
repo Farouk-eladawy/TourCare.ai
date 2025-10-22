@@ -1,5 +1,5 @@
 
-import { Content, Language, PrivacyPolicyContent, TermsOfServiceContent, TestAutomationPageContent } from '../types';
+import { Content, Language, PrivacyPolicyContent, TermsOfServiceContent } from '../types';
 
 const privacyPolicyEn: PrivacyPolicyContent = {
   pageTitle: 'Privacy Policy – TourCare.ai',
@@ -175,42 +175,6 @@ const termsOfServiceEs: TermsOfServiceContent = {
   sections: [{ title: '1. Aceptación de los Términos', content: 'Contenido traducido...' }]
 };
 
-const testAutomationPageEn: TestAutomationPageContent = {
-    title: "Try the Live Experience",
-    subtitle: "This is a live demonstration. Follow the steps below to see how our system handles a booking from start to finish. Each action you take will trigger a real automated workflow.",
-    demoNotice: {
-        title: "Please Note:",
-        body: "This is an interactive demo. Your data will be sent to a test webhook but will not be stored or used for any other purpose."
-    }
-};
-
-const testAutomationPageAr: TestAutomationPageContent = {
-    title: "جرب التجربة الحية",
-    subtitle: "هذه محاكاة حية. اتبع الخطوات أدناه لترى كيف يتعامل نظامنا مع الحجز من البداية إلى النهاية. كل إجراء تتخذه سيؤدي إلى تشغيل سير عمل آلي حقيقي.",
-    demoNotice: {
-        title: "يرجى الملاحظة:",
-        body: "هذه نسخة تجريبية تفاعلية. سيتم إرسال بياناتك إلى webhook اختباري ولكن لن يتم تخزينها أو استخدامها لأي غرض آخر."
-    }
-};
-
-const testAutomationPageDe: TestAutomationPageContent = {
-    title: "Das Live-Erlebnis testen",
-    subtitle: "Dies ist eine Live-Demonstration. Befolgen Sie die nachstehenden Schritte, um zu sehen, wie unser System eine Buchung von Anfang bis Ende abwickelt. Jede von Ihnen durchgeführte Aktion löst einen echten automatisierten Arbeitsablauf aus.",
-    demoNotice: {
-        title: "Bitte beachten Sie:",
-        body: "Dies ist eine interaktive Demo. Ihre Daten werden an einen Test-Webhook gesendet, aber nicht gespeichert oder für andere Zwecke verwendet."
-    }
-};
-
-const testAutomationPageEs: TestAutomationPageContent = {
-    title: "Probar la experiencia en vivo",
-    subtitle: "Esta es una demostración en vivo. Siga los pasos a continuación para ver cómo nuestro sistema maneja una reserva de principio a fin. Cada acción que realice activará un flujo de trabajo automatizado real.",
-    demoNotice: {
-        title: "Tenga en cuenta:",
-        body: "Esta es una demostración interactiva. Sus datos se enviarán a un webhook de prueba, pero no se almacenarán ni se utilizarán para ningún otro propósito."
-    }
-};
-
 
 const en: Content = {
   header: {
@@ -224,10 +188,9 @@ const en: Content = {
           { href: '#/products/live-support', text: 'Live Quality Support', description: 'Proactive review & feedback management.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Try Experience' },
+      { type: 'link', href: '#/demo', text: 'Demo Mode' },
       { type: 'link', href: '#/about', text: 'About Us' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
-      { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Contact' }
     ],
     cta: 'Book a Consultation',
@@ -365,7 +328,7 @@ const en: Content = {
         title: 'Company',
         links: [
           { text: 'About Us', href: '#/about' },
-          { text: 'Try Experience', href: '#/test-automation' },
+          { text: 'Demo Mode', href: '#/demo' },
           { text: 'Contact Us', href: '#/contact' },
         ],
       },
@@ -507,47 +470,61 @@ const en: Content = {
         confirmation: 'We respect your privacy and will never share your information.'
     }
   },
-  connectNowPage: {
-    title: "Connect Your Supplier Account",
-    connectButton: "Connect with GetYourGuide",
-    loginModal: {
-        title: "Log in to GetYourGuide",
-        description: "We'll open a secure window to log you in. Your credentials are never stored by TourCare.ai.",
-        emailPlaceholder: "Email",
-        passwordPlaceholder: "Password",
-        loginButton: "Log In",
-    },
-    loadingScreen: {
-        title: "Building Your Unified Dashboard...",
-        steps: [
-            "Authenticating session...",
-            "Discovering your products and tours...",
-            "Fetching recent bookings...",
-            "Syncing conversations...",
-            "Analyzing pickup schedules...",
-            "Finalizing dashboard...",
-        ],
-        complete: "Dashboard ready!",
+  demoPage: {
+    title: "Interactive Demo Hub",
+    subtitle: "Choose a demonstration to see how TourCare.ai can revolutionize your operations. All data is simulated and will not be stored.",
+    backButton: "Back to Demos",
+    workflow: {
+        title: "Live Experience Workflow",
+        description: "Follow the steps to see how our system handles a booking from start to finish. Each action you take triggers a real-time automated workflow.",
+        cta: "Start Workflow Demo",
     },
     dashboard: {
-        title: "Unified Dashboard",
-        searchPlaceholder: "Search by booking # or customer name...",
-        localDataWarning: "Demo Mode: All data shown is for demonstration purposes and is stored locally in your browser.",
-        upgradeButton: "Upgrade to a Live System",
-        tabs: {
-            bookings: "Bookings",
-            alerts: "Alerts",
+        title: "Supplier Dashboard Simulation",
+        description: "Simulate connecting a supplier account to see the unified dashboard. This demonstrates how you can manage all your bookings and communications in one place.",
+        connectGyg: "Demo with GetYourGuide",
+        connectViator: "Demo with Viator",
+    },
+    dashboardSimulation: {
+        loginModal: {
+            title: "Log in to {{platform}}",
+            description: "This is a simulated login. Your credentials are not stored or transmitted.",
+            emailPlaceholder: "Email (e.g., demo@tourcare.ai)",
+            passwordPlaceholder: "Password",
+            loginButton: "Log In",
         },
-        bookingCard: {
-            pickup: "Pickup",
-            missingInfo: "Missing Info",
-            status: "Status",
-            sendMessage: "Send Message",
-            setPickup: "Set Pickup",
+        loadingScreen: {
+            title: "Building Your Unified Dashboard...",
+            steps: [
+                "Authenticating session...",
+                "Discovering your products and tours...",
+                "Fetching recent bookings...",
+                "Syncing conversations...",
+                "Analyzing pickup schedules...",
+                "Finalizing dashboard...",
+            ],
+            complete: "Dashboard ready!",
+        },
+        dashboard: {
+            title: "Unified Dashboard",
+            searchPlaceholder: "Search by booking # or customer name...",
+            localDataWarning: "Data is currently stored in your browser for this session.",
+            demoNotice: "This is a demo. All booking data is for demonstration purposes.",
+            upgradeButton: "Book a consultation to go live.",
+            tabs: {
+                bookings: "Bookings",
+                alerts: "Alerts",
+            },
+            bookingCard: {
+                pickup: "Pickup",
+                missingInfo: "Missing Info",
+                status: "Status",
+                sendMessage: "Send Message",
+                setPickup: "Set Pickup",
+            }
         }
     }
   },
-  testAutomationPage: testAutomationPageEn,
   productPages: {
     operationSys: {
       navTitle: 'AI Operations System',
@@ -660,10 +637,9 @@ const ar: Content = {
                     { href: '#/products/live-support', text: 'دعم الجودة المباشر', description: 'إدارة استباقية للتقييمات والملاحظات.' },
                 ],
             },
-            { type: 'link', href: '#/test-automation', text: 'جرب التجربة' },
+            { type: 'link', href: '#/demo', text: 'الوضع التجريبي' },
             { type: 'link', href: '#/about', text: 'من نحن' },
             { type: 'link', href: '#/faq', text: 'الأسئلة الشائعة' },
-            { type: 'link', href: '#/connect-now', text: 'Connect Now' },
             { type: 'link', href: '#/contact', text: 'اتصل بنا' }
         ],
         cta: 'احجز استشارة',
@@ -801,7 +777,7 @@ const ar: Content = {
           title: 'الشركة',
           links: [
             { text: 'من نحن', href: '#/about' },
-            { text: 'جرب التجربة', href: '#/test-automation' },
+            { text: 'الوضع التجريبي', href: '#/demo' },
             { text: 'اتصل بنا', href: '#/contact' },
           ],
         },
@@ -943,47 +919,61 @@ const ar: Content = {
             confirmation: 'نحن نحترم خصوصيتك ولن نشارك معلوماتك أبدًا.'
         }
     },
-    connectNowPage: {
-        title: "ربط حساب المورد الخاص بك",
-        connectButton: "الاتصال بـ GetYourGuide",
-        loginModal: {
-            title: "تسجيل الدخول إلى GetYourGuide",
-            description: "سنفتح نافذة آمنة لتسجيل دخولك. لا يتم تخزين بيانات الاعتماد الخاصة بك بواسطة TourCare.ai أبدًا.",
-            emailPlaceholder: "البريد الإلكتروني",
-            passwordPlaceholder: "كلمة المرور",
-            loginButton: "تسجيل الدخول",
-        },
-        loadingScreen: {
-            title: "جاري إنشاء لوحة التحكم الموحدة الخاصة بك...",
-            steps: [
-                "جارٍ مصادقة الجلسة...",
-                "اكتشاف منتجاتك وجولاتك...",
-                "جلب الحجوزات الأخيرة...",
-                "مزامنة المحادثات...",
-                "تحليل جداول الاستلام...",
-                "وضع اللمسات الأخيرة على لوحة التحكم...",
-            ],
-            complete: "لوحة التحكم جاهزة!",
+    demoPage: {
+        title: "المركز التفاعلي التجريبي",
+        subtitle: "اختر عرضًا توضيحيًا لترى كيف يمكن لـ TourCare.ai إحداث ثورة في عملياتك. جميع البيانات محاكاة ولن يتم تخزينها.",
+        backButton: "العودة إلى العروض التجريبية",
+        workflow: {
+            title: "سير عمل التجربة الحية",
+            description: "اتبع الخطوات لترى كيف يتعامل نظامنا مع الحجز من البداية إلى النهاية. كل إجراء تتخذه يؤدي إلى سير عمل آلي في الوقت الفعلي.",
+            cta: "بدء العرض التجريبي لسير العمل",
         },
         dashboard: {
-            title: "لوحة التحكم الموحدة",
-            searchPlaceholder: "ابحث برقم الحجز أو اسم العميل...",
-            localDataWarning: "وضع العرض التجريبي: جميع البيانات المعروضة هي لأغراض توضيحية ويتم تخزينها محليًا في متصفحك.",
-            upgradeButton: "الترقية إلى نظام مباشر",
-            tabs: {
-                bookings: "الحجوزات",
-                alerts: "التنبيهات",
+            title: "محاكاة لوحة تحكم المورد",
+            description: "قم بمحاكاة ربط حساب مورد لرؤية لوحة التحكم الموحدة. يوضح هذا كيف يمكنك إدارة جميع حجوزاتك واتصالاتك في مكان واحد.",
+            connectGyg: "عرض تجريبي مع GetYourGuide",
+            connectViator: "عرض تجريبي مع Viator",
+        },
+        dashboardSimulation: {
+            loginModal: {
+                title: "تسجيل الدخول إلى {{platform}}",
+                description: "هذا تسجيل دخول محاكى. لا يتم تخزين أو نقل بيانات الاعتماد الخاصة بك.",
+                emailPlaceholder: "البريد الإلكتروني (مثال: demo@tourcare.ai)",
+                passwordPlaceholder: "كلمة المرور",
+                loginButton: "تسجيل الدخول",
             },
-            bookingCard: {
-                pickup: "الاستلام",
-                missingInfo: "معلومات ناقصة",
-                status: "الحالة",
-                sendMessage: "إرسال رسالة",
-                setPickup: "تحديد وقت الاستلام",
+            loadingScreen: {
+                title: "جاري إنشاء لوحة التحكم الموحدة الخاصة بك...",
+                steps: [
+                    "جارٍ مصادقة الجلسة...",
+                    "اكتشاف منتجاتك وجولاتك...",
+                    "جلب الحجوزات الأخيرة...",
+                    "مزامنة المحادثات...",
+                    "تحليل جداول الاستلام...",
+                    "وضع اللمسات الأخيرة على لوحة التحكم...",
+                ],
+                complete: "لوحة التحكم جاهزة!",
+            },
+            dashboard: {
+                title: "لوحة التحكم الموحدة",
+                searchPlaceholder: "ابحث برقم الحجز أو اسم العميل...",
+                localDataWarning: "يتم تخزين البيانات حاليًا في متصفحك لهذه الجلسة.",
+                demoNotice: "هذا عرض تجريبي. جميع بيانات الحجز هي لأغراض العرض التوضيحي.",
+                upgradeButton: "احجز استشارة للانطلاق مباشرة.",
+                tabs: {
+                    bookings: "الحجوزات",
+                    alerts: "التنبيهات",
+                },
+                bookingCard: {
+                    pickup: "الاستلام",
+                    missingInfo: "معلومات ناقصة",
+                    status: "الحالة",
+                    sendMessage: "إرسال رسالة",
+                    setPickup: "تحديد وقت الاستلام",
+                }
             }
         }
     },
-    testAutomationPage: testAutomationPageAr,
     productPages: {
         operationSys: {
             navTitle: 'نظام التشغيل بالذكاء الاصطناعي',
@@ -1069,7 +1059,7 @@ const ar: Content = {
                 features: [
                     { icon: '📈', text: 'رفع تقييمات منتجاتك على منصات مثل GetYourGuide وViator وتحسين ترتيبها في نتائج البحث.' },
                     { icon: '🚀', text: 'زيادة معدل التحويل والمبيعات بفضل السمعة القوية والتقييمات الإيجابية.' },
-                    { icon: '🧠', text: 'فهم أعمق لتجربة العملاء وتحسين جودة الخدمة بناءً na بيانات وتحليلات حقيقية.' },
+                    { icon: '🧠', text: 'فهم أعمق لتجربة العملاء وتحسين جودة الخدمة بناءً на بيانات وتحليلات حقيقية.' },
                     { icon: '🕐', text: 'توفير الوقت والجهد من خلال الاعتماد على فريق مختص وأدوات ذكاء اصطناعي تدير العملية بالكامل نيابةً عنك.' }
                 ]
             },
@@ -1096,10 +1086,9 @@ const de: Content = {
           { href: '#/products/live-support', text: 'Live-Qualitätssupport', description: 'Proaktives Bewertungs- & Feedback-Management.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Erlebnis testen' },
+      { type: 'link', href: '#/demo', text: 'Demo-Modus' },
       { type: 'link', href: '#/about', text: 'Über uns' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
-      { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Kontakt' }
     ],
     cta: 'Beratung buchen',
@@ -1237,7 +1226,7 @@ const de: Content = {
         title: 'Unternehmen',
         links: [
           { text: 'Über uns', href: '#/about' },
-          { text: 'Erlebnis testen', href: '#/test-automation' },
+          { text: 'Demo-Modus', href: '#/demo' },
           { text: 'Kontakt', href: '#/contact' },
         ],
       },
@@ -1379,47 +1368,7 @@ const de: Content = {
         confirmation: 'Wir respektieren Ihre Privatsphäre und werden Ihre Informationen niemals weitergeben.'
     }
   },
-  connectNowPage: {
-    title: "Ihr Lieferantenkonto verbinden",
-    connectButton: "Mit GetYourGuide verbinden",
-    loginModal: {
-        title: "Bei GetYourGuide anmelden",
-        description: "Wir öffnen ein sicheres Fenster, um Sie anzumelden. Ihre Anmeldeinformationen werden niemals von TourCare.ai gespeichert.",
-        emailPlaceholder: "E-Mail",
-        passwordPlaceholder: "Passwort",
-        loginButton: "Anmelden",
-    },
-    loadingScreen: {
-        title: "Ihr einheitliches Dashboard wird erstellt...",
-        steps: [
-            "Sitzung wird authentifiziert...",
-            "Ihre Produkte und Touren werden entdeckt...",
-            "Letzte Buchungen werden abgerufen...",
-            "Unterhaltungen werden synchronisiert...",
-            "Abholpläne werden analysiert...",
-            "Dashboard wird fertiggestellt...",
-        ],
-        complete: "Dashboard bereit!",
-    },
-    dashboard: {
-        title: "Einheitliches Dashboard",
-        searchPlaceholder: "Suche nach Buchungsnummer oder Kundenname...",
-        localDataWarning: "Demo-Modus: Alle angezeigten Daten dienen zu Demonstrationszwecken und werden lokal in Ihrem Browser gespeichert.",
-        upgradeButton: "Auf ein Live-System upgraden",
-        tabs: {
-            bookings: "Buchungen",
-            alerts: "Warnungen",
-        },
-        bookingCard: {
-            pickup: "Abholung",
-            missingInfo: "Fehlende Info",
-            status: "Status",
-            sendMessage: "Nachricht senden",
-            setPickup: "Abholung festlegen",
-        }
-    }
-  },
-  testAutomationPage: testAutomationPageDe,
+  demoPage: en.demoPage,
   productPages: {
     operationSys: {
       navTitle: 'KI-Betriebssystem',
@@ -1533,10 +1482,9 @@ const es: Content = {
           { href: '#/products/live-support', text: 'Soporte de Calidad en Vivo', description: 'Gestión proactiva de reseñas y comentarios.' },
         ],
       },
-      { type: 'link', href: '#/test-automation', text: 'Probar Experiencia' },
+       { type: 'link', href: '#/demo', text: 'Modo Demo' },
       { type: 'link', href: '#/about', text: 'Sobre Nosotros' },
       { type: 'link', href: '#/faq', text: 'FAQ' },
-       { type: 'link', href: '#/connect-now', text: 'Connect Now' },
       { type: 'link', href: '#/contact', text: 'Contacto' }
     ],
     cta: 'Reservar una Consulta',
@@ -1585,7 +1533,7 @@ const es: Content = {
         title: 'Empresa',
         links: [
           { text: 'Sobre Nosotros', href: '#/about' },
-          { text: 'Probar Experiencia', href: '#/test-automation' },
+          { text: 'Modo Demo', href: '#/demo' },
           { text: 'Contacto', href: '#/contact' },
         ],
       },
@@ -1611,47 +1559,7 @@ const es: Content = {
   commercialOffer: en.commercialOffer,
   faqSection: en.faqSection,
   contactPage: en.contactPage,
-  connectNowPage: {
-    title: "Conecte su cuenta de proveedor",
-    connectButton: "Conectar con GetYourGuide",
-    loginModal: {
-        title: "Iniciar sesión en GetYourGuide",
-        description: "Abriremos una ventana segura para que inicie sesión. Sus credenciales nunca son almacenadas por TourCare.ai.",
-        emailPlaceholder: "Correo electrónico",
-        passwordPlaceholder: "Contraseña",
-        loginButton: "Iniciar sesión",
-    },
-    loadingScreen: {
-        title: "Creando su panel de control unificado...",
-        steps: [
-            "Autenticando sesión...",
-            "Descubriendo sus productos y tours...",
-            "Obteniendo reservas recientes...",
-            "Sincronizando conversaciones...",
-            "Analizando horarios de recogida...",
-            "Finalizando el panel de control...",
-        ],
-        complete: "¡Panel de control listo!",
-    },
-    dashboard: {
-        title: "Panel de Control Unificado",
-        searchPlaceholder: "Buscar por n.º de reserva o nombre de cliente...",
-        localDataWarning: "Modo Demo: Todos los datos mostrados son para fines de demostración y se almacenan localmente en su navegador.",
-        upgradeButton: "Actualizar a un sistema en vivo",
-        tabs: {
-            bookings: "Reservas",
-            alerts: "Alertas",
-        },
-        bookingCard: {
-            pickup: "Recogida",
-            missingInfo: "Falta Info",
-            status: "Estado",
-            sendMessage: "Enviar Mensaje",
-            setPickup: "Establecer Recogida",
-        }
-    }
-  },
-  testAutomationPage: testAutomationPageEs,
+  demoPage: en.demoPage,
   productPages: en.productPages,
   privacyPolicy: privacyPolicyEs,
   termsOfService: termsOfServiceEs,

@@ -1,10 +1,11 @@
 
 import React from 'react';
-import { SupplierBooking, ConnectNowPageContent } from '../../types';
+// FIX: Changed ConnectNowPageContent to DemoDashboardSimulationContent to match the expected props shape.
+import { SupplierBooking, DemoDashboardSimulationContent } from '../../types';
 
 interface BookingCardProps {
     booking: SupplierBooking;
-    content: ConnectNowPageContent['dashboard']['bookingCard'];
+    content: DemoDashboardSimulationContent['dashboard']['bookingCard'];
     onUpdate: (booking: SupplierBooking) => void;
 }
 

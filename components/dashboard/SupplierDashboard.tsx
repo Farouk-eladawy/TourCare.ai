@@ -1,11 +1,11 @@
 
 import React, { useState, useMemo } from 'react';
-import { ConnectNowPageContent } from '../../types';
+import { DemoDashboardSimulationContent } from '../../types';
 import { useSupplierData } from '../../hooks/useSupplierData';
 import BookingCard from './BookingCard';
 
 interface SupplierDashboardProps {
-  content: ConnectNowPageContent['dashboard'];
+  content: DemoDashboardSimulationContent['dashboard'];
   openAuthModal: () => void;
 }
 
@@ -59,7 +59,7 @@ const SupplierDashboard: React.FC<SupplierDashboardProps> = ({ content, openAuth
             {/* Local Data Warning Banner */}
             <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-md mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p className="text-sm">
-                    <span className="font-bold">Note:</span> {content.localDataWarning}
+                    <span className="font-bold">Demo Mode:</span> {content.demoNotice} {content.localDataWarning}
                 </p>
                 <button 
                     onClick={openAuthModal}

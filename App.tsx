@@ -13,7 +13,7 @@ import GuidingAssistant from './components/GuidingAssistant';
 // Page Components
 import HomePage from './pages/HomePage';
 import OfferPage from './pages/OfferPage';
-import TestAutomationPage from './pages/TestAutomationPage';
+import DemoPage from './pages/DemoPage'; // Import the new unified demo page
 import FaqPage from './pages/FaqPage';
 import OperationSysPage from './pages/products/OperationSysPage';
 import PickupTimePage from './pages/products/PickupTimePage';
@@ -21,7 +21,6 @@ import LiveSupportPage from './pages/products/LiveSupportPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
-import ConnectNowPage from './pages/ConnectNowPage'; // Import the new page
 
 function App() {
   const { lang, dir, content, changeLanguage, availableLangs } = useLocalization();
@@ -55,12 +54,10 @@ function App() {
         return <HomePage content={content} setIsVideoModalOpen={setIsVideoModalOpen} openAuthModal={openAuthModal} />;
       case '#/about':
         return <OfferPage content={content.commercialOffer} />;
-      case '#/test-automation': // Replaced #/pricing route
-        return <TestAutomationPage content={content.testAutomationPage} openAuthModal={() => openAuthModal()} lang={lang} />;
+      case '#/demo': // New unified demo route
+        return <DemoPage content={content.demoPage} lang={lang} openAuthModal={openAuthModal} />;
       case '#/faq':
         return <FaqPage content={content.faqSection} />;
-      case '#/connect-now':
-        return <ConnectNowPage content={content.connectNowPage} lang={lang} openAuthModal={openAuthModal} />;
       case '#/contact':
         return <ContactPage content={content.contactPage} />;
       case '#/products/operation-sys':

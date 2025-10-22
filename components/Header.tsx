@@ -226,7 +226,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
     <>
       <header id="main-header" className={headerClasses}>
         <div className="container mx-auto px-6 py-0 flex justify-between items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <a href="#/" className="block z-10" aria-label="TourCare.ai Home">
               <img 
                 src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png" 
@@ -235,7 +235,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
                 className="object-contain"
               />
             </a>
-            <span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-1 rounded-full uppercase hidden md:inline-block tracking-wider">
+            <span className="bg-yellow-300 text-yellow-800 text-xs font-bold px-2 py-1 rounded-full ltr:ml-2 rtl:mr-2 hidden sm:block">
               Demo Mode
             </span>
           </div>

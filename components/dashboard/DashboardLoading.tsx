@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { ConnectNowPageContent } from '../../types';
+// FIX: Changed ConnectNowPageContent to DemoDashboardSimulationContent to match the expected props shape.
+import { DemoDashboardSimulationContent } from '../../types';
 
 interface DashboardLoadingProps {
-  content: ConnectNowPageContent['loadingScreen'];
+  content: DemoDashboardSimulationContent['loadingScreen'];
   onComplete: () => void;
 }
 

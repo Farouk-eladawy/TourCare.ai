@@ -293,11 +293,9 @@ export interface SupplierBooking {
     hasNewMessage: boolean;
 }
 
-export interface ConnectNowPageContent {
-    title: string;
-    connectButton: string;
+export interface DemoDashboardSimulationContent {
     loginModal: {
-        title: string;
+        title: string; // e.g. "Log in to {{platform}}"
         emailPlaceholder: string;
         passwordPlaceholder: string;
         loginButton: string;
@@ -312,6 +310,7 @@ export interface ConnectNowPageContent {
         title: string;
         searchPlaceholder: string;
         localDataWarning: string;
+        demoNotice: string;
         upgradeButton: string;
         tabs: {
             bookings: string;
@@ -327,13 +326,23 @@ export interface ConnectNowPageContent {
     };
 }
 
-export interface TestAutomationPageContent {
+
+export interface DemoPageContent {
     title: string;
     subtitle: string;
-    demoNotice: {
+    backButton: string;
+    workflow: {
         title: string;
-        body: string;
+        description: string;
+        cta: string;
     };
+    dashboard: {
+        title: string;
+        description: string;
+        connectGyg: string;
+        connectViator: string;
+    };
+    dashboardSimulation: DemoDashboardSimulationContent;
 }
 
 export interface Content {
@@ -358,8 +367,7 @@ export interface Content {
     contactPage: ContactPageContent;
     privacyPolicy: PrivacyPolicyContent;
     termsOfService: TermsOfServiceContent;
-    connectNowPage: ConnectNowPageContent;
-    testAutomationPage: TestAutomationPageContent;
+    demoPage: DemoPageContent;
     productPages: {
       operationSys: ProductPageContent;
       pickupTime: ProductPageContent;

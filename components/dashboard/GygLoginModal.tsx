@@ -1,14 +1,15 @@
 
 import React, { useState } from 'react';
-import { ConnectNowPageContent } from '../../types';
+import { DemoDashboardSimulationContent } from '../../types';
 
 interface GygLoginModalProps {
-  content: ConnectNowPageContent['loginModal'];
+  content: DemoDashboardSimulationContent['loginModal'];
+  platformName: string;
   onClose: () => void;
   onSuccess: () => void;
 }
 
-const GygLoginModal: React.FC<GygLoginModalProps> = ({ content, onClose, onSuccess }) => {
+const GygLoginModal: React.FC<GygLoginModalProps> = ({ content, platformName, onClose, onSuccess }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +24,8 @@ const GygLoginModal: React.FC<GygLoginModalProps> = ({ content, onClose, onSucce
         }, 1500);
     };
 
+    const title = content.title.replace('{{platform}}', platformName);
+
     return (
         <div 
             className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" 
@@ -35,7 +38,7 @@ const GygLoginModal: React.FC<GygLoginModalProps> = ({ content, onClose, onSucce
                 className="bg-white w-full max-w-sm rounded-lg shadow-2xl p-8" 
                 onClick={e => e.stopPropagation()}
             >
-                <h2 id="gyg-login-title" className="text-2xl font-bold text-center mb-2 text-gray-900">{content.title}</h2>
+                <h2 id="gyg-login-title" className="text-2xl font-bold text-center mb-2 text-gray-900">{title}</h2>
                 <p className="text-gray-600 text-center mb-6 text-sm">{content.description}</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input 
