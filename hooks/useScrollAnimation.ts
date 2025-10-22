@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 type AnimationOptions = {
   threshold?: number;
@@ -7,14 +7,21 @@ type AnimationOptions = {
 };
 
 export const useScrollAnimation = <T extends HTMLElement>(options: AnimationOptions = {}) => {
-  const ref = useRef<T>(null);
   const { threshold = 0.1, triggerOnce = true, delay = '0ms' } = options;
+  const [element, setElement] = useState<T | null>(null);
+
+  // A stable callback function to be used as the ref.
+  // This will be called by React when the component mounts (with the node) and unmounts (with null).
+  const callbackRef = useCallback((node: T | null) => {
+    setElement(node);
+  }, []);
 
   useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
+    // If there's no element, we don't need to do anything.
+    if (!element) {
+      return;
+    }
 
-    // Apply delay via style
     element.style.transitionDelay = delay;
 
     const observer = new IntersectionObserver(
@@ -22,10 +29,11 @@ export const useScrollAnimation = <T extends HTMLElement>(options: AnimationOpti
         if (entry.isIntersecting) {
           element.classList.add('is-visible');
           if (triggerOnce) {
-            observer.unobserve(element);
+            // Once the animation is triggered, we can stop observing.
+            observer.disconnect();
           }
         } else {
-          // Optionally, remove the class if you want the animation to repeat
+          // If triggerOnce is false, we can reset the animation when it goes out of view.
           if (!triggerOnce) {
             element.classList.remove('is-visible');
           }
@@ -38,12 +46,11 @@ export const useScrollAnimation = <T extends HTMLElement>(options: AnimationOpti
 
     observer.observe(element);
 
+    // Cleanup function to disconnect the observer when the component unmounts or the element changes.
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.disconnect();
     };
-  }, [ref, threshold, triggerOnce, delay]);
+  }, [element, threshold, triggerOnce, delay]); // Re-run the effect if the element or any option changes.
 
-  return ref;
+  return callbackRef;
 };
