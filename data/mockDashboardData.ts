@@ -1,5 +1,5 @@
 
-import { SupplierBooking } from '../types';
+import { SupplierBooking, Platform } from '../types';
 
 const sampleTripNames = [
     'Dubai Desert Safari', 'Burj Khalifa Sky Views', 'Abu Dhabi Grand Mosque Tour',
@@ -16,9 +16,10 @@ const sampleHotelNames = [
 
 const getRandomElement = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
-export const generateMockBookings = (count: number): SupplierBooking[] => {
+export const generateMockBookings = (count: number, platform: Platform = 'GetYourGuide'): SupplierBooking[] => {
     const bookings: SupplierBooking[] = [];
     const today = new Date();
+    const bookingPrefix = platform === 'Viator' ? 'BR-' : 'GYG-';
 
     for (let i = 0; i < count; i++) {
         const tripDate = new Date(today);
@@ -32,8 +33,8 @@ export const generateMockBookings = (count: number): SupplierBooking[] => {
         const pickupTime = pickupStatus === 'Set' ? '09:30' : null;
 
         const booking: SupplierBooking = {
-            id: `booking_${i + 1}`,
-            bookingNr: `GYG-${Math.floor(1000000 + Math.random() * 9000000)}`,
+            id: `booking_${i + 1}_${platform.toLowerCase()}`,
+            bookingNr: `${bookingPrefix}${Math.floor(1000000 + Math.random() * 9000000)}`,
             tripName: getRandomElement(sampleTripNames),
             tripDate: tripDate.toISOString().split('T')[0],
             customerName: getRandomElement(sampleCustomerNames),

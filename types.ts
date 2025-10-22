@@ -1,7 +1,7 @@
-
 // FIX: Removed self-import causing circular dependency.
 export type Language = 'en' | 'ar' | 'de' | 'es';
 export type Direction = 'ltr' | 'rtl';
+export type Platform = 'GetYourGuide' | 'Viator';
 
 export interface NavLink {
     type: 'link';

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { DemoPageContent, Language } from '../types';
+import { DemoPageContent, Language, Platform } from '../types';
 import ParticlesBackground from '../components/ParticlesBackground';
 import AutomationWorkflow from '../components/AutomationWorkflow';
 import GygLoginModal from '../components/dashboard/GygLoginModal';
@@ -16,7 +16,6 @@ interface DemoPageProps {
 
 type DemoView = 'choices' | 'workflow' | 'dashboard';
 type DashboardState = 'idle' | 'login' | 'loading' | 'ready';
-type Platform = 'GetYourGuide' | 'Viator';
 
 const DemoPage: React.FC<DemoPageProps> = ({ content, lang, openAuthModal }) => {
     const [view, setView] = useState<DemoView>('choices');
@@ -51,7 +50,7 @@ const DemoPage: React.FC<DemoPageProps> = ({ content, lang, openAuthModal }) => 
             case 'loading':
                 return <DashboardLoading content={content.dashboardSimulation.loadingScreen} onComplete={handleLoadingComplete} />;
             case 'ready':
-                return <SupplierDashboard content={content.dashboardSimulation.dashboard} openAuthModal={openAuthModal} />;
+                return platform && <SupplierDashboard content={content.dashboardSimulation.dashboard} openAuthModal={openAuthModal} platform={platform} />;
             default:
                 return null;
         }

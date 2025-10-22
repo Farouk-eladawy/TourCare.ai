@@ -1,16 +1,17 @@
 
 import React, { useState, useMemo } from 'react';
-import { DemoDashboardSimulationContent } from '../../types';
+import { DemoDashboardSimulationContent, Platform } from '../../types';
 import { useSupplierData } from '../../hooks/useSupplierData';
 import BookingCard from './BookingCard';
 
 interface SupplierDashboardProps {
   content: DemoDashboardSimulationContent['dashboard'];
   openAuthModal: () => void;
+  platform: Platform;
 }
 
-const SupplierDashboard: React.FC<SupplierDashboardProps> = ({ content, openAuthModal }) => {
-    const { bookings, isLoading, updateBooking } = useSupplierData();
+const SupplierDashboard: React.FC<SupplierDashboardProps> = ({ content, openAuthModal, platform }) => {
+    const { bookings, isLoading, updateBooking } = useSupplierData(platform);
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState<'bookings' | 'alerts'>('bookings');
 
