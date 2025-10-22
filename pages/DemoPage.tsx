@@ -7,6 +7,7 @@ import GygLoginModal from '../components/dashboard/GygLoginModal';
 import DashboardLoading from '../components/dashboard/DashboardLoading';
 import SupplierDashboard from '../components/dashboard/SupplierDashboard';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import BackgroundVideo from '../components/BackgroundVideo';
 
 interface DemoPageProps {
   content: DemoPageContent;
@@ -98,8 +99,15 @@ const DemoPage: React.FC<DemoPageProps> = ({ content, lang, openAuthModal }) => 
     };
 
     return (
-        <section className="relative py-16 bg-brand-light-gray min-h-[80vh] flex flex-col">
-            <ParticlesBackground id="particles-demo-page" />
+        <section className={`relative py-16 min-h-[80vh] flex flex-col overflow-hidden ${view !== 'choices' ? 'bg-brand-light-gray' : ''}`}>
+            {view === 'choices' && (
+                <>
+                    <BackgroundVideo src="https://res.cloudinary.com/dqlurfwet/video/upload/v1760505531/28657121-4a56-4468-b2de-53731deb4ae3_koemrh.mp4" />
+                    <div className="absolute inset-0 bg-white/50 z-10"></div>
+                </>
+            )}
+            {view !== 'choices' && <ParticlesBackground id="particles-demo-page" />}
+            
             <div className="relative container mx-auto px-6 z-20 flex-grow flex flex-col items-center justify-center">
                  {view !== 'choices' && (
                     <div className="w-full max-w-6xl mb-8">
