@@ -59,6 +59,12 @@ export default function ClientLayout({
 
   return (
     <AppContext.Provider value={contextValue}>
+      {/* 
+        This wrapper div resolves a structural issue where a client component
+        that is a direct child of <body> can cause a misleading 'children' prop error in Next.js.
+        Providing a single root DOM element ensures a stable structure for React's hydration process.
+      */}
+      <>
           <Header 
               content={content.header} 
               lang={lang} 
@@ -101,6 +107,7 @@ export default function ClientLayout({
               lang={lang}
               planOfInterest={authModalPlan}
           />
+      </>
     </AppContext.Provider>
   );
 }
