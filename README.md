@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TourCare.ai - Live Viewer Frontend
 
-# Run and deploy your AI Studio app
+This project is a Next.js application that provides a live viewer and scripting interface for browser automation tasks.
 
-This contains everything you need to run your app locally.
+## Getting Started
 
-View your app in AI Studio: https://ai.studio/apps/drive/1YvdWa_hhjHWh91f5ezi2AWpSL9bCPQa2
+First, install the dependencies:
 
-## Run Locally
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
 
-**Prerequisites:**  Node.js
+Then, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Open [http://localhost:3000/live](http://localhost:3000/live) with your browser to see the result.
+
+## Project Structure
+
+- **/app/live/**: Contains the main page for the Live Viewer application.
+  - `page.tsx`: The main route component for `/live`.
+  - `LiveViewer.tsx`: A client component that holds all the UI, state, and logic for the interface, including the address bar, viewer placeholder, Monaco editor, and results panel.
+- **/app/layout.tsx**: The root layout for the application, configured for Arabic (RTL).
+- **/app/globals.css**: Global styles and Tailwind CSS definitions.
+- **/components/**: Reusable components, such as icons.
+- **/public/**: Static assets.
+- `package.json`: Project dependencies and scripts.
+- `tailwind.config.ts`: Tailwind CSS configuration file.
