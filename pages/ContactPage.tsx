@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { ContactPageContent } from '../types';
+'use client';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 import ParticlesBackground from '../components/ParticlesBackground';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
-const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => {
+const ContactPage: React.FC = () => {
+    const { content } = useContext(AppContext);
     const [formState, setFormState] = useState({
         companyName: '',
         contactPerson: '',
@@ -59,8 +61,8 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
             <ParticlesBackground id="particles-contact" />
             <div className="relative container mx-auto px-6 z-20">
                 <div ref={titleRef} className="scroll-animate text-center max-w-3xl mx-auto mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{content.pageTitle}</h1>
-                    <p className="text-lg text-gray-700 whitespace-pre-line">{content.intro}</p>
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{content.contactPage.pageTitle}</h1>
+                    <p className="text-lg text-gray-700 whitespace-pre-line">{content.contactPage.intro}</p>
                 </div>
 
                 <div ref={sectionsRef} className="scroll-animate grid lg:grid-cols-5 gap-12">
@@ -68,9 +70,9 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
                     <div className="lg:col-span-2 space-y-8">
                         {/* Why Contact */}
                         <div className="bg-brand-light-gray/50 p-6 rounded-lg border-l-4 border-brand-accent">
-                            <h3 className="font-bold text-xl text-gray-900 mb-3">{content.whyContact.title}</h3>
+                            <h3 className="font-bold text-xl text-gray-900 mb-3">{content.contactPage.whyContact.title}</h3>
                             <ul className="space-y-2">
-                                {content.whyContact.reasons.map((reason, i) => (
+                                {content.contactPage.whyContact.reasons.map((reason, i) => (
                                     <li key={i} className="flex items-start gap-3 text-gray-700">
                                         <span className="text-brand-accent mt-1">✓</span>
                                         {reason}
@@ -80,9 +82,9 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
                         </div>
                         {/* Direct Contact */}
                         <div className="bg-brand-light-gray/50 p-6 rounded-lg border-l-4 border-brand-accent">
-                             <h3 className="font-bold text-xl text-gray-900 mb-4">{content.directContact.title}</h3>
+                             <h3 className="font-bold text-xl text-gray-900 mb-4">{content.contactPage.directContact.title}</h3>
                              <div className="space-y-4">
-                                {content.directContact.items.map((item, i) => (
+                                {content.contactPage.directContact.items.map((item, i) => (
                                     <div key={i} className="flex items-center gap-4">
                                         <span className="text-2xl">{item.icon}</span>
                                         <div>
@@ -99,9 +101,9 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
                         </div>
                         {/* Instant Channels */}
                          <div className="bg-brand-light-gray/50 p-6 rounded-lg border-l-4 border-brand-accent">
-                             <h3 className="font-bold text-xl text-gray-900 mb-4">{content.instantChannels.title}</h3>
+                             <h3 className="font-bold text-xl text-gray-900 mb-4">{content.contactPage.instantChannels.title}</h3>
                               <div className="space-y-3">
-                                {content.instantChannels.items.map((item, i) => (
+                                {content.contactPage.instantChannels.items.map((item, i) => (
                                      <button key={i} onClick={() => handleInstantChannelClick(item.href)} className="w-full text-start flex items-center gap-4 p-3 rounded-md hover:bg-gray-200 transition">
                                         <span className="text-2xl">{item.icon}</span>
                                         <div>
@@ -116,8 +118,9 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
 
                     {/* Right Column with Form */}
                     <div className="lg:col-span-3 bg-white/50 backdrop-blur-sm p-8 rounded-lg border border-gray-200/80">
-                         <h2 className="text-3xl font-bold text-gray-900 mb-2">{content.formSection.title}</h2>
-                         <p className="text-gray-600 mb-6">{content.formSection.subtitle}</p>
+                         {/* FIX: All references to `content.formSection` should be `content.contactPage.formSection` to match the data structure. */}
+                         <h2 className="text-3xl font-bold text-gray-900 mb-2">{content.contactPage.formSection.title}</h2>
+                         <p className="text-gray-600 mb-6">{content.contactPage.formSection.subtitle}</p>
 
                         {isSent ? (
                             <div className="text-center p-8 bg-green-100 border-l-4 border-green-500 rounded-md">
@@ -127,30 +130,30 @@ const ContactPage: React.FC<{ content: ContactPageContent }> = ({ content }) => 
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-5">
                                 <div className="grid sm:grid-cols-2 gap-5">
-                                    <input type="text" name="companyName" placeholder={content.formSection.form.companyName} value={formState.companyName} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
-                                    <input type="text" name="contactPerson" placeholder={content.formSection.form.contactPerson} value={formState.contactPerson} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
+                                    <input type="text" name="companyName" placeholder={content.contactPage.formSection.form.companyName} value={formState.companyName} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
+                                    <input type="text" name="contactPerson" placeholder={content.contactPage.formSection.form.contactPerson} value={formState.contactPerson} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
                                 </div>
                                  <div className="grid sm:grid-cols-2 gap-5">
-                                    <input type="email" name="email" placeholder={content.formSection.form.email} value={formState.email} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
-                                    <input type="tel" name="phone" placeholder={content.formSection.form.phone} value={formState.phone} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" />
+                                    <input type="email" name="email" placeholder={content.contactPage.formSection.form.email} value={formState.email} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required />
+                                    <input type="tel" name="phone" placeholder={content.contactPage.formSection.form.phone} value={formState.phone} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">{content.formSection.form.platforms}</label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">{content.contactPage.formSection.form.platforms}</label>
                                     <div className="flex flex-wrap gap-3">
-                                        {content.formSection.form.platformOptions.map(opt => (
+                                        {content.contactPage.formSection.form.platformOptions.map(opt => (
                                             <button type="button" key={opt} onClick={() => handlePlatformChange(opt)} className={`px-3 py-1.5 text-sm font-semibold rounded-full border-2 transition ${formState.platforms.includes(opt) ? 'bg-brand-accent text-white border-brand-accent' : 'bg-white text-gray-700 border-gray-300 hover:border-brand-accent/50'}`}>
                                                 {opt}
                                             </button>
                                         ))}
                                     </div>
                                 </div>
-                                <textarea name="message" placeholder={content.formSection.form.message} rows={5} value={formState.message} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required></textarea>
+                                <textarea name="message" placeholder={content.contactPage.formSection.form.message} rows={5} value={formState.message} onChange={handleInputChange} className="w-full bg-gray-100 border border-gray-300 rounded-md p-3 focus:ring-brand-accent focus:border-brand-accent" required></textarea>
                                 
                                 <div>
                                     <button type="submit" disabled={isSending} className="w-full bg-brand-accent text-white font-bold py-3 px-4 rounded-md hover:bg-brand-accent-hover transition disabled:bg-gray-400">
-                                        {isSending ? content.formSection.form.sendingButton : content.formSection.form.submitButton}
+                                        {isSending ? content.contactPage.formSection.form.sendingButton : content.contactPage.formSection.form.submitButton}
                                     </button>
-                                    <p className="text-xs text-gray-500 text-center mt-3">{content.formSection.confirmation}</p>
+                                    <p className="text-xs text-gray-500 text-center mt-3">{content.contactPage.formSection.confirmation}</p>
                                 </div>
                             </form>
                         )}

@@ -20,7 +20,7 @@ const Footer: React.FC<{ content: FooterContent }> = ({ content }) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-10">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <a href="#/" className="inline-block mb-4" aria-label="TourCare.ai Home">
+            <a href="/" className="inline-block mb-4" aria-label="TourCare.ai Home">
               <div className="bg-white p-2 rounded-xl shadow-md">
                 <img
                   src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png"
@@ -49,7 +49,7 @@ const Footer: React.FC<{ content: FooterContent }> = ({ content }) => {
                 <ul className="space-y-3">
                   {column.links.map(link => (
                     <li key={link.text}>
-                      <a href={link.href} className="text-gray-400 hover:text-brand-accent hover:underline transition-colors">
+                      <a href={link.href.replace('#', '')} className="text-gray-400 hover:text-brand-accent hover:underline transition-colors">
                         {link.text}
                       </a>
                     </li>
