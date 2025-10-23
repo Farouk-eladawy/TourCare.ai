@@ -1,3 +1,5 @@
+// FIX: Import React to resolve namespace errors for types like React.ReactNode.
+import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
