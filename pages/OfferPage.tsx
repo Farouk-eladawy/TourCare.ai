@@ -1,11 +1,13 @@
-'use client';
-import React, { useContext } from 'react';
+import React from 'react';
 import CommercialOffer from '../components/CommercialOffer';
-import { AppContext } from '../context/AppContext';
+import { CommercialOfferContent } from '../types';
 
-const OfferPage: React.FC = () => {
-  const { content } = useContext(AppContext);
-  return <CommercialOffer content={content.commercialOffer} />;
+interface OfferPageProps {
+  content: CommercialOfferContent;
+}
+
+const OfferPage: React.FC<OfferPageProps> = ({ content }) => {
+  return <CommercialOffer content={content} />;
 };
 
 export default OfferPage;

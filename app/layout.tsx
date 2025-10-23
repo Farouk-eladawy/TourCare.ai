@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { Cairo } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "@/components/ClientLayout";
+
+const cairo = Cairo({ subsets: ["arabic", "latin"] });
 
 export const metadata: Metadata = {
-  title: "TourCare.ai - AI & Automation for Tourism",
-  description: "TourCare.ai offers AI-powered automation for tourism operations and customer service, helping GetYourGuide suppliers streamline bookings, messaging, and support.",
+  title: "TourCare.ai Live",
+  description: "Live Viewer and Automation Scripting",
 };
 
 export default function RootLayout({
@@ -13,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClientLayout>
-      {children}
-    </ClientLayout>
+    <html lang="ar" dir="rtl">
+      <body className={cairo.className}>{children}</body>
+    </html>
   );
 }

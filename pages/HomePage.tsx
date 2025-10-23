@@ -1,6 +1,5 @@
-'use client';
-import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import React from 'react';
+import { Content } from '../types';
 
 import Hero from '../components/Hero';
 import WhoItIsFor from '../components/WhoItIsFor';
@@ -12,8 +11,13 @@ import CtaSection from '../components/CtaSection';
 import Integrations from '../components/Integrations';
 import Testimonials from '../components/Testimonials';
 
-const HomePage: React.FC = () => {
-    const { content, setIsVideoModalOpen, openAuthModal } = useContext(AppContext);
+interface HomePageProps {
+    content: Content;
+    setIsVideoModalOpen: (isOpen: boolean) => void;
+    openAuthModal: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ content, setIsVideoModalOpen, openAuthModal }) => {
     return (
         <>
             <Hero 
@@ -27,8 +31,11 @@ const HomePage: React.FC = () => {
             <Workflow content={content.workflow} />
             <VisualFeatures content={content.visualFeatures} />
             <CtaSection content={content.ctaSection} onBookConsultationClick={() => openAuthModal()} />
+            {/* The playground is now its own page */}
+            {/* <AutomationPlayground content={content.playground} /> */}
             <Integrations content={content.integrations} />
             <Testimonials content={content.testimonials} />
+            {/* The FAQ, Pricing, and Offer sections are now their own pages */}
         </>
     );
 }

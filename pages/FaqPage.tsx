@@ -1,11 +1,13 @@
-'use client';
-import React, { useContext } from 'react';
+import React from 'react';
 import FaqSection from '../components/FaqSection';
-import { AppContext } from '../context/AppContext';
+import { FaqSectionContent } from '../types';
 
-const FaqPage: React.FC = () => {
-  const { content } = useContext(AppContext);
-  return <FaqSection content={content.faqSection} />;
+interface FaqPageProps {
+  content: FaqSectionContent;
+}
+
+const FaqPage: React.FC<FaqPageProps> = ({ content }) => {
+  return <FaqSection content={content} />;
 };
 
 export default FaqPage;

@@ -1,6 +1,5 @@
-'use client';
-import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import React from 'react';
+import { PrivacyPolicyContent } from '../types';
 import ParticlesBackground from '../components/ParticlesBackground';
 
 // Helper function to find and link email addresses
@@ -14,21 +13,18 @@ const linkifyEmails = (text: string) => {
     });
 };
 
-const PrivacyPolicyPage: React.FC = () => {
-    const { content } = useContext(AppContext);
-    const pageContent = content.privacyPolicy;
-
+const PrivacyPolicyPage: React.FC<{ content: PrivacyPolicyContent }> = ({ content }) => {
     return (
         <section className="relative py-16 bg-brand-light-gray">
             <ParticlesBackground id="particles-privacy" />
             <div className="relative container mx-auto px-6 z-10">
                 <div className="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-lg shadow-lg border border-gray-200/80">
                     <header className="text-center pb-8 border-b border-gray-200">
-                        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">{pageContent.pageTitle}</h1>
-                        <p className="mt-2 text-gray-500">{pageContent.lastUpdated}</p>
+                        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">{content.pageTitle}</h1>
+                        <p className="mt-2 text-gray-500">{content.lastUpdated}</p>
                     </header>
                     <div className="prose prose-lg max-w-none mt-8 text-gray-700">
-                        {pageContent.sections.map((section, index) => (
+                        {content.sections.map((section, index) => (
                             <div key={index} className="mb-8">
                                 <h2 className="text-2xl font-bold text-gray-800 mb-4">{section.title}</h2>
                                 {Array.isArray(section.content) ? (
