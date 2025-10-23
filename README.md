@@ -1,6 +1,8 @@
-# TourCare.ai - Live Viewer Frontend
+# TourCare.ai - Landing Page
 
-This project is a Next.js application that provides a live viewer and scripting interface for browser automation tasks.
+This is a modern, responsive landing page for TourCare.ai, a service offering AI-powered automation for tourism operations, specifically targeting GetYourGuide suppliers.
+
+The project is built with Next.js and Tailwind CSS.
 
 ## Getting Started
 
@@ -24,16 +26,10 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000/live](http://localhost:3000/live) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Project Structure
+## Deployment on Netlify
 
-- **/app/live/**: Contains the main page for the Live Viewer application.
-  - `page.tsx`: The main route component for `/live`.
-  - `LiveViewer.tsx`: A client component that holds all the UI, state, and logic for the interface, including the address bar, viewer placeholder, Monaco editor, and results panel.
-- **/app/layout.tsx**: The root layout for the application, configured for Arabic (RTL).
-- **/app/globals.css**: Global styles and Tailwind CSS definitions.
-- **/components/**: Reusable components, such as icons.
-- **/public/**: Static assets.
-- `package.json`: Project dependencies and scripts.
-- `tailwind.config.ts`: Tailwind CSS configuration file.
+This project is ready for deployment on Netlify. The standard Next.js build settings will work:
+- **Build command**: `next build`
+- **Publish directory**: `.next`

@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -51,56 +52,54 @@ export default function ClientLayout({
     dir,
   };
 
+  // FIX: Removed <html> and <body> tags. A client component in Next.js cannot render these root elements.
+  // The useLocalization hook will handle updating the lang and dir attributes on the <html> tag.
   return (
     <AppContext.Provider value={contextValue}>
-      <html lang={lang} dir={dir}>
-        <body>
-            <div className={`${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`}>
-                <Header 
-                    content={content.header} 
-                    lang={lang} 
-                    availableLangs={availableLangs}
-                    changeLanguage={changeLanguage} 
-                    onCtaClick={() => openAuthModal()} 
-                />
-                
-                <main>
-                    {children}
-                </main>
-                
-                <SloganBanner slogan={content.slogan} />
-                <Footer content={content.footer} />
+      <div className={`${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`}>
+          <Header 
+              content={content.header} 
+              lang={lang} 
+              availableLangs={availableLangs}
+              changeLanguage={changeLanguage} 
+              onCtaClick={() => openAuthModal()} 
+          />
+          
+          <main>
+              {children}
+          </main>
+          
+          <SloganBanner slogan={content.slogan} />
+          <Footer content={content.footer} />
 
-                <GuidingAssistant
-                    onOpenAssistant={() => setIsAiModalOpen(true)}
-                    lang={lang}
-                    currentRoute={currentRoute}
-                />
+          <GuidingAssistant
+              onOpenAssistant={() => setIsAiModalOpen(true)}
+              lang={lang}
+              currentRoute={currentRoute}
+          />
 
-                <AiAssistantModal 
-                    isOpen={isAiModalOpen} 
-                    onClose={() => setIsAiModalOpen(false)} 
-                    aiAssistantContent={content.aiAssistant}
-                    pricingContent={content.pricing}
-                    lang={lang}
-                />
-                
-                <VideoModal 
-                    isOpen={isVideoModalOpen}
-                    onClose={() => setIsVideoModalOpen(false)}
-                    videoUrl="https://drive.google.com/file/d/1xXNlbbZ9osKNvn9GHZ_1Oaj2KB33Z5JK/preview"
-                />
+          <AiAssistantModal 
+              isOpen={isAiModalOpen} 
+              onClose={() => setIsAiModalOpen(false)} 
+              aiAssistantContent={content.aiAssistant}
+              pricingContent={content.pricing}
+              lang={lang}
+          />
+          
+          <VideoModal 
+              isOpen={isVideoModalOpen}
+              onClose={() => setIsVideoModalOpen(false)}
+              videoUrl="https://drive.google.com/file/d/1xXNlbbZ9osKNvn9GHZ_1Oaj2KB33Z5JK/preview"
+          />
 
-                <AuthModal
-                    isOpen={isAuthModalOpen}
-                    onClose={() => setIsAuthModalOpen(false)}
-                    content={content.authModal}
-                    lang={lang}
-                    planOfInterest={authModalPlan}
-                />
-            </div>
-        </body>
-      </html>
+          <AuthModal
+              isOpen={isAuthModalOpen}
+              onClose={() => setIsAuthModalOpen(false)}
+              content={content.authModal}
+              lang={lang}
+              planOfInterest={authModalPlan}
+          />
+      </div>
     </AppContext.Provider>
   );
 }
