@@ -9,7 +9,7 @@ interface TimePickerProps {
 // Generate the time slots once, outside the component.
 // This is more efficient as the list is static and fixes the conditional hook call issue.
 const generateTimeSlots = () => {
-    const slots = [];
+    const slots: string[] = [];
     for (let h = 0; h < 24; h++) {
         for (let m = 0; m < 60; m += 5) {
             const hour = h.toString().padStart(2, '0');
