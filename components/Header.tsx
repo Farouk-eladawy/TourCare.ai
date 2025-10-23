@@ -43,7 +43,7 @@ const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
           {item.items.map((subItem) => (
             <a
               key={subItem.href}
-              href={subItem.href}
+              href={subItem.href.replace('#', '')}
               onClick={() => setIsOpen(false)}
               className="block p-3 rounded-md hover:bg-brand-light-gray"
             >
@@ -141,7 +141,7 @@ const MobileMenu: FC<{
       >
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <a href="#/" onClick={onClose} className="block" aria-label="TourCare.ai Home">
+            <a href="/" onClick={onClose} className="block" aria-label="TourCare.ai Home">
               <img
                 src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png"
                 alt="TourCare.ai logo"
@@ -160,7 +160,7 @@ const MobileMenu: FC<{
             {content.navItems.map((item, index) => {
               if (item.type === 'link') {
                 return (
-                  <a key={index} href={item.href} onClick={onClose} className="block text-lg font-semibold text-gray-700 hover:text-brand-accent transition py-2">
+                  <a key={index} href={item.href.replace('#', '')} onClick={onClose} className="block text-lg font-semibold text-gray-700 hover:text-brand-accent transition py-2">
                     {item.text}
                   </a>
                 );
@@ -171,7 +171,7 @@ const MobileMenu: FC<{
                     <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                     <div className="space-y-2 ltr:pl-4 rtl:pr-4 border-l-2 border-brand-accent/20 ltr:border-l-2 rtl:border-r-2">
                       {item.items.map(subItem => (
-                        <a key={subItem.href} href={subItem.href} onClick={onClose} className="block text-gray-600 hover:text-brand-accent transition py-1">
+                        <a key={subItem.href} href={subItem.href.replace('#', '')} onClick={onClose} className="block text-gray-600 hover:text-brand-accent transition py-1">
                           {subItem.text}
                         </a>
                       ))}
@@ -227,7 +227,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
       <header id="main-header" className={headerClasses}>
         <div className="container mx-auto px-6 py-0 flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#/" className="block z-10" aria-label="TourCare.ai Home">
+            <a href="/" className="block z-10" aria-label="TourCare.ai Home">
               <img 
                 src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png" 
                 alt="TourCare.ai logo" 
@@ -243,7 +243,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
           <nav className="hidden md:flex items-center space-x-8">
             {content.navItems.map((item, index) => {
               if (item.type === 'link') {
-                return <a key={index} href={item.href} className="text-gray-700 hover:text-brand-accent transition font-semibold">{item.text}</a>;
+                return <a key={index} href={item.href.replace('#', '')} className="text-gray-700 hover:text-brand-accent transition font-semibold">{item.text}</a>;
               }
               if (item.type === 'dropdown') {
                 return <NavDropdown key={index} item={item} />;
