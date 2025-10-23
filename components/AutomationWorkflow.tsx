@@ -37,9 +37,20 @@ const AutomationWorkflow: React.FC<AutomationWorkflowProps> = ({ onBookConsultat
             actions: ["ابدأ الحجز", "اجمع البيانات", "حدد الوقت", "أرسل الطلب", "احجز الآن"],
             pickupTime: "أرسل وقت الاستلام",
             submitting: "جاري الإرسال..."
+        },
+        de: {
+            steps: ["Book Now", "Collect Info", "Set Pickup Time", "Request Review", "Book Consultation"],
+            actions: ["Start Booking", "Collect Data", "Set Time", "Send Request", "Book Now"],
+            pickupTime: "Send Pickup Time",
+            submitting: "Sending..."
+        },
+        es: {
+            steps: ["Book Now", "Collect Info", "Set Pickup Time", "Request Review", "Book Consultation"],
+            actions: ["Start Booking", "Collect Data", "Set Time", "Send Request", "Book Now"],
+            pickupTime: "Send Pickup Time",
+            submitting: "Sending..."
         }
     };
-    // FIX: Added a fallback to English to prevent runtime errors if an unsupported language is passed.
     const stepContent = content[lang as keyof typeof content] || content.en;
 
     const handleAnimationEnd = (stepIndex: number) => {

@@ -51,10 +51,14 @@ export default function ClientLayout({
     dir,
   };
 
+  // FIX: Apply language-specific classes directly to the body to avoid an extra div wrapper,
+  // which resolves the structural issue hinted at by the misleading error in app/layout.tsx.
+  useEffect(() => {
+    document.body.className = `${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`;
+  }, [lang]);
+
   return (
     <AppContext.Provider value={contextValue}>
-      {/* FIX: Removed <html> and <body> tags. The root layout in `app/layout.tsx` is now responsible for them, following Next.js conventions. The `useLocalization` hook handles dynamic updates. */}
-      <div className={`${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`}>
           <Header 
               content={content.header} 
               lang={lang} 
@@ -97,7 +101,6 @@ export default function ClientLayout({
               lang={lang}
               planOfInterest={authModalPlan}
           />
-      </div>
     </AppContext.Provider>
   );
 }
