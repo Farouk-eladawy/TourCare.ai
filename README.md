@@ -1,6 +1,8 @@
 # TourCare.ai Landing Page
 
-This is a modern, responsive landing page for TourCare.ai, a service offering AI-powered automation for tourism operations, specifically targeting GetYourGuide suppliers. It is built with Next.js and Tailwind CSS.
+This project is a modern, responsive landing page for TourCare.ai, a service offering AI-powered automation for tourism operations, specifically targeting GetYourGuide suppliers. Features include an automation playground, an AI assistant demo, and multi-language support (EN/AR/DE/ES).
+
+The project is built with **React** and **Vite**.
 
 ## Getting Started
 
@@ -8,27 +10,29 @@ First, install the dependencies:
 
 ```bash
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
 Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Building for Production
+
+To create a production build, run:
+
+```bash
+npm run build
+```
+
+This will generate the static files in the `dist` directory, which is ready for deployment.
 
 ## Deployment on Netlify
 
-This project is configured for easy deployment on Netlify.
-
-- **Build Command:** `next build`
-- **Publish directory:** `.next`
+1.  Connect your GitHub repository to Netlify.
+2.  Set the **Build command** to `npm run build`.
+3.  Set the **Publish directory** to `dist`.
+4.  Add your environment variables (e.g., `VITE_API_KEY`) in the Netlify UI.

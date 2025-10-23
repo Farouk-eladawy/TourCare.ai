@@ -51,64 +51,56 @@ export default function ClientLayout({
     dir,
   };
 
-  // This effect applies global styles to the body tag.
-  useEffect(() => {
-    document.body.className = `${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`;
-  }, [lang]);
-
   return (
     <AppContext.Provider value={contextValue}>
-      {/* 
-        FIX: Wrapped the component's content in a single root `div` instead of a React Fragment (<>).
-        In Next.js, when a client component is a direct child of `<body>`, returning a fragment
-        can cause hydration errors. These errors are sometimes misleadingly reported as a missing
-        'children' prop in the parent layout (`app/layout.tsx`). Providing a single, stable root DOM element
-        like this `div` resolves the structural issue and ensures React can hydrate correctly.
-      */}
-      <div className="flex flex-col min-h-screen">
-          <Header 
-              content={content.header} 
-              lang={lang} 
-              availableLangs={availableLangs}
-              changeLanguage={changeLanguage} 
-              onCtaClick={() => openAuthModal()} 
-          />
-          
-          <main className="flex-grow">
-              {children}
-          </main>
-          
-          <SloganBanner slogan={content.slogan} />
-          <Footer content={content.footer} />
+      <html lang={lang} dir={dir}>
+        <body>
+            <div className={`${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`}>
+                <Header 
+                    content={content.header} 
+                    lang={lang} 
+                    availableLangs={availableLangs}
+                    changeLanguage={changeLanguage} 
+                    onCtaClick={() => openAuthModal()} 
+                />
+                
+                <main>
+                    {children}
+                </main>
+                
+                <SloganBanner slogan={content.slogan} />
+                <Footer content={content.footer} />
 
-          <GuidingAssistant
-              onOpenAssistant={() => setIsAiModalOpen(true)}
-              lang={lang}
-              currentRoute={currentRoute}
-          />
+                <GuidingAssistant
+                    onOpenAssistant={() => setIsAiModalOpen(true)}
+                    lang={lang}
+                    currentRoute={currentRoute}
+                />
 
-          <AiAssistantModal 
-              isOpen={isAiModalOpen} 
-              onClose={() => setIsAiModalOpen(false)} 
-              aiAssistantContent={content.aiAssistant}
-              pricingContent={content.pricing}
-              lang={lang}
-          />
-          
-          <VideoModal 
-              isOpen={isVideoModalOpen}
-              onClose={() => setIsVideoModalOpen(false)}
-              videoUrl="https://drive.google.com/file/d/1xXNlbbZ9osKNvn9GHZ_1Oaj2KB33Z5JK/preview"
-          />
+                <AiAssistantModal 
+                    isOpen={isAiModalOpen} 
+                    onClose={() => setIsAiModalOpen(false)} 
+                    aiAssistantContent={content.aiAssistant}
+                    pricingContent={content.pricing}
+                    lang={lang}
+                />
+                
+                <VideoModal 
+                    isOpen={isVideoModalOpen}
+                    onClose={() => setIsVideoModalOpen(false)}
+                    videoUrl="https://drive.google.com/file/d/1xXNlbbZ9osKNvn9GHZ_1Oaj2KB33Z5JK/preview"
+                />
 
-          <AuthModal
-              isOpen={isAuthModalOpen}
-              onClose={() => setIsAuthModalOpen(false)}
-              content={content.authModal}
-              lang={lang}
-              planOfInterest={authModalPlan}
-          />
-      </div>
+                <AuthModal
+                    isOpen={isAuthModalOpen}
+                    onClose={() => setIsAuthModalOpen(false)}
+                    content={content.authModal}
+                    lang={lang}
+                    planOfInterest={authModalPlan}
+                />
+            </div>
+        </body>
+      </html>
     </AppContext.Provider>
   );
 }

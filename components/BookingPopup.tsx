@@ -27,24 +27,6 @@ const content = {
         submitButton: "بدء الأتمتة",
         submitting: "جاري البدء...",
         description: "أدخل بياناتك لتلقي إشعارات مباشرة أثناء محاكاة عملية الحجز.",
-    },
-    de: {
-        title: "Start Live Test",
-        namePlaceholder: "Your Name",
-        emailPlaceholder: "Your Email",
-        whatsappPlaceholder: "Your WhatsApp Number",
-        submitButton: "Start Automation",
-        submitting: "Starting...",
-        description: "Enter your details to receive live notifications as we simulate the booking process.",
-    },
-    es: {
-        title: "Start Live Test",
-        namePlaceholder: "Your Name",
-        emailPlaceholder: "Your Email",
-        whatsappPlaceholder: "Your WhatsApp Number",
-        submitButton: "Start Automation",
-        submitting: "Starting...",
-        description: "Enter your details to receive live notifications as we simulate the booking process.",
     }
 }
 
@@ -54,7 +36,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({ onClose, onSubmit, lang }) 
     const [phone, setPhone] = useState('');
     const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const popupContent = content[lang as keyof typeof content] || content.en;
+    const popupContent = content[lang] || content.en;
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

@@ -1,10 +1,65 @@
-<script type="importmap">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TourCare.ai - AI & Automation for Tourism</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <style>
+      :root {
+        --logo-height: 60px;
+        --bot-size: 72px;
+        --bot-color-primary: #0c1a3e; /* brand-blue */
+        --bot-color-secondary: #059669; /* brand-accent */
+        --bot-color-eye-glow: #34d399; /* lighter accent */
+      }
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .scroll-animate.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes scroll {
+        to {
+          transform: translate(calc(-50% - 2rem));
+        }
+      }
+      .animate-scroll {
+        animation: scroll 60s linear infinite;
+      }
+       @keyframes hit-animation {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+          100% { transform: scale(1); }
+      }
+      .animate-hit {
+          animation: hit-animation 0.5s ease-in-out;
+      }
+    </style>
+  <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "tailwindcss": "https://aistudiocdn.com/tailwindcss@^4.1.15",
-    "next": "https://aistudiocdn.com/next@^16.0.0"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+    "vite": "https://aistudiocdn.com/vite@^7.1.12",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.4",
+    "path": "https://aistudiocdn.com/path@^0.12.7"
   }
 }
 </script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
