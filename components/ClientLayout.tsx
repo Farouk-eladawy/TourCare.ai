@@ -51,8 +51,7 @@ export default function ClientLayout({
     dir,
   };
 
-  // FIX: Apply language-specific classes directly to the body to avoid an extra div wrapper,
-  // which resolves the structural issue hinted at by the misleading error in app/layout.tsx.
+  // This effect applies global styles to the body tag.
   useEffect(() => {
     document.body.className = `${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`;
   }, [lang]);
@@ -60,11 +59,13 @@ export default function ClientLayout({
   return (
     <AppContext.Provider value={contextValue}>
       {/* 
-        This wrapper div resolves a structural issue where a client component
-        that is a direct child of <body> can cause a misleading 'children' prop error in Next.js.
-        Providing a single root DOM element ensures a stable structure for React's hydration process.
+        FIX: Wrapped the component's content in a single root `div` instead of a React Fragment (<>).
+        In Next.js, when a client component is a direct child of `<body>`, returning a fragment
+        can cause hydration errors. These errors are sometimes misleadingly reported as a missing
+        'children' prop in the parent layout (`app/layout.tsx`). Providing a single, stable root DOM element
+        like this `div` resolves the structural issue and ensures React can hydrate correctly.
       */}
-      <>
+      <div className="flex flex-col min-h-screen">
           <Header 
               content={content.header} 
               lang={lang} 
@@ -73,7 +74,7 @@ export default function ClientLayout({
               onCtaClick={() => openAuthModal()} 
           />
           
-          <main>
+          <main className="flex-grow">
               {children}
           </main>
           
@@ -107,7 +108,7 @@ export default function ClientLayout({
               lang={lang}
               planOfInterest={authModalPlan}
           />
-      </>
+      </div>
     </AppContext.Provider>
   );
 }
