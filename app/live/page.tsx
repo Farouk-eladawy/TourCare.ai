@@ -1,9 +1,5 @@
-import LiveViewer from "./LiveViewer";
-
+// This page has been removed as per your request to resolve build issues.
+// The Live Viewer functionality is no longer part of this application.
 export default function LivePage() {
-  return (
-    <main className="min-h-screen">
-      <LiveViewer />
-    </main>
-  );
+  return null;
 }

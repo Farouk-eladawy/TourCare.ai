@@ -55,14 +55,13 @@ const generateMockSlots = (): AppointmentSlot[] => {
 export const fetchAirtableSlots = async (): Promise<AppointmentSlot[]> => {
     // Credentials are now read from environment variables using a standard convention.
     // Please set these in your deployment environment.
-    // FIX: Removed comments as 'import.meta.env' with type casting is a valid workaround.
-    const baseId = (import.meta as any).env.VITE_AIRTABLE_BASE_ID;
-    const tableName = (import.meta as any).env.VITE_AIRTABLE_TABLE_NAME;
-    const apiKey = (import.meta as any).env.VITE_AIRTABLE_API_KEY;
+    const baseId = process.env.NEXT_PUBLIC_AIRTABLE_BASE_ID;
+    const tableName = process.env.NEXT_PUBLIC_AIRTABLE_TABLE_NAME;
+    const apiKey = process.env.NEXT_PUBLIC_AIRTABLE_API_KEY;
 
     // Check if environment variables are configured. If not, use mock data.
     if (!baseId || !tableName || !apiKey) {
-        console.warn("Airtable environment variables (VITE_AIRTABLE_BASE_ID, VITE_AIRTABLE_TABLE_NAME, VITE_AIRTABLE_API_KEY) are not set. Using mock data for demonstration.");
+        console.warn("Airtable environment variables (NEXT_PUBLIC_AIRTABLE_BASE_ID, NEXT_PUBLIC_AIRTABLE_TABLE_NAME, NEXT_PUBLIC_AIRTABLE_API_KEY) are not set. Using mock data for demonstration.");
         return generateMockSlots();
     }
     
@@ -122,12 +121,12 @@ interface BookingPayload {
  */
 export const bookConsultation = async (payload: BookingPayload): Promise<void> => {
     // The webhook URL is read from an environment variable.
-    // Please set VITE_MAKE_BOOKING_WEBHOOK_URL in your deployment environment.
-    const webhookUrl = (import.meta as any).env.VITE_MAKE_BOOKING_WEBHOOK_URL;
+    // Please set NEXT_PUBLIC_MAKE_BOOKING_WEBHOOK_URL in your deployment environment.
+    const webhookUrl = process.env.NEXT_PUBLIC_MAKE_BOOKING_WEBHOOK_URL;
 
     // If the environment variable is not set, the app will run in "demo mode".
     if (!webhookUrl) {
-        console.warn("VITE_MAKE_BOOKING_WEBHOOK_URL is not set. Simulating a successful booking for demonstration purposes.");
+        console.warn("NEXT_PUBLIC_MAKE_BOOKING_WEBHOOK_URL is not set. Simulating a successful booking for demonstration purposes.");
         console.log("DEMO: Booking payload that would be sent:", payload);
         
         // Simulate a network delay to mimic a real API call

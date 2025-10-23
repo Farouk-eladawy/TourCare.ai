@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -52,10 +51,9 @@ export default function ClientLayout({
     dir,
   };
 
-  // FIX: Removed <html> and <body> tags. A client component in Next.js cannot render these root elements.
-  // The useLocalization hook will handle updating the lang and dir attributes on the <html> tag.
   return (
     <AppContext.Provider value={contextValue}>
+      {/* FIX: Removed <html> and <body> tags. The root layout in `app/layout.tsx` is now responsible for them, following Next.js conventions. The `useLocalization` hook handles dynamic updates. */}
       <div className={`${lang === 'ar' ? 'font-cairo' : 'font-sans'} bg-brand-white text-gray-800`}>
           <Header 
               content={content.header} 

@@ -7,8 +7,7 @@ interface Message {
   isPricing?: boolean;
 }
 
-// FIX: Removed comment as 'import.meta.env' with type casting is a valid workaround.
-const apiKey = (import.meta as any).env.VITE_DEEP_SEEK_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_DEEP_SEEK_API_KEY;
 const CHAT_HISTORY_KEY = 'tourcare_ai_chat_history';
 
 const AiAssistantModal: React.FC<{
@@ -28,7 +27,7 @@ const AiAssistantModal: React.FC<{
   useEffect(() => {
     if (isOpen) {
       if (!apiKey) {
-        console.error("VITE_DEEP_SEEK_API_KEY is not set. The AI Assistant cannot function.");
+        console.error("NEXT_PUBLIC_DEEP_SEEK_API_KEY is not set. The AI Assistant cannot function.");
         setMessages([{
           role: 'system',
           text: "Sorry, the AI Assistant is not configured correctly. An API key is missing."

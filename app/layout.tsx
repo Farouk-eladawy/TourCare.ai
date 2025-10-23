@@ -1,4 +1,3 @@
-
 // FIX: Import React to resolve namespace errors for types like React.ReactNode.
 import React from "react";
 import type { Metadata } from "next";
@@ -15,12 +14,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // FIX: RootLayout must render <html> and <body>. ClientLayout should be a wrapper inside <body>.
-  // This resolves an architectural issue with Next.js App Router where a Client Component cannot render the root layout tags, which was likely causing the original type error.
   return (
-    <html lang="en" dir="ltr">
+    // FIX: Per Next.js conventions, the RootLayout must render the <html> and <body> tags. The original code delegated this to a client component, which caused a structural issue and a misleading TypeScript error about missing children.
+    <html>
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

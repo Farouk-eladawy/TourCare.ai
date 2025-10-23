@@ -1,8 +1,6 @@
-# TourCare.ai - Landing Page
+# TourCare.ai Landing Page
 
-This is a modern, responsive landing page for TourCare.ai, a service offering AI-powered automation for tourism operations, specifically targeting GetYourGuide suppliers.
-
-The project is built with Next.js and Tailwind CSS.
+This is a modern, responsive landing page for TourCare.ai, a service offering AI-powered automation for tourism operations, specifically targeting GetYourGuide suppliers. It is built with Next.js and Tailwind CSS.
 
 ## Getting Started
 
@@ -30,6 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment on Netlify
 
-This project is ready for deployment on Netlify. The standard Next.js build settings will work:
-- **Build command**: `next build`
-- **Publish directory**: `.next`
+This project is configured for easy deployment on Netlify.
+
+- **Build Command:** `next build`
+- **Publish directory:** `.next`

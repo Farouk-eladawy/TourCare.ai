@@ -1431,7 +1431,7 @@ const de: Content = {
         title: 'Einfache Preise',
         plans: []
       },
-// FIX: Added missing 'cta' property and completed the object to resolve a type error.
+      // FIX: Added missing 'cta' property and completed the object to resolve a type error.
       cta: { title: 'Automatisieren Sie Ihre Abholungen noch heute', subtitle: 'Mit dem Smart Pickup & Tracking-System können Sie alle Transport- und Abholvorgänge mit voller Professionalität verwalten und so ein genaueres und zuverlässigeres Kundenerlebnis schaffen, das Ihnen hilft, Verluste zu reduzieren und Gewinne zu steigern.', cta: 'Kostenlose Beratung buchen' },
     },
     liveSupport: {
