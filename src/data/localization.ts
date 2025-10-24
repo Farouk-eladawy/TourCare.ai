@@ -1,5 +1,4 @@
 
-
 import { Content, Language, PrivacyPolicyContent, TermsOfServiceContent } from '../types';
 
 const privacyPolicyEn: PrivacyPolicyContent = {
@@ -184,15 +183,15 @@ const en: Content = {
         type: 'dropdown',
         title: 'Products',
         items: [
-          { href: '/products/operation-sys', text: 'AI Operations System', description: 'Automate your entire workflow.' },
-          { href: '/products/pickup-time', text: 'Smart Pickup & Tracking', description: 'Real-time GPS tracking for pickups.' },
-          { href: '/products/live-support', text: 'Live Quality Support', description: 'Proactive review & feedback management.' },
+          { href: '#/products/operation-sys', text: 'AI Operations System', description: 'Automate your entire workflow.' },
+          { href: '#/products/pickup-time', text: 'Smart Pickup & Tracking', description: 'Real-time GPS tracking for pickups.' },
+          { href: '#/products/live-support', text: 'Live Quality Support', description: 'Proactive review & feedback management.' },
         ],
       },
-      { type: 'link', href: '/demo', text: 'Demo Mode' },
-      { type: 'link', href: '/about', text: 'About Us' },
-      { type: 'link', href: '/faq', text: 'FAQ' },
-      { type: 'link', href: '/contact', text: 'Contact' }
+      { type: 'link', href: '#/demo', text: 'Demo Mode' },
+      { type: 'link', href: '#/about', text: 'About Us' },
+      { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/contact', text: 'Contact' }
     ],
     cta: 'Book a Consultation',
   },
@@ -320,23 +319,23 @@ const en: Content = {
       {
         title: 'Products',
         links: [
-          { text: 'AI Operations System', href: '/products/operation-sys' },
-          { text: 'Smart Pickup & Tracking', href: '/products/pickup-time' },
-          { text: 'Live Quality Support', href: '/products/live-support' },
+          { text: 'AI Operations System', href: '#/products/operation-sys' },
+          { text: 'Smart Pickup & Tracking', href: '#/products/pickup-time' },
+          { text: 'Live Quality Support', href: '#/products/live-support' },
         ],
       },
       {
         title: 'Company',
         links: [
-          { text: 'About Us', href: '/about' },
-          { text: 'Demo Mode', href: '/demo' },
-          { text: 'Contact Us', href: '/contact' },
+          { text: 'About Us', href: '#/about' },
+          { text: 'Demo Mode', href: '#/demo' },
+          { text: 'Contact Us', href: '#/contact' },
         ],
       },
       {
         title: 'Resources',
         links: [
-          { text: 'FAQ', href: '/faq' },
+          { text: 'FAQ', href: '#/faq' },
           { text: 'Blog', href: '#' },
           { text: 'Case Studies', href: '#' },
         ],
@@ -344,8 +343,8 @@ const en: Content = {
       {
         title: 'Legal',
         links: [
-          { text: 'Privacy Policy', href: '/privacy' },
-          { text: 'Terms of Service', href: '/terms' },
+          { text: 'Privacy Policy', href: '#/privacy' },
+          { text: 'Terms of Service', href: '#/terms' },
         ],
       },
     ]
@@ -633,15 +632,15 @@ const ar: Content = {
                 type: 'dropdown',
                 title: 'المنتجات',
                 items: [
-                    { href: '/products/operation-sys', text: 'نظام التشغيل بالذكاء الاصطناعي', description: 'أتمتة سير عملك بالكامل.' },
-                    { href: '/products/pickup-time', text: 'التتبع الذكي للاستلام', description: 'تتبع GPS مباشر لعمليات الاستلام.' },
-                    { href: '/products/live-support', text: 'دعم الجودة المباشر', description: 'إدارة استباقية للتقييمات والملاحظات.' },
+                    { href: '#/products/operation-sys', text: 'نظام التشغيل بالذكاء الاصطناعي', description: 'أتمتة سير عملك بالكامل.' },
+                    { href: '#/products/pickup-time', text: 'التتبع الذكي للاستلام', description: 'تتبع GPS مباشر لعمليات الاستلام.' },
+                    { href: '#/products/live-support', text: 'دعم الجودة المباشر', description: 'إدارة استباقية للتقييمات والملاحظات.' },
                 ],
             },
-            { type: 'link', href: '/demo', text: 'الوضع التجريبي' },
-            { type: 'link', href: '/about', text: 'من نحن' },
-            { type: 'link', href: '/faq', text: 'الأسئلة الشائعة' },
-            { type: 'link', href: '/contact', text: 'اتصل بنا' }
+            { type: 'link', href: '#/demo', text: 'الوضع التجريبي' },
+            { type: 'link', href: '#/about', text: 'من نحن' },
+            { type: 'link', href: '#/faq', text: 'الأسئلة الشائعة' },
+            { type: 'link', href: '#/contact', text: 'اتصل بنا' }
         ],
         cta: 'احجز استشارة',
     },
@@ -769,23 +768,23 @@ const ar: Content = {
         {
           title: 'المنتجات',
           links: [
-            { text: 'نظام التشغيل بالذكاء الاصطناعي', href: '/products/operation-sys' },
-            { text: 'التتبع الذكي للاستلام', href: '/products/pickup-time' },
-            { text: 'دعم الجودة المباشر', href: '/products/live-support' },
+            { text: 'نظام التشغيل بالذكاء الاصطناعي', href: '#/products/operation-sys' },
+            { text: 'التتبع الذكي للاستلام', href: '#/products/pickup-time' },
+            { text: 'دعم الجودة المباشر', href: '#/products/live-support' },
           ],
         },
         {
           title: 'الشركة',
           links: [
-            { text: 'من نحن', href: '/about' },
-            { text: 'الوضع التجريبي', href: '/demo' },
-            { text: 'اتصل بنا', href: '/contact' },
+            { text: 'من نحن', href: '#/about' },
+            { text: 'الوضع التجريبي', href: '#/demo' },
+            { text: 'اتصل بنا', href: '#/contact' },
           ],
         },
         {
           title: 'المصادر',
           links: [
-            { text: 'الأسئلة الشائعة', href: '/faq' },
+            { text: 'الأسئلة الشائعة', href: '#/faq' },
             { text: 'المدونة', href: '#' },
             { text: 'دراسات الحالة', href: '#' },
           ],
@@ -793,8 +792,8 @@ const ar: Content = {
         {
           title: 'قانوني',
           links: [
-            { text: 'سياسة الخصوصية', href: '/privacy' },
-            { text: 'شروط الخدمة', href: '/terms' },
+            { text: 'سياسة الخصوصية', href: '#/privacy' },
+            { text: 'شروط الخدمة', href: '#/terms' },
           ],
         },
       ]
@@ -1082,15 +1081,15 @@ const de: Content = {
         type: 'dropdown',
         title: 'Produkte',
         items: [
-          { href: '/products/operation-sys', text: 'KI-Betriebssystem', description: 'Automatisieren Sie Ihren gesamten Arbeitsablauf.' },
-          { href: '/products/pickup-time', text: 'Intelligente Abholung & Nachverfolgung', description: 'Echtzeit-GPS-Verfolgung für Abholungen.' },
-          { href: '/products/live-support', text: 'Live-Qualitätssupport', description: 'Proaktives Bewertungs- & Feedback-Management.' },
+          { href: '#/products/operation-sys', text: 'KI-Betriebssystem', description: 'Automatisieren Sie Ihren gesamten Arbeitsablauf.' },
+          { href: '#/products/pickup-time', text: 'Intelligente Abholung & Nachverfolgung', description: 'Echtzeit-GPS-Verfolgung für Abholungen.' },
+          { href: '#/products/live-support', text: 'Live-Qualitätssupport', description: 'Proaktives Bewertungs- & Feedback-Management.' },
         ],
       },
-      { type: 'link', href: '/demo', text: 'Demo-Modus' },
-      { type: 'link', href: '/about', text: 'Über uns' },
-      { type: 'link', href: '/faq', text: 'FAQ' },
-      { type: 'link', href: '/contact', text: 'Kontakt' }
+      { type: 'link', href: '#/demo', text: 'Demo-Modus' },
+      { type: 'link', href: '#/about', text: 'Über uns' },
+      { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/contact', text: 'Kontakt' }
     ],
     cta: 'Beratung buchen',
   },
@@ -1218,23 +1217,23 @@ const de: Content = {
       {
         title: 'Produkte',
         links: [
-          { text: 'KI-Betriebssystem', href: '/products/operation-sys' },
-          { text: 'Intelligente Abholung & Nachverfolgung', href: '/products/pickup-time' },
-          { text: 'Live-Qualitätssupport', href: '/products/live-support' },
+          { text: 'KI-Betriebssystem', href: '#/products/operation-sys' },
+          { text: 'Intelligente Abholung & Nachverfolgung', href: '#/products/pickup-time' },
+          { text: 'Live-Qualitätssupport', href: '#/products/live-support' },
         ],
       },
       {
         title: 'Unternehmen',
         links: [
-          { text: 'Über uns', href: '/about' },
-          { text: 'Demo-Modus', href: '/demo' },
-          { text: 'Kontakt', href: '/contact' },
+          { text: 'Über uns', href: '#/about' },
+          { text: 'Demo-Modus', href: '#/demo' },
+          { text: 'Kontakt', href: '#/contact' },
         ],
       },
       {
         title: 'Ressourcen',
         links: [
-          { text: 'FAQ', href: '/faq' },
+          { text: 'FAQ', href: '#/faq' },
           { text: 'Blog', href: '#' },
           { text: 'Fallstudien', href: '#' },
         ],
@@ -1242,8 +1241,8 @@ const de: Content = {
       {
         title: 'Rechtliches',
         links: [
-          { text: 'Datenschutzrichtlinie', href: '/privacy' },
-          { text: 'Nutzungsbedingungen', href: '/terms' },
+          { text: 'Datenschutzrichtlinie', href: '#/privacy' },
+          { text: 'Nutzungsbedingungen', href: '#/terms' },
         ],
       },
     ]
@@ -1432,6 +1431,7 @@ const de: Content = {
         title: 'Einfache Preise',
         plans: []
       },
+      // FIX: Added missing 'cta' property and completed the object to resolve a type error.
       cta: { title: 'Automatisieren Sie Ihre Abholungen noch heute', subtitle: 'Mit dem Smart Pickup & Tracking-System können Sie alle Transport- und Abholvorgänge mit voller Professionalität verwalten und so ein genaueres und zuverlässigeres Kundenerlebnis schaffen, das Ihnen hilft, Verluste zu reduzieren und Gewinne zu steigern.', cta: 'Kostenlose Beratung buchen' },
     },
     liveSupport: {
@@ -1477,15 +1477,15 @@ const es: Content = {
         type: 'dropdown',
         title: 'Productos',
         items: [
-          { href: '/products/operation-sys', text: 'Sistema de Operaciones IA', description: 'Automatice todo su flujo de trabajo.' },
-          { href: '/products/pickup-time', text: 'Recogida y Seguimiento Inteligente', description: 'Seguimiento GPS en tiempo real para recogidas.' },
-          { href: '/products/live-support', text: 'Soporte de Calidad en Vivo', description: 'Gestión proactiva de reseñas y comentarios.' },
+          { href: '#/products/operation-sys', text: 'Sistema de Operaciones IA', description: 'Automatice todo su flujo de trabajo.' },
+          { href: '#/products/pickup-time', text: 'Recogida y Seguimiento Inteligente', description: 'Seguimiento GPS en tiempo real para recogidas.' },
+          { href: '#/products/live-support', text: 'Soporte de Calidad en Vivo', description: 'Gestión proactiva de reseñas y comentarios.' },
         ],
       },
-       { type: 'link', href: '/demo', text: 'Modo Demo' },
-      { type: 'link', href: '/about', text: 'Sobre Nosotros' },
-      { type: 'link', href: '/faq', text: 'FAQ' },
-      { type: 'link', href: '/contact', text: 'Contacto' }
+       { type: 'link', href: '#/demo', text: 'Modo Demo' },
+      { type: 'link', href: '#/about', text: 'Sobre Nosotros' },
+      { type: 'link', href: '#/faq', text: 'FAQ' },
+      { type: 'link', href: '#/contact', text: 'Contacto' }
     ],
     cta: 'Reservar una Consulta',
   },
@@ -1524,23 +1524,23 @@ const es: Content = {
       {
         title: 'Productos',
         links: [
-          { text: 'Sistema de Operaciones IA', href: '/products/operation-sys' },
-          { text: 'Recogida y Seguimiento Inteligente', href: '/products/pickup-time' },
-          { text: 'Soporte de Calidad en Vivo', href: '/products/live-support' },
+          { text: 'Sistema de Operaciones IA', href: '#/products/operation-sys' },
+          { text: 'Recogida y Seguimiento Inteligente', href: '#/products/pickup-time' },
+          { text: 'Soporte de Calidad en Vivo', href: '#/products/live-support' },
         ],
       },
       {
         title: 'Empresa',
         links: [
-          { text: 'Sobre Nosotros', href: '/about' },
-          { text: 'Modo Demo', href: '/demo' },
-          { text: 'Contacto', href: '/contact' },
+          { text: 'Sobre Nosotros', href: '#/about' },
+          { text: 'Modo Demo', href: '#/demo' },
+          { text: 'Contacto', href: '#/contact' },
         ],
       },
       {
         title: 'Recursos',
         links: [
-          { text: 'FAQ', href: '/faq' },
+          { text: 'FAQ', href: '#/faq' },
           { text: 'Blog', href: '#' },
           { text: 'Casos de Éxito', href: '#' },
         ],
@@ -1548,8 +1548,8 @@ const es: Content = {
       {
         title: 'Legal',
         links: [
-          { text: 'Política de Privacidad', href: '/privacy' },
-          { text: 'Términos de Servicio', href: '/terms' },
+          { text: 'Política de Privacidad', href: '#/privacy' },
+          { text: 'Términos de Servicio', href: '#/terms' },
         ],
       },
     ]
@@ -1565,6 +1565,7 @@ const es: Content = {
   termsOfService: termsOfServiceEs,
 };
 
+// FIX: Added exports for 'content' and 'getContent' to be used in useLocalization hook.
 export const content = {
     en,
     ar,

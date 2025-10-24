@@ -27,24 +27,6 @@ const content = {
         submitButton: "بدء الأتمتة",
         submitting: "جاري البدء...",
         description: "أدخل بياناتك لتلقي إشعارات مباشرة أثناء محاكاة عملية الحجز.",
-    },
-    de: {
-        title: "Live-Test starten",
-        namePlaceholder: "Ihr Name",
-        emailPlaceholder: "Ihre E-Mail",
-        whatsappPlaceholder: "Ihre WhatsApp-Nummer",
-        submitButton: "Automatisierung starten",
-        submitting: "Wird gestartet...",
-        description: "Geben Sie Ihre Daten ein, um Live-Benachrichtigungen zu erhalten, während wir den Buchungsprozess simulieren.",
-    },
-    es: {
-        title: "Iniciar prueba en vivo",
-        namePlaceholder: "Tu nombre",
-        emailPlaceholder: "Tu correo electrónico",
-        whatsappPlaceholder: "Tu número de WhatsApp",
-        submitButton: "Iniciar automatización",
-        submitting: "Iniciando...",
-        description: "Ingrese sus datos para recibir notificaciones en vivo mientras simulamos el proceso de reserva.",
     }
 }
 

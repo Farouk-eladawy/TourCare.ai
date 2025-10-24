@@ -1,5 +1,5 @@
+
 import React, { useState, useRef, useEffect, FC } from 'react';
-import { Link } from 'react-router-dom';
 import { Language, HeaderContent, NavDropdown as NavDropdownType } from '../types';
 
 interface HeaderProps {
@@ -10,6 +10,7 @@ interface HeaderProps {
   onCtaClick: () => void;
 }
 
+// Self-contained Dropdown component for Products (Desktop)
 const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -40,15 +41,15 @@ const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
       {isOpen && (
         <div className="absolute top-full ltr:left-0 rtl:right-0 mt-3 w-64 bg-white rounded-md shadow-lg border border-gray-200/80 p-2 z-20">
           {item.items.map((subItem) => (
-            <Link
+            <a
               key={subItem.href}
-              to={subItem.href.replace('#', '')}
+              href={subItem.href.replace('#', '')}
               onClick={() => setIsOpen(false)}
               className="block p-3 rounded-md hover:bg-brand-light-gray"
             >
               <p className="font-semibold text-gray-800">{subItem.text}</p>
               <p className="text-sm text-gray-500">{subItem.description}</p>
-            </Link>
+            </a>
           ))}
         </div>
       )}
@@ -56,6 +57,7 @@ const NavDropdown: FC<{ item: NavDropdownType }> = ({ item }) => {
   );
 };
 
+// Language Switcher Dropdown
 const LanguageSwitcher: FC<{ currentLang: Language; availableLangs: Language[]; onChange: (lang: Language) => void; }> = ({ currentLang, availableLangs, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -101,6 +103,7 @@ const LanguageSwitcher: FC<{ currentLang: Language; availableLangs: Language[]; 
     );
 }
 
+// Mobile Menu Component
 const MobileMenu: FC<{
   isOpen: boolean;
   onClose: () => void;
@@ -119,30 +122,33 @@ const MobileMenu: FC<{
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
+      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60"
         onClick={onClose}
         aria-hidden="true"
       ></div>
+
+      {/* Menu Panel */}
       <div
-        className={`absolute top-0 h-full w-full max-w-sm bg-white shadow-xl transition-transform duration-300 ease-in-out ${
+        className={`absolute top-0 h-full w-full max-w-sm bg-brand-white shadow-xl transition-transform duration-300 ease-in-out ${
           lang === 'ar'
-            ? `right-0 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
-            : `left-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+            ? `left-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`
+            : `right-0 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
         }`}
         role="dialog"
         aria-modal="true"
       >
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <Link to="/" onClick={onClose} className="block" aria-label="TourCare.ai Home">
+            <a href="/" onClick={onClose} className="block" aria-label="TourCare.ai Home">
               <img
                 src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png"
                 alt="TourCare.ai logo"
                 style={{ height: 'var(--logo-height)' }}
                 className="object-contain max-w-[200px]"
               />
-            </Link>
+            </a>
             <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-800">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -154,9 +160,9 @@ const MobileMenu: FC<{
             {content.navItems.map((item, index) => {
               if (item.type === 'link') {
                 return (
-                  <Link key={index} to={item.href.replace('#', '')} onClick={onClose} className="block text-lg font-semibold text-gray-700 hover:text-brand-accent transition py-2">
+                  <a key={index} href={item.href.replace('#', '')} onClick={onClose} className="block text-lg font-semibold text-gray-700 hover:text-brand-accent transition py-2">
                     {item.text}
-                  </Link>
+                  </a>
                 );
               }
               if (item.type === 'dropdown') {
@@ -165,9 +171,9 @@ const MobileMenu: FC<{
                     <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
                     <div className="space-y-2 ltr:pl-4 rtl:pr-4 border-l-2 border-brand-accent/20 ltr:border-l-2 rtl:border-r-2">
                       {item.items.map(subItem => (
-                        <Link key={subItem.href} to={subItem.href.replace('#', '')} onClick={onClose} className="block text-gray-600 hover:text-brand-accent transition py-1">
+                        <a key={subItem.href} href={subItem.href.replace('#', '')} onClick={onClose} className="block text-gray-600 hover:text-brand-accent transition py-1">
                           {subItem.text}
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -211,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
   const headerClasses = `
     sticky top-0 z-40 transition-all duration-300
     ${isScrolled
-      ? 'bg-white/80 backdrop-blur-lg border-b border-gray-200/80 shadow-sm'
+      ? 'bg-brand-white/80 backdrop-blur-lg border-b border-gray-200/80 shadow-sm'
       : 'bg-transparent border-b-transparent'
     }
   `;
@@ -221,20 +227,23 @@ const Header: React.FC<HeaderProps> = ({ content, lang, availableLangs, changeLa
       <header id="main-header" className={headerClasses}>
         <div className="container mx-auto px-6 py-0 flex justify-between items-center">
           <div className="flex items-center">
-            <Link to="/" className="block z-10" aria-label="TourCare.ai Home">
+            <a href="/" className="block z-10" aria-label="TourCare.ai Home">
               <img 
                 src="https://res.cloudinary.com/dqlurfwet/image/upload/v1760801741/20251018_1834_%D8%AA%D9%83%D8%A8%D9%8A%D8%B1_%D9%84%D9%88%D8%AC%D9%88_TourCare.AI_remix_01k7vz6rjze1gbrer8wx1eke0k_qgdxxq.png" 
                 alt="TourCare.ai logo" 
                 style={{ height: 'var(--logo-height)' }}
                 className="object-contain"
               />
-            </Link>
+            </a>
+            <span className="bg-yellow-300 text-yellow-800 text-xs font-bold px-2 py-1 rounded-full ltr:ml-2 rtl:mr-2 hidden sm:block">
+              Demo Mode
+            </span>
           </div>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {content.navItems.map((item, index) => {
               if (item.type === 'link') {
-                return <Link key={index} to={item.href.replace('#', '')} className="text-gray-700 hover:text-brand-accent transition font-semibold">{item.text}</Link>;
+                return <a key={index} href={item.href.replace('#', '')} className="text-gray-700 hover:text-brand-accent transition font-semibold">{item.text}</a>;
               }
               if (item.type === 'dropdown') {
                 return <NavDropdown key={index} item={item} />;
